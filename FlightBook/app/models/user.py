@@ -19,6 +19,14 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
+
+    flights = db.relationship("Flight", back_populates = "user_id", cascade =" all, delete-orphan")
+    sites = db.relationship("Site", back_populates = "creator_id", cascade =" all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="creator_id", cascade="all, delete-orphan")
+    reviews = db.relationship("Review", back_populates="creator_id", cascade="all, delete-orphan")
+
+    # servers = db.relationship("Server", back_populates="creator", cascade="all, delete-orphan")
+
     @property
     def password(self):
         return self.hashed_password

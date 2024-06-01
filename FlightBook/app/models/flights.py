@@ -1,6 +1,5 @@
 from sqlalchemy.orm import relationship
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from datetime import datetime
 
 
@@ -21,3 +20,8 @@ class Flight(db.Model):
     weather = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
+    pilot = db.relationship('User', back_populates = "flights")
+
+
+    # creator = relationship("User", back_populates='servers')
