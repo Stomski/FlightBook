@@ -82,7 +82,14 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+    if environment == "production":
+     op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE sites SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE flights SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
 
+    # ### end Alembic commands ###
     # ### end Alembic commands ###qqqqqqqqq
     # ### end Alembic commands ###
 
