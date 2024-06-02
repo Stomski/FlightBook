@@ -25,6 +25,7 @@ class Flight(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     pilot = db.relationship('User', back_populates = "flights")
-
+    comments = db.relationship('Comment', back_populates = "flight", cascade="all, delete-orphan")
+    # comments = db.relationship("Comment", back_populates="creator", cascade="all, delete-orphan")
 
     # creator = relationship("User", back_populates='servers')
