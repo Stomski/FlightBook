@@ -5,12 +5,40 @@ from app.models import Flight
 flight_routes = Blueprint('flights', __name__)
 
 
-@flight_routes.route('/by-user/<int:userId>')
-def test(userId):
+@flight_routes.route('/by-user/<int:user_id>')
+def flights_by_user(user_id):
     """
     this route will return all flights for a given user
     """
-    flights = Flight.query.filter(Flight.user_id ==userId).all()
+    flights = Flight.query.filter(Flight.user_id ==user_id).all()
     print(flights)
+    flights_dict={}
+    for flight in flights:
+        flight_to_dict = flight.to_dict()
+        flights_dict[flight_to_dict['id']]=flight_to_dict
 
-    return {'message':"success"}
+    return flights_dict
+
+@flight_routes.route('/by-site/<int:site_id>')
+def flights_by_site(site_id):
+    """
+    this route returns all flights at a given site
+    """
+    flights = Flight.query.filter(Flight.site_id ==site_id).all()
+    flights_dict={}
+    for flight in flights:
+        flight_to_dict = flight.to_dict()
+        flights_dict[flight_to_dict['id']]=flight_to_dict
+
+    return flights_dict
+
+
+@flight_routes.route('/new')
+def create_flight(flight_obj):
+    """
+    this route creates a new flight in the DB from a flight OBJ,
+    it returns the made flight as a dict
+    """
+
+    print(flight_obj)
+    return {'message':'in progress, ROUTE INCOMPLETE'}
