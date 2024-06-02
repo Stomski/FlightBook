@@ -5,103 +5,163 @@ def seed_sites():
     sites = [
         Site(
             creator_id=1,
-            name='Lookout Mountain',
+            name='Boulder - Wonderland',
+            lat=400165,
+            lon=-1052828,
+            altitude=5600,
+            intro='First student flights to epic XC.',
+            official=True,
+            license_required=0  # P2 / H2 / M1
+        ),
+        Site(
+            creator_id=2,
+            name='Wolcott',
+            lat=396422,
+            lon=-1066886,
+            altitude=7200,
+            intro='Evening thermals and glassoffs.',
+            official=True,
+            license_required=0  # P2 / H2
+        ),
+        Site(
+            creator_id=3,
+            name='Williams Peak',
+            lat=397426,
+            lon=-1066804,
+            altitude=8000,
+            intro='Evening glassoffs with stunning Gore Range views.',
+            official=True,
+            license_required=1  # P2+ / H2+ / M2
+        ),
+        Site(
+            creator_id=1,
+            name='Kenosha Pass',
+            lat=391003,
+            lon=-1057563,
+            altitude=10000,
+            intro='High altitude thermals and soaring.',
+            official=True,
+            license_required=0  # P2 / H2 / M1
+        ),
+        Site(
+            creator_id=2,
+            name='Golden - Lookout Mountain',
             lat=397294,
             lon=-1052311,
             altitude=7077,
-            intro='Located in Golden, Lookout Mountain offers stunning views and steady winds, making it a favorite among local paragliders.',
+            intro='Popular drive-up site for advanced pilots.',
             official=True,
-            license_required=0
-        ),
-        Site(
-            creator_id=2,
-            name='Boulder Mountain',
-            lat=400150,
-            lon=-1052705,
-            altitude=5430,
-            intro='Located in Boulder, Boulder Mountain is a well-known site for paragliding enthusiasts, with challenging conditions.',
-            official=True,
-            license_required=1
+            license_required=3  # P4 / H4 / M2 *Sponsored
         ),
         Site(
             creator_id=3,
-            name='Pikes Peak',
-            lat=388409,
-            lon=-1050423,
-            altitude=14115,
-            intro='Located near Colorado Springs, Pikes Peak offers a high-altitude launch with spectacular views, perfect for experienced paragliders.',
+            name='Bellyache',
+            lat=396500,
+            lon=-1067453,
+            altitude=7000,
+            intro='Intro mountain site for morning sleds & thermals.',
             official=True,
-            license_required=1
+            license_required=0  # P2 / H2 / M1
         ),
         Site(
             creator_id=1,
-            name='Mount Evans',
-            lat=395883,
-            lon=-1056438,
-            altitude=14271,
-            intro='Located in Idaho Springs, Mount Evans is known for its rugged terrain and provides a thrilling experience for advanced paragliders.',
+            name='Villa Grove',
+            lat=381642,
+            lon=-1061053,
+            altitude=8000,
+            intro='Huge mountains, huge thermals, huge XC.',
             official=True,
-            license_required=2
+            license_required=1  # P2+ / H2+
         ),
         Site(
             creator_id=2,
-            name='Cheyenne Mountain',
-            lat=387496,
-            lon=-1048485,
-            altitude=9600,
-            intro='Located in Colorado Springs, Cheyenne Mountain has reliable thermals and beautiful scenery, suitable for all skill levels.',
+            name='Copper Mountain',
+            lat=397298,
+            lon=-1061573,
+            altitude=12400,
+            intro='Advanced site with local guide, mostly winter.',
             official=True,
-            license_required=0
+            license_required=3  # P4
         ),
         Site(
             creator_id=3,
-            name='Red Mountain',
-            lat=385280,
-            lon=-1052980,
-            altitude=8475,
-            intro='Located near Cañon City, Red Mountain is a favorite for its gentle slopes and consistent winds, ideal for beginners.',
-            official=False,
-            license_required=0
+            name='Otto\'s Ridge',
+            lat=393262,
+            lon=-1084373,
+            altitude=6000,
+            intro='Reliable ridge soaring & kiting.',
+            official=True,
+            license_required=1  # P2 / H2 / M2
         ),
         Site(
             creator_id=1,
-            name='Sunrise Ridge',
-            lat=397392,
-            lon=-1049903,
-            altitude=5400,
-            intro='Located in Denver, Sunrise Ridge provides beautiful sunrise flights with smooth air conditions.',
+            name='Peak 6',
+            lat=397491,
+            lon=-1060665,
+            altitude=12800,
+            intro='Big mountain flying popular with speedwings.',
             official=True,
-            license_required=0
+            license_required=1  # P2+ / M2
         ),
         Site(
             creator_id=2,
-            name='Bear Peak',
-            lat=399654,
-            lon=-1052922,
-            altitude=8461,
-            intro='Located in Boulder, Bear Peak offers an adventurous launch point with challenging thermal conditions.',
-            official=False,
-            license_required=1
+            name='Mt. Victoria',
+            lat=396070,
+            lon=-1063875,
+            altitude=11667,
+            intro='Morning speed laps or east wind big thermals.',
+            official=True,
+            license_required=0  # P2
         ),
         Site(
             creator_id=3,
-            name='Mount Elbert',
-            lat=391178,
-            lon=-1064454,
-            altitude=14440,
-            intro='Located near Leadville, Mount Elbert, as the highest peak in Colorado, provides breathtaking flights for advanced pilots.',
+            name='Stovepipe',
+            lat=394834,
+            lon=-1090066,
+            altitude=7000,
+            intro='Thermic flying along the Book Cliffs.',
             official=True,
-            license_required=2
+            license_required=2  # P3 / M2
         ),
         Site(
             creator_id=1,
-            name='Garden of the Gods',
-            lat=388784,
-            lon=-1048695,
-            altitude=6403,
-            intro='Located in Colorado Springs, this site is famous for its stunning rock formations and smooth, predictable wind conditions.',
+            name='The Duck',
+            lat=402975,
+            lon=-1069695,
+            altitude=7800,
+            intro='Lakeside evening soaring flights.',
             official=True,
-            license_required=0
+            license_required=2  # P3
+        ),
+        Site(
+            creator_id=2,
+            name='Loveland Pass',
+            lat=397627,
+            lon=-1058710,
+            altitude=11990,
+            intro='Light wind high alpine paradise.',
+            official=True,
+            license_required=2  # P3
+        ),
+        Site(
+            creator_id=3,
+            name='Mt. Herman',
+            lat=390662,
+            lon=-1049211,
+            altitude=9063,
+            intro='High altitude front range thermal paradise.',
+            official=True,
+            license_required=0  # P2
+        ),
+        Site(
+            creator_id=1,
+            name='Douglas Pass',
+            lat=398205,
+            lon=-1088072,
+            altitude=8268,
+            intro='High mountain XC on the western slope.',
+            official=True,
+            license_required=2  # P3
         ),
     ]
 

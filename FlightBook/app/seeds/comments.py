@@ -1,10 +1,10 @@
-from app.models import db, Flight, environment, SCHEMA
+from app.models import db, Comment, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime, timedelta
 
-def seed_flights():
-    flights = [
-        Flight(
+def seed_comments():
+    comments = [
+        Comment(
             user_id=1,
             site_id=1,  # Boulder - Wonderland
             site_name='Boulder - Wonderland',
@@ -12,10 +12,10 @@ def seed_flights():
             length=120,
             equipment='Ozone Rush 5',
             track_data=None,
-            log='Great weather, smooth flight over the Wonderland.',
+            log='Great weather, smooth Comment over the Wonderland.',
             weather=None,
         ),
-        Flight(
+        Comment(
             user_id=2,
             site_id=2,  # Wolcott
             site_name='Wolcott',
@@ -26,7 +26,7 @@ def seed_flights():
             log='Beautiful evening thermals and glassoffs.',
             weather=None,
         ),
-        Flight(
+        Comment(
             user_id=2,
             site_id=1,  # Boulder - Wonderland
             site_name='Boulder - Wonderland',
@@ -37,7 +37,7 @@ def seed_flights():
             log='Strong thermals, great lift today.',
             weather=None,
         ),
-        Flight(
+        Comment(
             user_id=3,
             site_id=5,  # Golden - Lookout Mountain
             site_name='Golden - Lookout Mountain',
@@ -45,10 +45,10 @@ def seed_flights():
             length=180,
             equipment='Advance Sigma 10',
             track_data=None,
-            log='Long flight with consistent updrafts.',
+            log='Long Comment with consistent updrafts.',
             weather=None,
         ),
-        Flight(
+        Comment(
             user_id=3,
             site_id=4,  # Kenosha Pass
             site_name='Kenosha Pass',
@@ -59,7 +59,7 @@ def seed_flights():
             log='Amazing experience, flew over the summit.',
             weather=None,
         ),
-        Flight(
+        Comment(
             user_id=1,
             site_id=6,  # Bellyache
             site_name='Bellyache',
@@ -67,10 +67,10 @@ def seed_flights():
             length=75,
             equipment='UP Summit XC4',
             track_data=None,
-            log='Short but enjoyable flight, great scenery.',
+            log='Short but enjoyable Comment, great scenery.',
             weather=None,
         ),
-        Flight(
+        Comment(
             user_id=2,
             site_id=5,  # Golden - Lookout Mountain
             site_name='Golden - Lookout Mountain',
@@ -81,7 +81,7 @@ def seed_flights():
             log='Windy but manageable, beautiful sunset.',
             weather=None,
         ),
-        Flight(
+        Comment(
             user_id=2,
             site_id=3,  # Williams Peak
             site_name='Williams Peak',
@@ -89,10 +89,10 @@ def seed_flights():
             length=30,
             equipment='Mac Para Eden 6',
             track_data=None,
-            log='Short flight, but great lift near the peak.',
+            log='Short Comment, but great lift near the peak.',
             weather=None,
         ),
-        Flight(
+        Comment(
             user_id=3,
             site_id=9,  # Peak 6
             site_name='Peak 6',
@@ -100,10 +100,10 @@ def seed_flights():
             length=210,
             equipment='Ozone Delta 3',
             track_data=None,
-            log='Longest flight yet, spectacular views.',
+            log='Longest Comment yet, spectacular views.',
             weather=None,
         ),
-        Flight(
+        Comment(
             user_id=1,
             site_id=10,  # Mt. Victoria
             site_name='Mt. Victoria',
@@ -116,12 +116,12 @@ def seed_flights():
         ),
     ]
 
-    db.session.add_all(flights)
+    db.session.add_all(comments)
     db.session.commit()
 
-def undo_flights():
+def undo_comments():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.flights RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.comments RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM flights"))
+        db.session.execute(text("DELETE FROM comments"))
     db.session.commit()
