@@ -25,3 +25,4 @@ class Site(db.Model):
 
 
     creator = db.relationship('User', back_populates = "sites")
+    reviews = db.relationship('Review', back_populates = "site", cascade="all, delete-orphan")
