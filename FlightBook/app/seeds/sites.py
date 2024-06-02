@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 def seed_sites():
     sites = [
         Site(
-            creatorId=1,
+            creator_id=1,
             name='Lookout Mountain',
             lat=397294,
             lon=-1052311,
@@ -14,7 +14,7 @@ def seed_sites():
             license_required=0
         ),
         Site(
-            creatorId=2,
+            creator_id=2,
             name='Boulder Mountain',
             lat=400150,
             lon=-1052705,
@@ -24,7 +24,7 @@ def seed_sites():
             license_required=1
         ),
         Site(
-            creatorId=3,
+            creator_id=3,
             name='Pikes Peak',
             lat=388409,
             lon=-1050423,
@@ -34,7 +34,7 @@ def seed_sites():
             license_required=1
         ),
         Site(
-            creatorId=1,
+            creator_id=1,
             name='Mount Evans',
             lat=395883,
             lon=-1056438,
@@ -44,7 +44,7 @@ def seed_sites():
             license_required=2
         ),
         Site(
-            creatorId=2,
+            creator_id=2,
             name='Cheyenne Mountain',
             lat=387496,
             lon=-1048485,
@@ -54,7 +54,7 @@ def seed_sites():
             license_required=0
         ),
         Site(
-            creatorId=3,
+            creator_id=3,
             name='Red Mountain',
             lat=385280,
             lon=-1052980,
@@ -64,7 +64,7 @@ def seed_sites():
             license_required=0
         ),
         Site(
-            creatorId=1,
+            creator_id=1,
             name='Sunrise Ridge',
             lat=397392,
             lon=-1049903,
@@ -74,7 +74,7 @@ def seed_sites():
             license_required=0
         ),
         Site(
-            creatorId=2,
+            creator_id=2,
             name='Bear Peak',
             lat=399654,
             lon=-1052922,
@@ -84,7 +84,7 @@ def seed_sites():
             license_required=1
         ),
         Site(
-            creatorId=3,
+            creator_id=3,
             name='Mount Elbert',
             lat=391178,
             lon=-1064454,
@@ -94,7 +94,7 @@ def seed_sites():
             license_required=2
         ),
         Site(
-            creatorId=1,
+            creator_id=1,
             name='Garden of the Gods',
             lat=388784,
             lon=-1048695,
