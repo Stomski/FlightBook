@@ -9,7 +9,7 @@ class Site(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    creatorId = db.Column(
+    creator_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete="CASCADE"), nullable=False
     )
     name = db.Column(db.String(200), nullable = False)
@@ -25,3 +25,4 @@ class Site(db.Model):
 
 
     creator = db.relationship('User', back_populates = "sites")
+    reviews = db.relationship('Review', back_populates = "site", cascade="all, delete-orphan")
