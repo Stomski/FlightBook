@@ -24,11 +24,12 @@ def seed():
         undo_sites()
         undo_flights()
         undo_users()
-    seed_reviews()
-    seed_comments()
+
     seed_users()
     seed_flights()
     seed_sites()
+    seed_reviews()
+    seed_comments()
     # Add other seed functions here
 
 
