@@ -9,7 +9,9 @@ class Comment(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    creator_id =db.Column(db.Integer, nullable=False)
+    creatorId = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete="CASCADE"), nullable=False
+    )
     comment = db.Column(db.String(2000), nullable = False)
     flight_id = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.now)

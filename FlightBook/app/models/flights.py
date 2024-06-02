@@ -9,7 +9,9 @@ class Flight(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id =db.Column(db.Integer, nullable=False)
+    user_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete="CASCADE"), nullable=False
+    )
     site_id = db.Column(db.Integer)
     site_name = db.Column(db.String(200), nullable = False)
     start_time = db.Column(db.DateTime, nullable =  False)
