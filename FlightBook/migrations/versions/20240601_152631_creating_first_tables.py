@@ -1,12 +1,16 @@
 """creating first tables
 
 Revision ID: debd26d9b565
-Revises: 
+Revises:
 Create Date: 2024-06-01 15:26:31.199034
 
 """
 from alembic import op
 import sqlalchemy as sa
+
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
@@ -78,6 +82,15 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+    if environment == "production":
+     op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE sites SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE flights SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+
+    # ### end Alembic commands ###
+    # ### end Alembic commands ###qqqqqqqqq
     # ### end Alembic commands ###
 
 
