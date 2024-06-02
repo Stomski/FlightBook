@@ -20,10 +20,10 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
 
-    flights = db.relationship("Flight", back_populates = "user_id", cascade =" all, delete-orphan")
-    sites = db.relationship("Site", back_populates = "creator_id", cascade =" all, delete-orphan")
-    comments = db.relationship("Comment", back_populates="creator_id", cascade="all, delete-orphan")
-    reviews = db.relationship("Review", back_populates="creator_id", cascade="all, delete-orphan")
+    flights = db.relationship("Flight", back_populates = "pilot", cascade="all, delete-orphan")
+    sites = db.relationship("Site", back_populates = "creator", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="creator", cascade="all, delete-orphan")
+    reviews = db.relationship("Review", back_populates="creator", cascade="all, delete-orphan")
 
     @property
     def password(self):
