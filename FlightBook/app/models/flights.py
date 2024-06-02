@@ -5,6 +5,7 @@ from datetime import datetime
 
 class Flight(db.Model):
     __tablename__= 'flights'
+
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
