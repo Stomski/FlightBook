@@ -1,0 +1,16 @@
+.leftcolumndiv {
+  display: grid;
+  grid-template-rows: 32% 1fr; /* 32% for top div, remaining for bottom div */
+  gap: 6px; /* 6px gap between rows */
+  border: 2px solid rgb(125, 248, 24);
+}
+
+.topdivleftcolumn {
+  background-color: rgb(255, 0, 0); /* Red background for top div */
+  border: 2px solid black; /* Black border for top div */
+}
+
+.bottomdivleftcolumn {
+  background-color: rgb(0, 255, 0); /* Green background for bottom div */
+  border: 2px solid black; /* Black border for bottom div */
+}

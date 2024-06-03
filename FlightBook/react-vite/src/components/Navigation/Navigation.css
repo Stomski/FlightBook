@@ -1,7 +1,7 @@
 /* Navbar container styled as a grid */
 .navbardiv {
   display: grid;
-  grid-template-columns: 2fr 10fr 1fr;
+  grid-template-columns: 2fr 10fr 2fr;
   align-items: center; /* Vertically center the content */
   border: 2px solid blue;
   height: 100%;

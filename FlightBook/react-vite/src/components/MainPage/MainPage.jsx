@@ -1,10 +1,12 @@
 import "./MainPage.css";
+import LeftColumn from "../LeftColumn/LeftColumn";
+import Feed from "../Feed/Feed";
 
 function MainPage() {
   return (
     <section className="mainpagesection">
-      <header></header>
-      <h1>THIS IS A TEST I UNDERSTAND REACT</h1>
+      <LeftColumn />
+      <Feed />
     </section>
   );
 }
