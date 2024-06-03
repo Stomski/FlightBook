@@ -6,7 +6,7 @@ function Navigation() {
   return (
     <div className="navbardiv">
       <div className="navlogodiv">LOGO</div>
-      <div className="navmaindiv">placeholder top div</div>
+      <div className="navmaindiv">navmaindiv THIS DIV</div>
 
       <ul className="usermenudiv">
         <li>
