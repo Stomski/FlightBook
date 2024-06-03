@@ -1,1 +1,21 @@
-/* TODO: Add sitewide styles */
+/* Ensure the html and body take up the full height of the viewport */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Apply sitewide styles to the root div */
+.rootdiv {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 15% 84%; /* No comma, correct syntax */
+  gap: 5px;
+}
+#root {
+  height: 100%;
+}
