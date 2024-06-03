@@ -30,7 +30,21 @@ function SignupFormModal() {
         email,
         username,
         password,
+        first_name: firstName,
+        last_name: lastName,
+        user_photo: null,
       })
+    );
+
+    console.log(
+      "TEST USEER OBJ CREATION PRINT #################################################################",
+      {
+        email,
+        username,
+        password,
+        firstName,
+        lastName,
+      }
     );
 
     if (serverResponse) {
