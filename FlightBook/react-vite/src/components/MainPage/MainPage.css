@@ -1,0 +1,5 @@
+.mainpagesection {
+  border: 2px solid red;
+  background-color: lightblue; /* Just for demonstration */
+  grid-row: 1 / -1;
+}

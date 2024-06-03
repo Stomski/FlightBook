@@ -1,3 +1,18 @@
 .profile-dropdown {
   position: absolute;
 }
+.navbardiv {
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  border: 2px solid blue;
+}
+.navmaindiv {
+  border: 2px solid blueviolet;
+}
+.usermenudiv {
+  border: 2px solid orange;
+}
+.navlogodiv {
+  border: 2px solid yellow;
+}
