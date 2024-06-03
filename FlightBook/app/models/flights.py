@@ -21,6 +21,7 @@ class Flight(db.Model):
     track_data=db.Column(db.String(255))
     log = db.Column(db.String(1017))
     weather = db.Column(db.Integer)
+    flight_photo = db.Column(db.String(264))
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
