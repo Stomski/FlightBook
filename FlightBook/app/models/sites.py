@@ -18,7 +18,9 @@ class Site(db.Model):
     altitude =  db.Column(db.Integer, nullable=False)
     intro = db.Column(db.String(1029), nullable = False)
     official = db.Column(db.Boolean, nullable= False)
+
     license_required=db.Column(db.Integer)
+    site_photo = db.Column(db.String(264))
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 

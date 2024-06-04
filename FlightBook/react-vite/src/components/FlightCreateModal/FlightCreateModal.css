@@ -1,0 +1,73 @@
+/* General reset and box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style the modal container */
+.flight-create-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.flight-create-modal h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Style the form */
+.flight-create-modal form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Style the labels and inputs */
+.flight-create-modal label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.flight-create-modal input {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Style the error messages */
+.flight-create-modal p {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: red;
+}
+
+/* Style the submit button */
+.flight-create-modal button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.flight-create-modal button:hover {
+  background-color: #0056b3;
+}
