@@ -41,7 +41,7 @@ function SiteCreateModal() {
   };
 
   return (
-    <div className="site-create-modal">
+    <div className="signup-form-modal">
       <h1>Create Site</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -83,7 +83,7 @@ function SiteCreateModal() {
         </label>
         {errors.altitude && <p>{errors.altitude}</p>}
         <label>
-          Log
+          Site Intro
           <textarea
             value={intro}
             onChange={(e) => setIntro(e.target.value)}
@@ -91,15 +91,6 @@ function SiteCreateModal() {
           />
         </label>
         {errors.intro && <p>{errors.intro}</p>}
-        <label>
-          Official
-          <input
-            type="checkbox"
-            checked={official}
-            onChange={(e) => setOfficial(e.target.checked)}
-          />
-        </label>
-        {errors.official && <p>{errors.official}</p>}
         <label>
           Upload Site Photo
           <input

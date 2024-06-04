@@ -28,3 +28,19 @@ class Site(db.Model):
 
     creator = db.relationship('User', back_populates = "sites")
     reviews = db.relationship('Review', back_populates = "site", cascade="all, delete-orphan")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "creator_id": self.creator_id,
+            "name": self.name,
+            "lat": self.lat,
+            "lon": self.lon,
+            "altitude": self.altitude,
+            "intro": self.intro,
+            "official": self.official,
+            "license_required": self.license_required,
+            "site_photo": self.site_photo,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }
