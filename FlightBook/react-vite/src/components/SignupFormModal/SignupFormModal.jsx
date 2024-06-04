@@ -7,6 +7,7 @@ import "./SignupForm.css";
 function SignupFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [photo, setPhoto] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -17,6 +18,18 @@ function SignupFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("user_photo", photo);
+    formData.append("email", email);
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+
+    console.log(
+      formData,
+      "FORM DATA IN HANDLE SUBMIT IN MY SIGNUP FORM MODAL ???????????????????????????????????????????????????????????????????????????????"
+    );
 
     if (password !== confirmPassword) {
       return setErrors({
@@ -25,16 +38,7 @@ function SignupFormModal() {
       });
     }
 
-    const serverResponse = await dispatch(
-      thunkSignup({
-        email,
-        username,
-        password,
-        first_name: firstName,
-        last_name: lastName,
-        user_photo: null,
-      })
-    );
+    const serverResponse = await dispatch(thunkSignup(formData));
 
     console.log(
       "TEST USEER OBJ CREATION PRINT #################################################################",
@@ -58,7 +62,16 @@ function SignupFormModal() {
     <div className="signup-form-modal">
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <label>
+          Upload a Profile Image
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setPhoto(e.target.files[0])}
+          />
+        </label>
+        {errors.photo && <p>{errors.photo}</p>}
         <label>
           Email
           <input
