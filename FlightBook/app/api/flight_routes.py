@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import Flight
+from ..forms.create_flight import FlightCreateForm
 
 flight_routes = Blueprint('flights', __name__)
 
@@ -33,12 +34,18 @@ def flights_by_site(site_id):
     return flights_dict
 
 
-@flight_routes.route('/new')
-def create_flight(flight_obj):
+@flight_routes.route('/new', methods=["POST"])
+def create_flight():
     """
     this route creates a new flight in the DB from a flight OBJ,
     it returns the made flight as a dict
     """
+    form = FlightCreateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data, "FORM DATA IN CREATE FLIGHT THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+
+
+
 
     print(flight_obj)
     return {'message':'in progress, ROUTE INCOMPLETE'}

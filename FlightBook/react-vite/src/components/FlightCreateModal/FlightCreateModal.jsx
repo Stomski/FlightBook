@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { thunkCreateFlight } from "../../redux/flights";
+import { createFlightThunk } from "../../redux/flights";
 import "./FlightCreateModal.css";
 
 function FlightCreateModal() {
@@ -27,9 +27,8 @@ function FlightCreateModal() {
     formData.append("start_time", startTime);
     formData.append("equipment", equipment);
     formData.append("log", log);
-    formData.append("weather", weather);
 
-    const serverResponse = await dispatch(thunkCreateFlight(formData));
+    const serverResponse = await dispatch(createFlightThunk(formData));
 
     if (serverResponse) {
       setErrors(serverResponse);
