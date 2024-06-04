@@ -32,3 +32,10 @@
   list-style: none;
   height: 100%;
 }
+.user-photo {
+  height: 70px;
+}
+.user-pulldown-menu {
+  position: absolute;
+  padding-right: 15 px;
+}
