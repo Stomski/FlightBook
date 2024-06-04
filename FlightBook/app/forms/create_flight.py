@@ -12,3 +12,4 @@ class FlightCreateForm(FlaskForm):
     log = TextAreaField('Log', validators=[DataRequired()])
     weather = IntegerField('Weather')
     flight_photo = FileField('Flight Photo', validators=[FileAllowed(list(ALLOWED_EXTENSIONS), 'Invalid file type.')])
+    user_id = IntegerField('user_id')
