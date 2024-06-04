@@ -12,8 +12,15 @@ const getAllSites = (sites) => ({
 });
 
 export const getAllSitesThunk = () => async (dispatch) => {
+  console.log(
+    "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > BEFORE FETCH"
+  );
+
   const response = await fetch("/api/sites/all");
   if (response.ok) {
+    console.log(
+      "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > RESPONSE OK"
+    );
     const data = await response.json();
     dispatch(getAllSites(data));
   } else if (response.status < 500) {
