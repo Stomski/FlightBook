@@ -19,7 +19,9 @@ function SignupFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("user_photo", photo);
+    if (photo !== "") {
+      formData.append("user_photo", photo);
+    }
     formData.append("email", email);
     formData.append("username", username);
     formData.append("password", password);
@@ -39,17 +41,6 @@ function SignupFormModal() {
     }
 
     const serverResponse = await dispatch(thunkSignup(formData));
-
-    console.log(
-      "TEST USEER OBJ CREATION PRINT #################################################################",
-      {
-        email,
-        username,
-        password,
-        firstName,
-        lastName,
-      }
-    );
 
     if (serverResponse) {
       setErrors(serverResponse);

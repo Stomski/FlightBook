@@ -41,10 +41,6 @@ export const thunkLogin = (credentials) => async (dispatch) => {
 };
 
 export const thunkSignup = (user) => async (dispatch) => {
-  console.log(
-    user,
-    "USER##################################################################"
-  );
   const response = await fetch("/api/auth/signup", {
     method: "POST",
 
