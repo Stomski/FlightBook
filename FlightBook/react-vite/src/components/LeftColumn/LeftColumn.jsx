@@ -1,10 +1,13 @@
+import LeftPageInfo from "./LeftPageInfo";
+import LeftNavTree from "./LeftNavTree";
+
 import "./LeftColumn.css";
 
 function LeftColumn() {
   return (
     <section className="leftcolumndiv">
-      <div className="topdivleftcolumn">top div</div>
-      <div className="bottomdivleftcolumn">bottom div</div>
+      <LeftPageInfo />
+      <LeftNavTree />
     </section>
   );
 }

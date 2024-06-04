@@ -5,12 +5,12 @@
   border: 2px solid rgb(125, 248, 24);
 }
 
-.topdivleftcolumn {
+.left-page-info-div {
   background-color: rgb(255, 0, 0); /* Red background for top div */
   border: 2px solid black; /* Black border for top div */
 }
 
-.bottomdivleftcolumn {
+.left-nav-tree-div {
   background-color: rgb(0, 255, 0); /* Green background for bottom div */
   border: 2px solid black; /* Black border for bottom div */
 }
