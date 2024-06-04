@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, request
 from flask_login import login_required
-from app.models import Flight
+from app.models import Flight, db
 from ..forms.create_flight import FlightCreateForm
+from ..api.aws_functions import upload_file_to_s3, get_unique_filename
 
 flight_routes = Blueprint('flights', __name__)
 
@@ -43,9 +44,47 @@ def create_flight():
     form = FlightCreateForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print(form.data, "FORM DATA IN CREATE FLIGHT THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    if form.validate_on_submit():
+        if form.data["flight_photo"]:
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> there is FLIGHT photo data")
+            image = form.data["flight_photo"]
+            print(image, "IMAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            image.filename = get_unique_filename(image.filename)
+            print(image, "IMAGE")
+            print(image.filename, "IMAGE>FILEMANE")
+            upload = upload_file_to_s3(image)
+            print(upload, "UPLOAD<<<<<<<<<<<<<<<<")
 
+            if "url" not in upload:
+                print("WHAT THE FUCK")
+                return form.errors, 400
+            url = upload["url"]
+            flight = Flight(
+                site_name=form.data['site_name'],
+                start_time=form.data['start_time'],
+                length = form.data["length"],
+                equipment = form.data["equipment"],
+                flight_photo = url,
+                user_id= form.data["user_id"],
+                log = form.data["log"]
+            )
+            db.session.add(flight)
+            db.session.commit()
+            return flight.to_dict()
+        else:
+            print("XXXXXXX#################################################### NO FLIGHT photo data")
+            print(form.data)
+            print("XXXXXXX#################################################### NO FLIGHT photo data")
+            flight = Flight(
+                site_name=form.data['site_name'],
+                start_time=form.data['start_time'],
+                length = form.data["length"],
+                equipment = form.data["equipment"],
+                log = form.data["log"],
+                user_id= form.data["user_id"]
+            )
+            db.session.add(flight)
+            db.session.commit()
+            return flight.to_dict()
 
-
-
-    print(flight_obj)
-    return {'message':'in progress, ROUTE INCOMPLETE'}
+    return form.errors, 400

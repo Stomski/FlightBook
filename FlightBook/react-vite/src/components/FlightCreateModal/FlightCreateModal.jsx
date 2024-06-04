@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createFlightThunk } from "../../redux/flights";
 import "./FlightCreateModal.css";
@@ -15,6 +15,7 @@ function FlightCreateModal() {
   const [flightPhoto, setFlightPhoto] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+  const sessionUser = useSelector((state) => state.session.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +28,12 @@ function FlightCreateModal() {
     formData.append("start_time", startTime);
     formData.append("equipment", equipment);
     formData.append("log", log);
+    formData.append("user_id", sessionUser.id);
+
+    console.log(
+      "I HAVE ATTACHED ALL THE THINGS INCLUDING FORM ID",
+      sessionUser.id
+    );
 
     const serverResponse = await dispatch(createFlightThunk(formData));
 
