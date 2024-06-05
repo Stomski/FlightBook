@@ -10,7 +10,8 @@ function viewReducer(state = {}, action) {
   switch (action.type) {
     case SET_FEED_COMPONENT:
       newState = { ...state };
-      newstate["feedComponentName"] = action.payload;
+      newState["feedComponentName"] = action.payload;
+      return newState;
     default:
       return state;
   }

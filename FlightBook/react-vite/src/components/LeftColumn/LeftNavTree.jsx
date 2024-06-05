@@ -2,27 +2,39 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import FlightCreateModal from "../FlightCreateModal/FlightCreateModal";
 import SiteCreateModal from "../SiteCreateModal/SiteCreateModal";
 import { useState } from "react";
+import { setFeedComponent } from "../../redux/view";
+import { useDispatch } from "react-redux";
 
 function TreeNode({ node }) {
-  const { RenderComponent, children, label, Modal, title } = node;
-
+  const { RenderComponent, children, label, Modal, title, viewOption } = node;
+  const dispatch = useDispatch();
   const [showChildren, setShowChildren] = useState(false);
-
-  console.log(
-    "RENDER COMPONENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
-    RenderComponent
-  );
 
   const handleClick = () => {
     setShowChildren(!showChildren);
   };
+
+  const handleViewChange = () => {
+    console.log("%c handleViewChange log>", "color:red; font-size: 26px");
+    dispatch(setFeedComponent(viewOption));
+  };
   return (
     <>
-      {RenderComponent && Modal ? (
+      {RenderComponent && Modal && (
         <div>
           <RenderComponent itemText={label} modalComponent={<Modal />} />
         </div>
-      ) : (
+      )}
+
+      {viewOption && (
+        <>
+          <div onClick={handleViewChange} style={{ marginBottom: "10px" }}>
+            <span>{label}</span>
+          </div>
+        </>
+      )}
+
+      {children && children.length > 0 && (
         <div onClick={handleClick} style={{ marginBottom: "10px" }}>
           {title ? (
             <h2 className="tree-title">{label}</h2>
