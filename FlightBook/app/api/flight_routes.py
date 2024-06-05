@@ -6,6 +6,20 @@ from ..api.aws_functions import upload_file_to_s3, get_unique_filename
 
 flight_routes = Blueprint('flights', __name__)
 
+@flight_routes.route('/all')
+def flights_recent():
+    """
+    this route will return all flights MOST RECENT AT THE TOP
+    """
+    flights = Flight.query.order_by(Flight.start_time.desc()).limit(20).all()
+    print(flights)
+    flights_dict={}
+    for flight in flights:
+        flight_to_dict = flight.to_dict()
+        flights_dict[flight_to_dict['id']]=flight_to_dict
+
+    return flights_dict
+
 
 @flight_routes.route('/by-user/<int:user_id>')
 def flights_by_user(user_id):
