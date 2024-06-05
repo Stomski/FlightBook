@@ -6,11 +6,24 @@
 }
 
 .left-page-info-div {
-  background-color: rgb(255, 0, 0); /* Red background for top div */
+  background-color: rgba(74, 56, 195, 0.847); /* Red background for top div */
   border: 2px solid black; /* Black border for top div */
 }
 
 .left-nav-tree-div {
-  background-color: rgb(243, 152, 16); /* Green background for bottom div */
+  background-color: rgb(32, 39, 183); /* Green background for bottom div */
   border: 2px solid black; /* Black border for bottom div */
+}
+.navigation-title {
+  padding-bottom: 10px;
+}
+.left-nav-tree-title {
+  padding-top: 6px;
+  font-size: 1.5em; /* Increase the font size */
+  font-weight: bold; /* Make the text bold */
+  padding-left: 4px;
+}
+.tree-title {
+  padding-top: 10px;
+  padding-left: 4px;
 }

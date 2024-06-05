@@ -1,7 +1,14 @@
 .site-card-div {
   border: 2px solid black;
+  padding: 20px;
 }
 .all-sites-feed {
   max-height: 100%;
   overflow-y: auto; /* Enable vertical scrolling */
+}
+.site-title {
+  font-size: 2em; /* Increase the font size */
+  font-weight: bold; /* Make the text bold */
+  margin-bottom: 10px; /* Add some space below the title */
+  color: #333; /* Optional: Change the text color */
 }

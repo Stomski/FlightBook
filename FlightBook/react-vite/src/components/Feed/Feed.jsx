@@ -5,7 +5,7 @@ import "./Feed.css";
 function Feed() {
   return (
     <section className="FeedDiv">
-      <h1>Feed</h1>
+      <h1></h1>
       <FeedAllSites />
     </section>
   );
