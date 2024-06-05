@@ -1,0 +1,7 @@
+.site-card-div {
+  border: 2px solid black;
+}
+.all-sites-feed {
+  max-height: 100%;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
