@@ -14,11 +14,12 @@ export default function FeedFlightsByUser() {
 
   return (
     <section className="flights-by-user-feed">
-      {Object.values(flights).map((flight) => (
-        <div className="flight-card-div" key={flight["id"]}>
-          <h2 className="flight-title">{flight["site_name"]}</h2>
-        </div>
-      ))}
+      {flights["selectedUsersFlights"] &&
+        Object.values(flights["selectedUsersFlights"]).map((flight) => (
+          <div className="flight-card-div" key={flight["id"]}>
+            <h2 className="flight-title">{flight["site_name"]}</h2>
+          </div>
+        ))}
     </section>
   );
 }
