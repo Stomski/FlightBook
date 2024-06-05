@@ -18,6 +18,9 @@ const createFlight = (flight) => ({
 });
 
 export const getFlightsByUserThunk = (userId) => async (dispatch) => {
+  console.log(
+    "GET FLIGHTS BY USER THUNK CALLED&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+  );
   const response = await fetch(`/api/flights/by-user/${userId}`);
   if (response.ok) {
     console.log("GET FLIGHTS BY USER THUNK > RESPONSE OK");
@@ -79,7 +82,7 @@ function flightsReducer(state = {}, action) {
   switch (action.type) {
     case GET_FLIGHTS_BY_USER:
       newState = { ...state };
-      newstate["selectedUsersFlights"] = action.payload;
+      newState["selectedUsersFlights"] = action.payload;
       return newState;
     case GET_ALL_FLIGHTS:
       newState = { ...action.payload };

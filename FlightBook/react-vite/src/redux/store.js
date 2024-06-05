@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import flightsReducer from "./flights";
 import sitesReducer from "./sites";
+import viewReducer from "./view";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   flights: flightsReducer,
   sites: sitesReducer,
+  view: viewReducer,
 });
 
 let enhancer;

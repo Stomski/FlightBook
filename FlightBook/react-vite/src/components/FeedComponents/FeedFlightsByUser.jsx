@@ -6,9 +6,10 @@ import "./FeedFlightsByUser.css";
 export default function FeedFlightsByUser() {
   const flights = useSelector((state) => state.flights);
   const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(getFlightsByUserThunk());
+    dispatch(getFlightsByUserThunk(sessionUser.id));
   }, []);
 
   return (
