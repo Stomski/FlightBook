@@ -46,7 +46,7 @@ function FlightCreateModal() {
 
   return (
     <div className="flight-create-modal">
-      <h1>Create Flight</h1>
+      <h1>Log a Flight!</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
