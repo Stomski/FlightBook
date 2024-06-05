@@ -24,7 +24,11 @@ function TreeNode({ node }) {
         </div>
       ) : (
         <div onClick={handleClick} style={{ marginBottom: "10px" }}>
-          {title ? <h2>{label}</h2> : <span>{label}</span>}
+          {title ? (
+            <h2 className="tree-title">{label}</h2>
+          ) : (
+            <span>{label}</span>
+          )}
         </div>
       )}
 
