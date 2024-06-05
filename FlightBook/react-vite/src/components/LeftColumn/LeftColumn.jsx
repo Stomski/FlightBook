@@ -8,7 +8,10 @@ function LeftColumn() {
   return (
     <section className="leftcolumndiv">
       <LeftPageInfo />
-      <LeftNavTree treeData={treeData} />
+      <div className="left-nav-tree-div">
+        <h1 className="left-nav-tree-title"> NAVIGATION:</h1>
+        <LeftNavTree treeData={treeData} />
+      </div>
     </section>
   );
 }

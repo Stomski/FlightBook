@@ -4,22 +4,28 @@ import SiteCreateModal from "../SiteCreateModal/SiteCreateModal";
 import { useState } from "react";
 
 function TreeNode({ node }) {
-  const { renderComponent, children, label } = node;
+  const { RenderComponent, children, label, Modal, title } = node;
 
   const [showChildren, setShowChildren] = useState(false);
+
+  console.log(
+    "RENDER COMPONENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+    RenderComponent
+  );
 
   const handleClick = () => {
     setShowChildren(!showChildren);
   };
   return (
     <>
-      <div onClick={handleClick} style={{ marginBottom: "10px" }}>
-        <span>{label}</span>
-      </div>
-      {renderComponent && (
-        <>
-          <h1>{renderComponent}</h1>
-        </>
+      {RenderComponent && Modal ? (
+        <div>
+          <RenderComponent itemText={label} modalComponent={<Modal />} />
+        </div>
+      ) : (
+        <div onClick={handleClick} style={{ marginBottom: "10px" }}>
+          {title ? <h2>{label}</h2> : <span>{label}</span>}
+        </div>
       )}
 
       {children && children.length > 0 && showChildren && (
@@ -33,7 +39,7 @@ function TreeNode({ node }) {
 function LeftNavTree({ treeData }) {
   console.log(treeData);
   return (
-    <section className="left-nav-tree-div">
+    <section className="left-nav-tree">
       {/* <div></div>
       <OpenModalMenuItem
         itemText="Log a Flight!"

@@ -14,3 +14,12 @@
   background-color: rgb(243, 152, 16); /* Green background for bottom div */
   border: 2px solid black; /* Black border for bottom div */
 }
+.navigation-title {
+  padding-bottom: 10px;
+}
+.left-nav-tree-title {
+  padding-bottom: 10px;
+  font-size: 1.5em; /* Increase the font size */
+  font-weight: bold; /* Make the text bold */
+  margin-bottom: 10px; /* Add some space below the title */
+}
