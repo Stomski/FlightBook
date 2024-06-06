@@ -24,7 +24,8 @@ def seed_users():
             first_name='Bobby',
             last_name='Brown',
             email='bobby@aa.io',
-            password='password'
+            password='password',
+            user_photo = 's3://flightbook1may2024/5ad4906987ea4fd7a986277679e9ffa3.jpg'
         ),
         User(
             username='alice',
