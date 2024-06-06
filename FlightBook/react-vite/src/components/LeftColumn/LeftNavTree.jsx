@@ -3,12 +3,21 @@ import FlightCreateModal from "../FlightCreateModal/FlightCreateModal";
 import SiteCreateModal from "../SiteCreateModal/SiteCreateModal";
 import { useState } from "react";
 import { setFeedComponent } from "../../redux/view";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function TreeNode({ node }) {
-  const { RenderComponent, children, label, Modal, title, viewOption } = node;
+  const {
+    RenderComponent,
+    children,
+    label,
+    Modal,
+    title,
+    viewOption,
+    requireLogin,
+  } = node;
   const dispatch = useDispatch();
   const [showChildren, setShowChildren] = useState(false);
+  const sessionUser = useSelector((state) => state.session.user);
 
   const handleClick = () => {
     setShowChildren(!showChildren);
@@ -20,13 +29,20 @@ function TreeNode({ node }) {
   };
   return (
     <>
-      {RenderComponent && Modal && (
+      {RenderComponent && Modal && sessionUser && (
         <div>
           <RenderComponent itemText={label} modalComponent={<Modal />} />
         </div>
       )}
 
-      {viewOption && (
+      {viewOption && sessionUser && (
+        <>
+          <div onClick={handleViewChange} style={{ marginBottom: "10px" }}>
+            <span>{label}</span>
+          </div>
+        </>
+      )}
+      {viewOption && !sessionUser && !requireLogin && (
         <>
           <div onClick={handleViewChange} style={{ marginBottom: "10px" }}>
             <span>{label}</span>
@@ -34,7 +50,7 @@ function TreeNode({ node }) {
         </>
       )}
 
-      {children && children.length > 0 && (
+      {children && sessionUser && children.length > 0 && (
         <div onClick={handleClick} style={{ marginBottom: "10px" }}>
           {title ? (
             <h2 className="tree-title">{label}</h2>
@@ -44,11 +60,30 @@ function TreeNode({ node }) {
         </div>
       )}
 
-      {children && children.length > 0 && showChildren && (
+      {children && !sessionUser && children.length > 0 && !requireLogin && (
+        <div onClick={handleClick} style={{ marginBottom: "10px" }}>
+          {title ? (
+            <h2 className="tree-title">{label}</h2>
+          ) : (
+            <span>{label}</span>
+          )}
+        </div>
+      )}
+
+      {children && sessionUser && children.length > 0 && showChildren && (
         <ul style={{ paddingLeft: "10px", borderLeft: "1px solid black" }}>
           <LeftNavTree treeData={children} />
         </ul>
       )}
+      {children &&
+        !sessionUser &&
+        children.length > 0 &&
+        showChildren &&
+        !requireLogin && (
+          <ul style={{ paddingLeft: "10px", borderLeft: "1px solid black" }}>
+            <LeftNavTree treeData={children} />
+          </ul>
+        )}
     </>
   );
 }

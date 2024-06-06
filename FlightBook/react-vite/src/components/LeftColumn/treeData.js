@@ -17,10 +17,12 @@ export const treeData = [
         key: "0-1",
         label: "view my sites",
         viewOption: "FeedMySites",
+        requireLogin: true,
       },
       {
         key: "0-2",
         label: "view favorites",
+        requireLogin: true,
         children: [
           {
             key: "0-2-0",
@@ -56,6 +58,7 @@ export const treeData = [
         key: "1-1",
         label: "view my log book and stats",
         viewOption: "FeedFlightsByUser",
+        requireLogin: true,
       },
       {
         key: "1-2",
