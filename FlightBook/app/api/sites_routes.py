@@ -22,6 +22,24 @@ def getAllSites():
         sites_dict[site_to_dict["id"]] = site_to_dict
     return sites_dict
 
+@site_routes.route('/by-user/<int:user_id>')
+def get_sites_by_user(user_id):
+    """
+    this route returns dictionaries of all the sites in the DB
+    CREATED BY A GIVEN USER
+    """
+
+    sites = Site.query.filter(Site.creator_id==user_id).all()
+
+    sites_dict ={}
+    for site in sites:
+        site_to_dict = site.to_dict()
+        sites_dict[site_to_dict["id"]] = site_to_dict
+    return sites_dict
+
+
+
+
 @site_routes.route('/new', methods = ["POST"])
 def createSite():
     """
