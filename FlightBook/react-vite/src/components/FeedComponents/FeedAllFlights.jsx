@@ -20,14 +20,24 @@ export default function FeedAllFlights() {
   });
   return (
     <section className="all-flights-feed">
-      <h1>TOP OF VIEW RECENT FLIGHTS</h1>
       {Object.values(flights).map(
         (flight) =>
           flight &&
           flight.pilot && (
             <div className="flight-card-div" key={flight.id}>
-              <h2 className="flight-title">{`${flight.pilot.username} flew at ${flight.site_name}`}</h2>
-              <h3>{`for ${flight.length} minutes`}</h3>
+              <div className="flight-info">
+                {flight.pilot.user_photo && (
+                  <img
+                    className="flight-photo"
+                    src={flight.pilot.user_photo}
+                    alt={`${flight.pilot.username}'s profile`}
+                  />
+                )}
+                <div>
+                  <h2 className="flight-title">{`${flight.pilot.username} flew at ${flight.site_name}`}</h2>
+                  <h3 className="flight-times">{`for ${flight.length} minutes on ${flight.start_time}`}</h3>
+                </div>
+              </div>
             </div>
           )
       )}

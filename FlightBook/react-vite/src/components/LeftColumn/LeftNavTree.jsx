@@ -30,28 +30,40 @@ function TreeNode({ node }) {
   return (
     <>
       {RenderComponent && Modal && sessionUser && (
-        <div>
+        <div className="clickable">
           <RenderComponent itemText={label} modalComponent={<Modal />} />
         </div>
       )}
 
       {viewOption && sessionUser && (
         <>
-          <div onClick={handleViewChange} style={{ marginBottom: "10px" }}>
+          <div
+            className="clickable"
+            onClick={handleViewChange}
+            style={{ marginBottom: "10px" }}
+          >
             <span>{label}</span>
           </div>
         </>
       )}
       {viewOption && !sessionUser && !requireLogin && (
         <>
-          <div onClick={handleViewChange} style={{ marginBottom: "10px" }}>
+          <div
+            className="clickable"
+            onClick={handleViewChange}
+            style={{ marginBottom: "10px" }}
+          >
             <span>{label}</span>
           </div>
         </>
       )}
 
       {children && sessionUser && children.length > 0 && (
-        <div onClick={handleClick} style={{ marginBottom: "10px" }}>
+        <div
+          className="clickable"
+          onClick={handleClick}
+          style={{ marginBottom: "10px" }}
+        >
           {title ? (
             <h2 className="tree-title">{label}</h2>
           ) : (
@@ -61,7 +73,11 @@ function TreeNode({ node }) {
       )}
 
       {children && !sessionUser && children.length > 0 && !requireLogin && (
-        <div onClick={handleClick} style={{ marginBottom: "10px" }}>
+        <div
+          className="clickable"
+          onClick={handleClick}
+          style={{ marginBottom: "10px" }}
+        >
           {title ? (
             <h2 className="tree-title">{label}</h2>
           ) : (
@@ -91,17 +107,6 @@ function LeftNavTree({ treeData }) {
   console.log(treeData);
   return (
     <section className="left-nav-tree">
-      {/* <div></div>
-      <OpenModalMenuItem
-        itemText="Log a Flight!"
-        modalComponent={<FlightCreateModal />}
-      />
-      <OpenModalMenuItem
-        itemText="Create a Site!"
-        modalComponent={<SiteCreateModal />}
-      />
-      <div></div> */}
-
       <ul>
         {treeData.map((node) => (
           <TreeNode node={node} key={node.key} />

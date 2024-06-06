@@ -1,14 +1,36 @@
-.site-card-div {
-  border: 2px solid black;
-  padding: 20px;
-}
 .all-sites-feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
   max-height: 100%;
   overflow-y: auto; /* Enable vertical scrolling */
 }
+
+.site-card-div {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.site-card-div:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 .site-title {
-  font-size: 2em; /* Increase the font size */
-  font-weight: bold; /* Make the text bold */
-  margin-bottom: 10px; /* Add some space below the title */
-  color: #333; /* Optional: Change the text color */
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.site-info {
+  font-size: 1em;
+  color: #666;
 }

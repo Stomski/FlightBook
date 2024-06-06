@@ -16,8 +16,13 @@ export default function FeedFlightsByUser() {
     <section className="flights-by-user-feed">
       {flights["selectedUsersFlights"] &&
         Object.values(flights["selectedUsersFlights"]).map((flight) => (
-          <div className="flight-card-div" key={flight["id"]}>
-            <h2 className="flight-title">{flight["site_name"]}</h2>
+          <div className="flight-card-div" key={flight.id}>
+            <h2 className="flight-title">{flight.site_name}</h2>
+            <div className="flight-info">
+              <p>{`Duration: ${flight.length} minutes        Date: ${new Date(
+                flight.start_time
+              ).toLocaleDateString()}`}</p>
+            </div>
           </div>
         ))}
     </section>

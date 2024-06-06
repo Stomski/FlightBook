@@ -20,8 +20,12 @@ export default function FeedMySites() {
     <section className="my-sites-feed">
       <h2>Sites That YOU submitted to our database:</h2>
       {Object.values(sites).map((site) => (
-        <div className="site-card-div">
-          <h2 className="site-title">{site["name"]}</h2>
+        <div className="site-card-div" key={site.id}>
+          <h2 className="site-title">{site.name}</h2>
+          <div className="site-info">
+            <p>Altitude: {site.altitude} ft</p>
+            <p>Official Status: {site.official ? "Yes" : "No"}</p>
+          </div>
         </div>
       ))}
     </section>
