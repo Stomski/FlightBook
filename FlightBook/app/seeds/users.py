@@ -18,6 +18,7 @@ def seed_users():
             last_name='Smith',
             email='marnie@aa.io',
             password='password'
+            user_photo = 'https://flightbook1may2024.s3.us-east-2.amazonaws.com/704484a5b6914597be69b584ae347d10.jpg'
         ),
         User(
             username='bobby',
@@ -25,7 +26,7 @@ def seed_users():
             last_name='Brown',
             email='bobby@aa.io',
             password='password',
-            user_photo = 's3://flightbook1may2024/5ad4906987ea4fd7a986277679e9ffa3.jpg'
+            user_photo = 'https://flightbook1may2024.s3.us-east-2.amazonaws.com/f5b638ae605342d8afe210c37d77ca8a.jpg'
         ),
         User(
             username='alice',
