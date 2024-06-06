@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getMySitesThunk } from "../../redux/sites";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import SiteUpdateModal from "../SiteCreateModal/SiteUpdateModal";
 import "./FeedMySites.css";
 
 export default function FeedMySites() {
@@ -24,6 +26,12 @@ export default function FeedMySites() {
           <div className="site-info">
             <p>Altitude: {site.altitude} ft</p>
             <p>Official Status: {site.official ? "Yes" : "No"}</p>
+            <p>testing</p>
+            <OpenModalMenuItem
+              itemText="Edit this Launch Site"
+              modalComponent={<SiteUpdateModal site={site} />}
+            />
+            <p>the fuck</p>
           </div>
         </div>
       ))}
