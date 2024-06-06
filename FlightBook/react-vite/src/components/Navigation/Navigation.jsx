@@ -12,24 +12,21 @@ function Navigation() {
       <div className="navlogodiv">LOGO</div>
       <div className="navmaindiv">navmaindiv THIS DIV</div>
 
-      <ul className="usermenudiv">
+      <div className="usermenudiv">
         {sessionUser && sessionUser["user_photo"] && (
-          <li>
+          <div className="user-photo">
             <img
               className="user-photo"
               src={sessionUser["user_photo"]}
               alt="user profile image"
             />
-          </li>
+          </div>
         )}
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
 
-        <li>
+        <div className="user-pulldown-menu">
           <ProfileButton />
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 }
