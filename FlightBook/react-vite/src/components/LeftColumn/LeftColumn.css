@@ -1,3 +1,12 @@
+.clickable {
+  cursor: pointer;
+  transition: text-shadow 0.3s ease;
+}
+
+.clickable:hover {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adjust the values as needed */
+}
+
 .leftcolumndiv {
   display: grid;
   grid-template-rows: 32% 1fr; /* 32% for top div, remaining for bottom div */
@@ -11,18 +20,22 @@
 }
 
 .left-nav-tree-div {
-  background-color: rgb(32, 39, 183); /* Green background for bottom div */
+  background-color: rgba(93, 174, 255, 0.37); /* Just for demonstration */
   border: 2px solid black; /* Black border for bottom div */
+  padding-left: 4px;
 }
+
 .navigation-title {
   padding-bottom: 10px;
 }
+
 .left-nav-tree-title {
   padding-top: 6px;
   font-size: 1.5em; /* Increase the font size */
   font-weight: bold; /* Make the text bold */
   padding-left: 4px;
 }
+
 .tree-title {
   padding-top: 10px;
   padding-left: 4px;

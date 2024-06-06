@@ -1,5 +1,11 @@
 const GET_ALL_SITES = "sites/getAll";
 const CREATE_SITE = "sites/new";
+const GET_MY_SITES = "sites/mine";
+
+const getMySites = (sites) => ({
+  type: GET_MY_SITES,
+  payload: sites,
+});
 
 const createSite = (site) => ({
   type: CREATE_SITE,
@@ -10,6 +16,24 @@ const getAllSites = (sites) => ({
   type: GET_ALL_SITES,
   payload: sites,
 });
+
+export const getMySitesThunk = (userId) => async (dispatch) => {
+  console.log(" THIS IS GETTING CALLED< GET MY SITES THUNK > BEFORE FETCH");
+
+  const response = await fetch(`/api/sites/by-user/${userId}`);
+  if (response.ok) {
+    console.log(
+      "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > RESPONSE OK"
+    );
+    const data = await response.json();
+    dispatch(getAllSites(data));
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages;
+  } else {
+    return { server: "Something went wrong. Please try again" };
+  }
+};
 
 export const getAllSitesThunk = () => async (dispatch) => {
   console.log(

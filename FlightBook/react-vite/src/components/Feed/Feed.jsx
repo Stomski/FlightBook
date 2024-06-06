@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import FeedAllSites from "../FeedComponents/FeedAllSites";
 import FeedAllFlights from "../FeedComponents/FeedAllFlights";
+import FeedMySites from "../FeedComponents/FeedMySites";
 import FeedFlightsByUser from "../FeedComponents/FeedFlightsByUser";
 import FeedFeatureComingSoon from "../FeedComponents/FeedFEatureComingSoon";
 
@@ -25,6 +26,7 @@ function Feed() {
   return (
     <section className="FeedDiv">
       {feedComponentName === "FeedAllSites" && <FeedAllSites />}
+      {feedComponentName === "FeedMySites" && <FeedMySites />}
       {feedComponentName === "FeedAllFlights" && <FeedAllFlights />}
       {feedComponentName === "FeedFlightsByUser" && <FeedFlightsByUser />}
       {feedComponentName === "featureComingSoon" && <FeedFeatureComingSoon />}
