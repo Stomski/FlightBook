@@ -50,7 +50,8 @@ function LeftInfoMySites() {
 function LeftInfoFeatureComingSoon() {
   return (
     <>
-      <h1>THIS FEATURE COMING SOON YO!!!!!</h1>
+      <h1>explore elsewhere</h1>
+      <h1>for now</h1>
     </>
   );
 }
@@ -58,7 +59,8 @@ function LeftInfoFeatureComingSoon() {
 function WelcomePage() {
   return (
     <>
-      <h1>Welcome to the Free Flight Site</h1>
+      <h2>Welcome to the Free Flight Site!</h2>
+      <h1>we know you love to explore</h1>
     </>
   );
 }

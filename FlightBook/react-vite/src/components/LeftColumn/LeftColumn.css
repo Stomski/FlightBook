@@ -11,18 +11,24 @@
   display: grid;
   grid-template-rows: 32% 1fr; /* 32% for top div, remaining for bottom div */
   gap: 6px; /* 6px gap between rows */
-  border: 2px solid rgb(125, 248, 24);
 }
 
 .left-page-info-div {
-  background-color: rgba(74, 56, 195, 0.847); /* Red background for top div */
-  border: 2px solid black; /* Black border for top div */
+  background-color: rgba(93, 174, 255, 0.37); /* Just for demonstration */
+
+  padding: 10px;
+  padding-left: 15px;
+  padding-top: 20px;
+  position: relative;
 }
 
 .left-nav-tree-div {
-  background-color: rgba(93, 174, 255, 0.37); /* Just for demonstration */
+  background-color: rgba(19, 82, 190, 0.847); /* Red background for top div */
   border: 2px solid black; /* Black border for bottom div */
   padding-left: 4px;
+  border-top-right-radius: 10px; /* Add rounded edges */
+  border-bottom: none; /* Hide the bottom border */
+  border-left: none; /* Hide the left border */
 }
 
 .navigation-title {

@@ -5,7 +5,7 @@ import SiteCreateModal from "../SiteCreateModal/SiteCreateModal";
 export const treeData = [
   {
     key: "0",
-    label: "Sites",
+    label: "Launch Sites",
     title: true,
     children: [
       {
@@ -46,7 +46,7 @@ export const treeData = [
   },
   {
     key: "1",
-    label: "Flights",
+    label: "Flight Logs",
     title: true,
     children: [
       {
