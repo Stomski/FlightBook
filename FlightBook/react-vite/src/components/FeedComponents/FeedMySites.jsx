@@ -4,7 +4,7 @@ import { getMySitesThunk } from "../../redux/sites";
 import "./FeedMySites.css";
 
 export default function FeedMySites() {
-  const flights = useSelector((state) => state.flights);
+  const sites = useSelector((state) => state.sites);
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -12,15 +12,16 @@ export default function FeedMySites() {
     dispatch(getMySitesThunk(sessionUser.id));
   }, []);
 
-  console.log("%c flights log>", "color:red; font-size: 26px", flights);
-  Object.values(flights).forEach((flight) => {
+  console.log("%c sites log>", "color:red; font-size: 26px", sites);
+  Object.values(sites).forEach((flight) => {
     console.log(flight);
   });
   return (
-    <section className="all-flights-feed">
-      {Object.values(flights).map((flight) => (
-        <div className="flight-card-div">
-          <h2 className="flight-title">{flight["site_name"]}</h2>
+    <section className="my-sites-feed">
+      <h2>Sites That YOU submitted to our database:</h2>
+      {Object.values(sites).map((site) => (
+        <div className="site-card-div">
+          <h2 className="site-title">{site["name"]}</h2>
         </div>
       ))}
     </section>

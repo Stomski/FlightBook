@@ -17,6 +17,7 @@ export default function FeedAllFlights() {
   });
   return (
     <section className="all-flights-feed">
+      <h1>TOP OF VIEW RECENT FLIGHTS</h1>
       {Object.values(flights).map((flight) => (
         <div className="flight-card-div">
           <h2 className="flight-title">{flight["site_name"]}</h2>
