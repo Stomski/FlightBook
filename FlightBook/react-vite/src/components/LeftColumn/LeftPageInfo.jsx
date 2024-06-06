@@ -17,7 +17,7 @@ FeedFlightsByUser
 function LeftInfoAllSites() {
   return (
     <>
-      <h1>THIS IS THE GET ALL SITES THINGY MABOB SHOW RESPECT</h1>
+      <h2>All the flights in our DB:</h2>
     </>
   );
 }
@@ -38,17 +38,29 @@ function LeftInfoFlightsByUser() {
   );
 }
 
-function LeftInfoFeatureComingSoon() {
+function LeftInfoMySites() {
   return (
     <>
-      <h1>THIS FEATURE COMING SOON YO!!!!!</h1>
+      <h2>These are all the sites which you have submitted to the database:</h2>
+      <p>thank you for your contributions!</p>
     </>
   );
 }
+
+function LeftInfoFeatureComingSoon() {
+  return (
+    <>
+      <h1>explore elsewhere</h1>
+      <h1>for now</h1>
+    </>
+  );
+}
+
 function WelcomePage() {
   return (
     <>
-      <h1>Welcome to the Free Flight Site</h1>
+      <h2>Welcome to the Free Flight Site!</h2>
+      <h1>we know you love to explore</h1>
     </>
   );
 }
@@ -70,6 +82,8 @@ function LeftPageInfo() {
         <>
           {feedComponentName === "FeedAllSites" && <LeftInfoAllSites />}
           {feedComponentName === "FeedAllFlights" && <LeftInfoAllFlights />}
+          {feedComponentName === "FeedMySites" && <LeftInfoMySites />}
+
           {feedComponentName === "FeedFlightsByUser" && (
             <LeftInfoFlightsByUser />
           )}

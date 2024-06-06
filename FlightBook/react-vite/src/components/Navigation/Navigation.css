@@ -25,17 +25,36 @@
 
 .usermenudiv {
   border: 2px solid orange;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  list-style: none;
+  display: grid; /* Use grid layout */
+  grid-template-rows: 70% 30%; /* 70% top, 30% bottom */
   height: 100%;
 }
 .user-photo {
+  padding-top: 6px;
   height: 70px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
+
 .user-pulldown-menu {
-  position: absolute;
-  padding-right: 15 px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+.profile-dropdown {
+  position: absolute; /* Position the dropdown absolutely */
+  top: 11%; /* Align the top of the dropdown with the bottom of the button */
+  right: 0%;
+  list-style: none;
+  z-index: 1; /* Ensure the dropdown appears above other content */
+  background-color: white; /* Add background color */
+  border: 1px solid black; /* Add border */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 10px; /* Add padding */
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.452); /* Add box shadow */
+
+  width: 16%;
+  min-width: 90px;
 }

@@ -45,7 +45,10 @@ function ProfileButton() {
         <FaUserCircle />
       </button>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <ul
+          className={`profile-dropdown ${showMenu ? "show" : ""}`}
+          ref={ulRef}
+        >
           {user ? (
             <>
               <li>{user.username}</li>

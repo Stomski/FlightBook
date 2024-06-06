@@ -17,14 +17,16 @@ def seed_users():
             first_name='Marnie',
             last_name='Smith',
             email='marnie@aa.io',
-            password='password'
+            password='password',
+            user_photo = 'https://flightbook1may2024.s3.us-east-2.amazonaws.com/704484a5b6914597be69b584ae347d10.jpg'
         ),
         User(
             username='bobby',
             first_name='Bobby',
             last_name='Brown',
             email='bobby@aa.io',
-            password='password'
+            password='password',
+            user_photo = 'https://flightbook1may2024.s3.us-east-2.amazonaws.com/f5b638ae605342d8afe210c37d77ca8a.jpg'
         ),
         User(
             username='alice',
