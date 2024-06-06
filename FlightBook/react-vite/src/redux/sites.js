@@ -1,6 +1,18 @@
 const GET_ALL_SITES = "sites/getAll";
 const CREATE_SITE = "sites/new";
 const GET_MY_SITES = "sites/mine";
+const UPDATE_SITE = "sites/update";
+const DELETE_SITE = "sites/delete";
+
+const deleteSite = (site) => ({
+  type: DELETE_SITE,
+  payload: site,
+});
+
+const updateSite = (site) => ({
+  type: UPDATE_SITE,
+  payload: site,
+});
 
 const getMySites = (sites) => ({
   type: GET_MY_SITES,
@@ -16,6 +28,58 @@ const getAllSites = (sites) => ({
   type: GET_ALL_SITES,
   payload: sites,
 });
+
+export const deleteSiteThunk = (siteId) => async (dispatch) => {
+  console.log(
+    " THIS IS GETTING CALLED< Delete DELETE SITES THUNK > BEFORE FETCH"
+  );
+
+  const response = await fetch(`/api/sites/delete/${siteId}`);
+
+  if (response.ok) {
+    console.log("I THINK THIS IS GETTING CALLED< DELETE > RESPONSE OK");
+    const data = await response.json();
+    dispatch(deleteSite(data));
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages;
+  } else {
+    return { server: "Something went wrong. Please try again" };
+  }
+};
+
+export const updateSiteThunk = (siteId, site) => async (dispatch) => {
+  console.log(" THIS IS GETTING CALLED< UPDATE SITES THUNK > BEFORE FETCH");
+  const response = await fetch(`/api/sites/update/${siteId}`, {
+    method: "POST",
+    body: site,
+  });
+  if (response.ok) {
+    console.log(
+      "RESPONSE OK IN  update SITETHUNK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    );
+    const data = await response.json();
+
+    console.log(
+      "%c data log in site thunjk response>",
+      "color:blue; font-size: 26px",
+      data
+    );
+    dispatch(updateSite(data));
+  } else if (response.status < 500) {
+    console.log(
+      "RESPPONSE NOT OK LESS THAN 500 UPDATE SITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
+    );
+
+    const errorMessages = await response.json();
+    return errorMessages;
+  } else {
+    console.log(
+      "RESPPONSE BAD GREAATER THAN 500  vUPDATE SITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
+    );
+    return { server: "Something went wrong. Please try again" };
+  }
+};
 
 export const getMySitesThunk = (userId) => async (dispatch) => {
   console.log(" THIS IS GETTING CALLED< GET MY SITES THUNK > BEFORE FETCH");
@@ -84,6 +148,10 @@ export const createSiteThunk = (site) => async (dispatch) => {
 function sitesReducer(state = {}, action) {
   let newState;
   switch (action.type) {
+    case UPDATE_SITE:
+      newState = { ...state };
+      newState[action.payload["id"]];
+      return newState;
     case GET_ALL_SITES:
       newState = { ...action.payload };
       return newState;

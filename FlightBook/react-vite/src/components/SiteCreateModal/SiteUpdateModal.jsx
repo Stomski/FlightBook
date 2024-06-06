@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-// import { updateSiteThunk } from "../../redux/sites";
+import { updateSiteThunk } from "../../redux/sites";
+import { setFeedComponent } from "../../redux/view";
 import "./SiteUpdateModal.css";
 
 function SiteUpdateModal({ site }) {
@@ -32,13 +33,14 @@ function SiteUpdateModal({ site }) {
     formData.append("official", official);
     formData.append("user_id", sessionUser.id);
 
-    // const serverResponse = await dispatch(updateSiteThunk(site.id, formData));
+    const serverResponse = await dispatch(updateSiteThunk(site.id, formData));
 
-    // if (serverResponse) {
-    //   setErrors(serverResponse);
-    // } else {
-    //   closeModal();
-    // }
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
+      dispatch(setFeedComponent("FeedMySites"));
+    }
   };
 
   return (

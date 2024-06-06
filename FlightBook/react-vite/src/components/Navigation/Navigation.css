@@ -13,12 +13,31 @@
   align-items: center;
   height: 100%;
 }
-.logoimg {
+.logo-container {
+  position: relative;
   padding-left: 29px;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.logoimg {
+  height: 100px;
+  opacity: 85%;
+}
+.logo-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  background: url("../../../public/PARAGLIDELOGO.png") no-repeat center;
+  background-size: contain;
+  filter: drop-shadow(0 6px 2px rgba(10, 96, 255, 0.758));
+  pointer-events: none;
+  z-index: -1; /* Ensure the shadow is behind the image */
 }
 
 .usermenudiv {
@@ -27,7 +46,7 @@
   height: 100%;
 }
 .user-photo {
-  padding-top: 6px;
+  margin-top: 6px;
   height: 70px;
   display: flex;
   justify-content: center; /* Center horizontally */

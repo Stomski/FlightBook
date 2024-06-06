@@ -9,7 +9,7 @@ function Navigation() {
   console.log(sessionUser, "SESSION USER IN NAVIGATION COMPONENT");
   return (
     <div className="navbardiv">
-      <div>
+      <div className="logo-container">
         <img className="logoimg" src="../../../public/PARAGLIDELOGO.png" />
       </div>
 

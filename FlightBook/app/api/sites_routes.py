@@ -38,6 +38,48 @@ def get_sites_by_user(user_id):
     return sites_dict
 
 
+@site_routes.route('/update/<int:site_id>', methods = ["POST"])
+def update_site(site_id):
+    """
+    This route UPDATES AN EXISTING site in the database from the form data in the SiteCreateForm
+    """
+    print("CREATE SITE THUNK CALLED $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print(site_id)
+    form = SiteCreateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data, "FORM DATA IN CREATE SITE THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    if form.validate_on_submit():
+        print("form.validate on submit in the update site route!!!!!!!!!!!!!!!!!!")
+        site_to_update = Site.query.get(site_id)
+        print(site_to_update)
+        site_to_update.name = form.data["name"]
+        site_to_update.lat = form.data["lat"]
+        site_to_update.lon = form.data["lon"]
+        site_to_update.altitude = form.data["altitude"]
+        site_to_update.intro = form.data["intro"]
+        site_to_update.user_id = form.data["user_id"]
+        site_to_update.official = form.data["official"]
+        site_to_update.site_photo = form.data["site_photo"]
+        db.session.add(site_to_update)
+        db.session.commit()
+        return site_to_update.to_dict()
+    return form.errors, 400
+
+
+@site_routes.route('/delete/<int:site_id>')
+def deleteSite(site_id):
+    """
+    This route DELETES A SITE FROM THE DB
+    """
+    site_to_delete = Site.query.get(site_id)
+    if site_to_delete==None:
+        {"errors": "File upload failed"}, 400
+    print(site_to_delete, "SITE TO DELETE ********************************************************************************")
+    db.session.delete(site_to_delete)
+    db.session.commit()
+    return site_to_delete.to_dict()
+
+
 
 
 @site_routes.route('/new', methods = ["POST"])
