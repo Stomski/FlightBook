@@ -17,7 +17,7 @@ FeedFlightsByUser
 function LeftInfoAllSites() {
   return (
     <>
-      <h2>All the flights in our DB:</h2>
+      <h2>All the Launch Sites in our DB:</h2>
     </>
   );
 }
@@ -33,7 +33,13 @@ function LeftInfoAllFlights() {
 function LeftInfoFlightsByUser() {
   return (
     <>
-      <h1>THIS IS THE GET ALL FLIGHTS BY USER</h1>
+      <h1>THIS is your log book!</h1>
+      <p>good on you for keeping one, I sure never did.</p>
+
+      <p>Thats Why I made theFreeFlightSite</p>
+
+      <h3>STATS:</h3>
+      <p>coming soon</p>
     </>
   );
 }

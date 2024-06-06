@@ -9,14 +9,17 @@ function Navigation() {
   console.log(sessionUser, "SESSION USER IN NAVIGATION COMPONENT");
   return (
     <div className="navbardiv">
-      <div className="navlogodiv">LOGO</div>
+      <div>
+        <img className="logoimg" src="../../../public/PARAGLIDELOGO.png" />
+      </div>
+
       <div className="navmaindiv">navmaindiv THIS DIV</div>
 
       <div className="usermenudiv">
         {sessionUser && sessionUser["user_photo"] && (
           <div className="user-photo">
             <img
-              className="user-photo"
+              className="user-photo prof-image"
               src={sessionUser["user_photo"]}
               alt="user profile image"
             />

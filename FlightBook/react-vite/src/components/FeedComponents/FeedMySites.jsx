@@ -26,12 +26,16 @@ export default function FeedMySites() {
           <div className="site-info">
             <p>Altitude: {site.altitude} ft</p>
             <p>Official Status: {site.official ? "Yes" : "No"}</p>
-            <p>testing</p>
+
             <OpenModalMenuItem
               itemText="Edit this Launch Site"
               modalComponent={<SiteUpdateModal site={site} />}
             />
-            <p>the fuck</p>
+
+            <OpenModalMenuItem
+              itemText="Delete this Launch Site"
+              modalComponent={<SiteUpdateModal site={site} />}
+            />
           </div>
         </div>
       ))}

@@ -3,28 +3,25 @@
   display: grid;
   grid-template-columns: 2fr 10fr 2fr;
   align-items: center; /* Vertically center the content */
-  border: 2px solid blue;
-  height: 100%;
-}
 
-/* Individual grid items with borders for visibility */
-.navlogodiv {
-  border: 2px solid yellow;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
 }
 
 .navmaindiv {
-  border: 2px solid blueviolet;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
+.logoimg {
+  padding-left: 29px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .usermenudiv {
-  border: 2px solid orange;
   display: grid; /* Use grid layout */
   grid-template-rows: 70% 30%; /* 70% top, 30% bottom */
   height: 100%;
@@ -35,6 +32,9 @@
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+}
+.prof-image {
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.758); /* Add box shadow */
 }
 
 .user-pulldown-menu {
