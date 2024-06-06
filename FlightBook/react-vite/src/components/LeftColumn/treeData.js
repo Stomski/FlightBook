@@ -11,11 +11,12 @@ export const treeData = [
       {
         key: "0-0",
         label: "view all",
-        renderComponent: "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        viewOption: "FeedAllSites",
       },
       {
         key: "0-1",
         label: "view my sites",
+        viewOption: "FeedMySites",
       },
       {
         key: "0-2",
@@ -24,10 +25,12 @@ export const treeData = [
           {
             key: "0-2-0",
             label: "my favorites",
+            viewOption: "featureComingSoon",
           },
           {
             key: "0-2-1",
             label: "Top Rated",
+            viewOption: "featureComingSoon",
           },
         ],
       },
@@ -47,10 +50,12 @@ export const treeData = [
       {
         key: "1-0",
         label: "view recent",
+        viewOption: "FeedAllFlights",
       },
       {
         key: "1-1",
         label: "view my log book and stats",
+        viewOption: "FeedFlightsByUser",
       },
       {
         key: "1-2",

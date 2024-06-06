@@ -6,6 +6,8 @@ import Feed from "../Feed/Feed";
 import "./MainPage.css";
 
 function MainPage() {
+  //i need to set the state of
+
   return (
     <section className="mainpagesection">
       <LeftColumn />
