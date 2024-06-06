@@ -38,6 +38,15 @@ function LeftInfoFlightsByUser() {
   );
 }
 
+function LeftInfoMySites() {
+  return (
+    <>
+      <h2>These are all the sites which you have submitted to the database</h2>
+      <p>thank you for your contributions!</p>
+    </>
+  );
+}
+
 function LeftInfoFeatureComingSoon() {
   return (
     <>
@@ -45,6 +54,7 @@ function LeftInfoFeatureComingSoon() {
     </>
   );
 }
+
 function WelcomePage() {
   return (
     <>
@@ -70,6 +80,8 @@ function LeftPageInfo() {
         <>
           {feedComponentName === "FeedAllSites" && <LeftInfoAllSites />}
           {feedComponentName === "FeedAllFlights" && <LeftInfoAllFlights />}
+          {feedComponentName === "FeedMySites" && <LeftInfoMySites />}
+
           {feedComponentName === "FeedFlightsByUser" && (
             <LeftInfoFlightsByUser />
           )}
