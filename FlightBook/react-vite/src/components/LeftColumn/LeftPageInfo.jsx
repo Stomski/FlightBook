@@ -17,7 +17,7 @@ FeedFlightsByUser
 function LeftInfoAllSites() {
   return (
     <>
-      <h1>THIS IS THE GET ALL SITES THINGY MABOB SHOW RESPECT</h1>
+      <h2>All the flights in our DB:</h2>
     </>
   );
 }
@@ -41,7 +41,7 @@ function LeftInfoFlightsByUser() {
 function LeftInfoMySites() {
   return (
     <>
-      <h2>These are all the sites which you have submitted to the database</h2>
+      <h2>These are all the sites which you have submitted to the database:</h2>
       <p>thank you for your contributions!</p>
     </>
   );
