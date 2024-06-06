@@ -31,12 +31,16 @@ def flights_by_user(user_id):
     """
     this route will return all flights for a given user
     """
-    flights = Flight.query.filter(Flight.user_id ==user_id).all()
+    flights = Flight.query.options(joinedload(Flight.pilot)).filter(Flight.user_id ==user_id).all()
     print(flights)
     flights_dict={}
     for flight in flights:
+        pilot = flight.pilot.to_dict()
+
         flight_to_dict = flight.to_dict()
+        flight_to_dict["pilot"]= pilot
         flights_dict[flight_to_dict['id']]=flight_to_dict
+
 
     return flights_dict
 
