@@ -3,6 +3,7 @@ from flask_login import login_required
 from app.models import Flight, db
 from ..forms.create_flight import FlightCreateForm
 from ..api.aws_functions import upload_file_to_s3, get_unique_filename
+from sqlalchemy.orm import joinedload
 
 flight_routes = Blueprint('flights', __name__)
 
@@ -11,11 +12,15 @@ def flights_recent():
     """
     this route will return all flights MOST RECENT AT THE TOP
     """
-    flights = Flight.query.order_by(Flight.start_time.desc()).limit(20).all()
-    print(flights)
+    flights = Flight.query.options(joinedload(Flight.pilot)).order_by(Flight.start_time.desc()).limit(20).all()
+    print(flights, "FLIGHTS IN THE FLIGHTS RECENT FUNC")
     flights_dict={}
     for flight in flights:
+        pilot = flight.pilot.to_dict()
+
+
         flight_to_dict = flight.to_dict()
+        flight_to_dict["pilot"]= pilot
         flights_dict[flight_to_dict['id']]=flight_to_dict
 
     return flights_dict
