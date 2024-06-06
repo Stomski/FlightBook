@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getFlightsByUserThunk } from "../../redux/flights";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import FlightUpdateModal from "../FlightCreateModal/FlightUpdateModal";
 import "./FeedFlightsByUser.css";
 
 export default function FeedFlightsByUser() {
   const flights = useSelector((state) => state.flights);
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-
+  const view = useSelector((state) => state.view);
   useEffect(() => {
     dispatch(getFlightsByUserThunk(sessionUser.id));
-  }, []);
+  }, [view, sessionUser]);
 
   return (
     <section className="flights-by-user-feed">
@@ -23,6 +25,10 @@ export default function FeedFlightsByUser() {
                 flight.start_time
               ).toLocaleDateString()}`}</p>
             </div>
+            <OpenModalMenuItem
+              itemText="Edit your Flight"
+              modalComponent={<FlightUpdateModal flight={flight} />}
+            />
           </div>
         ))}
     </section>
