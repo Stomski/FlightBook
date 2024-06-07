@@ -5,6 +5,7 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { setFeedComponent } from "../../redux/view";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function ProfileButton() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
+    dispatch(setFeedComponent("FeedAllSites"));
     closeMenu();
   };
 

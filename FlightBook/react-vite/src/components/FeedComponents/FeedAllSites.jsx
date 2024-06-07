@@ -14,13 +14,6 @@ export default function FeedAllSites() {
   console.log(Object.entries(sites), "OBJECT>ENTRIES OF SITES");
   const allSites = {};
   Object.entries(sites).forEach((set) => {
-    console.log(
-      set[0],
-      "KEY",
-      set[1],
-      "VALUEEEEEEEEELl",
-      "FEED ALL SITES COMPOMENT **************************************************************"
-    );
     if (!isNaN(parseFloat(set[0]))) {
       allSites[set[1]["id"]] = set[1];
     }
@@ -42,7 +35,7 @@ export default function FeedAllSites() {
       {Object.values(allSites).map((site) => (
         <div
           onClick={() => handleClick(site["id"])}
-          className="site-card-div"
+          className="site-card-div clickable"
           key={site["id"]}
         >
           <h2 className="site-title">{site.name}</h2>

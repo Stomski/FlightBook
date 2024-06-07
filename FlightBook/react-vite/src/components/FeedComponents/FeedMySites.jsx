@@ -4,6 +4,8 @@ import { getMySitesThunk } from "../../redux/sites";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import SiteUpdateModal from "../SiteCreateModal/SiteUpdateModal";
 import SiteDeleteModal from "../SiteCreateModal/siteDeleteModal";
+import { setFeedComponent } from "../../redux/view";
+import { getSiteDetailsThunk } from "../../redux/sites";
 import "./FeedMySites.css";
 
 export default function FeedMySites() {
@@ -23,31 +25,48 @@ export default function FeedMySites() {
     dispatch(getMySitesThunk(sessionUser.id));
   }, [view]);
 
-  console.log("%c sites log>", "color:red; font-size: 26px", sites);
-  Object.values(sites).forEach((flight) => {
-    console.log(flight);
-  });
+  const handleClick = (siteId) => {
+    console.log("HANDLE CLICK CALLED IN THE FEED ALL SITES COMPONENT", siteId);
+    dispatch(setFeedComponent("FeedSiteInfo"));
+    dispatch(getSiteDetailsThunk(siteId));
+  };
+
   return (
     <section className="my-sites-feed">
       {Object.values(mySites).map((site) => (
         <div className="site-card-div" key={site.id}>
           <h2 className="site-title">{site.name}</h2>
           {site.site_photo && (
-            <img className="site-photo" src={site.site_photo} alt="" />
+            <img
+              onClick={() => handleClick(site.id)}
+              className="site-photo clickable"
+              src={site.site_photo}
+              alt=""
+            />
           )}
           <div className="site-info">
             <p>Altitude: {site.altitude} ft</p>
             <p>Official Status: {site.official ? "Yes" : "No"}</p>
+            <p>Introduction: {site.intro}</p>
+            <p>Latitude: {site.lat}</p>
+            <p>Longitude: {site.lon}</p>
+            <p>License Required: {site.license_required ? "Yes" : "No"}</p>
+            <p>Created At: {new Date(site.created_at).toLocaleString()}</p>
+            <p>Updated At: {new Date(site.updated_at).toLocaleString()}</p>
 
-            <OpenModalMenuItem
-              itemText="Edit this Launch Site"
-              modalComponent={<SiteUpdateModal site={site} />}
-            />
+            <div className="clickable modal-button">
+              <OpenModalMenuItem
+                itemText="Edit this Launch Site"
+                modalComponent={<SiteUpdateModal site={site} />}
+              />
+            </div>
 
-            <OpenModalMenuItem
-              itemText="Delete this Launch Site"
-              modalComponent={<SiteDeleteModal site={site} />}
-            />
+            <div className="clickable modal-button">
+              <OpenModalMenuItem
+                itemText="Delete this Launch Site"
+                modalComponent={<SiteDeleteModal site={site} />}
+              />
+            </div>
           </div>
         </div>
       ))}

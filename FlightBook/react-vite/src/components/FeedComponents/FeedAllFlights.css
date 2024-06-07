@@ -39,8 +39,6 @@
 }
 
 .flight-info {
-  display: flex;
-  align-items: center;
 }
 .flight-photo {
   max-width: 80%;
