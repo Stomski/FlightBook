@@ -129,7 +129,8 @@ def create_flight():
                 equipment = form.data["equipment"],
                 flight_photo = url,
                 user_id= form.data["user_id"],
-                log = form.data["log"]
+                log = form.data["log"],
+                site_id =form.data["site_id"]
             )
             db.session.add(flight)
             db.session.commit()
@@ -144,7 +145,8 @@ def create_flight():
                 length = form.data["length"],
                 equipment = form.data["equipment"],
                 log = form.data["log"],
-                user_id= form.data["user_id"]
+                user_id= form.data["user_id"],
+                site_id =form.data["site_id"]
             )
             db.session.add(flight)
             db.session.commit()
