@@ -62,6 +62,26 @@ function LeftInfoFeatureComingSoon() {
   );
 }
 
+function LeftInfoFlightInfo() {
+  return (
+    <>
+      <h2>Flight Details</h2>
+      <p>Pilot</p>
+      <p>ETC</p>
+    </>
+  );
+}
+
+function LeftInfoSiteInfo() {
+  return (
+    <>
+      <h2>Site Details</h2>
+      <p>Pilot</p>
+      <p>ETC</p>
+    </>
+  );
+}
+
 function WelcomePage() {
   return (
     <>
@@ -78,16 +98,13 @@ function LeftPageInfo() {
     (state) => state.view["feedComponentName"]
   );
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(
-    "%c feedComponentName log>",
-    "color:red; font-size: 26px",
-    feedComponentName
-  );
 
   return (
     <section className="left-page-info-div">
       {sessionUser ? (
         <>
+          {feedComponentName === "FeedFlightInfo" && <LeftInfoFlightInfo />}
+          {feedComponentName === "FeedSiteInfo" && <LeftInfoSiteInfo />}
           {feedComponentName === "FeedAllSites" && <LeftInfoAllSites />}
           {feedComponentName === "FeedAllFlights" && <LeftInfoAllFlights />}
           {feedComponentName === "FeedMySites" && <LeftInfoMySites />}

@@ -44,6 +44,19 @@ def flights_by_user(user_id):
 
     return flights_dict
 
+@flight_routes.route('/detail-view/<int:flight_id>')
+def flight_details(flight_id):
+    """
+    this route returns THE DETAILS OF A FLIGHT, THUROUGHLY
+    """
+    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    flight = Flight.query.get(flight_id)
+    if not flight:
+        return {"errors": "failed to locate flight"}, 404
+    print(flight.to_dict(), "FLIGHT IN THE FLIGHT DETAILS PYTHON ROUTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    return flight.to_dict()
+
+
 @flight_routes.route('/by-site/<int:site_id>')
 def flights_by_site(site_id):
     """
@@ -75,33 +88,13 @@ def delete_flight(flight_id):
     db.session.commit()
     return flight_to_delete.to_dict()
 
+@flight_routes.route('/detail-view/<int:flight_id>')
+def detailFlight(flight_id):
+    print('DETAIL FLIGHT ROUTE HIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
 
 
 
-
-# @flight_routes.route('/update/<int:flight_id>', methods = ['POST'])
-# def update_flight(flight_id):
-#     """
-#     this route UPDATES a flight in the DB from a flight OBJ,
-#     it returns the made flight as a dict
-#     """
-#     form = FlightCreateForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     print(form.data, "FORM DATA IN CREATE FLIGHT THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-#     if form.validate_on_submit():
-#         flight_to_update = Flight.query.get(flight_id)
-#         print(flight_to_update)
-#         flight_to_update.site_name = form.data['site_name']
-#         flight_to_update.length = form.data['length']
-#         flight_to_update.start_time = form.data['start_time']
-#         flight_to_update.equipment = form.data['equipment']
-#         flight_to_update.log = form.data['log']
-
-#         db.session.add(flight_to_update)
-#         db.session.commit()
-#         return flight_to_update.to_dict()
-#     return form.errors, 400
 
 @flight_routes.route('/update/<int:flight_id>', methods=['POST'])
 def update_flight(flight_id):

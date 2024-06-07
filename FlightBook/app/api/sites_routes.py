@@ -8,6 +8,19 @@ from ..api.aws_functions import upload_file_to_s3, get_unique_filename, remove_f
 site_routes = Blueprint('sites', __name__)
 
 
+@site_routes.route('/details/<int:site_id>')
+def getSiteDetails(site_id):
+    """
+    this route returns a very detailed view of a site
+    """
+    site_details = Site.query.get(site_id)
+
+    print(site_details.to_dict())
+    return site_details.to_dict()
+
+
+
+
 @site_routes.route('/all')
 def getAllSites():
     """

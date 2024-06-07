@@ -6,6 +6,8 @@ import FeedAllFlights from "../FeedComponents/FeedAllFlights";
 import FeedMySites from "../FeedComponents/FeedMySites";
 import FeedFlightsByUser from "../FeedComponents/FeedFlightsByUser";
 import FeedFeatureComingSoon from "../FeedComponents/FeedFEatureComingSoon";
+import FeedFlightInfo from "../FeedComponents/FeedFlightInfo";
+import FeedSiteInfo from "../FeedComponents/FeedSiteInfo";
 
 import "./Feed.css";
 
@@ -18,14 +20,16 @@ function Feed() {
     (state) => state.view["feedComponentName"]
   );
 
-  console.log(
-    "FEED COMPNENET NAME IN THE FEED JSX FUNCTION AFTER STATE SELECTION!!!!!!!!!!!!!!!!!!!!!",
-    feedComponentName
-  );
+  // console.log(
+  //   "FEED COMPNENET NAME IN THE FEED JSX FUNCTION AFTER STATE SELECTION!!!!!!!!!!!!!!!!!!!!!",
+  //   feedComponentName
+  // );
 
   return (
     <section className="FeedDiv">
       {feedComponentName === "FeedAllSites" && <FeedAllSites />}
+      {feedComponentName === "FeedFlightInfo" && <FeedFlightInfo />}
+      {feedComponentName === "FeedSiteInfo" && <FeedSiteInfo />}
       {feedComponentName === "FeedMySites" && <FeedMySites />}
       {feedComponentName === "FeedAllFlights" && <FeedAllFlights />}
       {feedComponentName === "FeedFlightsByUser" && <FeedFlightsByUser />}
