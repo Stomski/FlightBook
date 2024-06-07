@@ -52,16 +52,8 @@ function FlightUpdateModal({ flight }) {
       <h1>Update Flight</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <label>
-          Site Name
-          <input
-            type="text"
-            value={siteName}
-            onChange={(e) => setSiteName(e.target.value)}
-            required
-          />
-        </label>
-        {errors.siteName && <p>{errors.siteName}</p>}
+        <h2>{flight.site_name}</h2>
+
         <label>
           Length (in minutes)
           <input
