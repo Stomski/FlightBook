@@ -57,6 +57,21 @@ def flights_by_site(site_id):
 
     return flights_dict
 
+
+@flight_routes.route('/delete/<int:flight_id>')
+def delete_flight(flight_id):
+    """
+    this route DELETES a flight in the DB from a flight OBJ,
+    it returns the deleted flight as a dict
+    """
+    flight_to_delete = Flight.query.get(flight_id)
+    if not flight_to_delete:
+       {"errors": "failed to locate file"}, 400
+    db.session.delete(flight_to_delete)
+    db.session.commit()
+    return flight_to_delete.to_dict()
+
+
 @flight_routes.route('/update/<int:flight_id>', methods = ['POST'])
 def update_flight(flight_id):
     """
@@ -66,8 +81,19 @@ def update_flight(flight_id):
     form = FlightCreateForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print(form.data, "FORM DATA IN CREATE FLIGHT THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    if form.validate_on_submit():
+        flight_to_update = Flight.query.get(flight_id)
+        print(flight_to_update)
+        flight_to_update.site_name = form.data['site_name']
+        flight_to_update.length = form.data['length']
+        flight_to_update.start_time = form.data['start_time']
+        flight_to_update.equipment = form.data['equipment']
+        flight_to_update.log = form.data['log']
 
-
+        db.session.add(flight_to_update)
+        db.session.commit()
+        return flight_to_update.to_dict()
+    return form.errors, 400
 
 
 
@@ -103,7 +129,8 @@ def create_flight():
                 equipment = form.data["equipment"],
                 flight_photo = url,
                 user_id= form.data["user_id"],
-                log = form.data["log"]
+                log = form.data["log"],
+                site_id =form.data["site_id"]
             )
             db.session.add(flight)
             db.session.commit()
@@ -118,7 +145,8 @@ def create_flight():
                 length = form.data["length"],
                 equipment = form.data["equipment"],
                 log = form.data["log"],
-                user_id= form.data["user_id"]
+                user_id= form.data["user_id"],
+                site_id =form.data["site_id"]
             )
             db.session.add(flight)
             db.session.commit()

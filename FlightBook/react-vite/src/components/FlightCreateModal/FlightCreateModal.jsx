@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createFlightThunk } from "../../redux/flights";
+import { getAllSitesThunk } from "../../redux/sites";
+import Select from "react-select";
 import "./FlightCreateModal.css";
 
 function FlightCreateModal() {
@@ -16,6 +18,11 @@ function FlightCreateModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
+  const sites = useSelector((state) => state.sites);
+
+  useEffect(() => {
+    dispatch(getAllSitesThunk());
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,12 +30,13 @@ function FlightCreateModal() {
     if (flightPhoto !== "") {
       formData.append("flight_photo", flightPhoto);
     }
-    formData.append("site_name", siteName);
+    formData.append("site_name", siteName.name);
     formData.append("length", length);
     formData.append("start_time", startTime);
     formData.append("equipment", equipment);
     formData.append("log", log);
     formData.append("user_id", sessionUser.id);
+    formData.append("site_id", siteName.id);
 
     console.log(
       "I HAVE ATTACHED ALL THE THINGS INCLUDING FORM ID",
@@ -43,6 +51,14 @@ function FlightCreateModal() {
       closeModal();
     }
   };
+  const handleSiteChange = (selectedOption) => {
+    setSiteName(selectedOption ? selectedOption.value : "");
+  };
+
+  const siteOptions = Object.values(sites).map((site) => ({
+    value: site,
+    label: site.name,
+  }));
 
   return (
     <div className="flight-create-modal">
@@ -51,11 +67,11 @@ function FlightCreateModal() {
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Site Name
-          <input
-            type="text"
-            value={siteName}
-            onChange={(e) => setSiteName(e.target.value)}
-            required
+          <Select
+            options={siteOptions}
+            onChange={handleSiteChange}
+            isClearable
+            placeholder="Select site..."
           />
         </label>
         {errors.siteName && <p>{errors.siteName}</p>}

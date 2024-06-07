@@ -73,7 +73,7 @@ def deleteSite(site_id):
     """
     site_to_delete = Site.query.get(site_id)
     if site_to_delete==None:
-        {"errors": "File upload failed"}, 400
+        {"errors": "failed to locate file"}, 400
     print(site_to_delete, "SITE TO DELETE ********************************************************************************")
     db.session.delete(site_to_delete)
     db.session.commit()

@@ -24,7 +24,8 @@
 
 .logoimg {
   height: 100px;
-  opacity: 85%;
+  opacity: 69%;
+  /* display: none; */
 }
 .logo-container::after {
   content: "";
