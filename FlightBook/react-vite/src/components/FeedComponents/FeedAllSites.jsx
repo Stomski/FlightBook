@@ -49,7 +49,7 @@ export default function FeedAllSites() {
           </p>
           {sessionUser && site.creator_id === sessionUser.id && (
             <>
-              <h1>AY YO YOU MADE THIS SHIT!!! good for you</h1>
+              <h1>thank you for your contribution :)</h1>
             </>
           )}
         </div>
