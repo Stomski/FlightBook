@@ -11,6 +11,13 @@ export default function FeedMySites() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const view = useSelector((state) => state.view);
+  const mySites = {};
+  Object.entries(sites).forEach((set) => {
+    if (!isNaN(parseFloat(set[0]))) {
+      mySites[set[1]["id"]] = set[1];
+    }
+  });
+  console.log(mySites);
 
   useEffect(() => {
     dispatch(getMySitesThunk(sessionUser.id));
@@ -22,7 +29,7 @@ export default function FeedMySites() {
   });
   return (
     <section className="my-sites-feed">
-      {Object.values(sites).map((site) => (
+      {Object.values(mySites).map((site) => (
         <div className="site-card-div" key={site.id}>
           <h2 className="site-title">{site.name}</h2>
           {site.site_photo && (

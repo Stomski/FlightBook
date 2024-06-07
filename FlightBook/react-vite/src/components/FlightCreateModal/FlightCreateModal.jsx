@@ -20,6 +20,14 @@ function FlightCreateModal() {
   const sessionUser = useSelector((state) => state.session.user);
   const sites = useSelector((state) => state.sites);
 
+  const allSites = {};
+  Object.entries(sites).forEach((set) => {
+    if (!isNaN(parseFloat(set[0]))) {
+      allSites[set[1]["id"]] = set[1];
+    }
+  });
+  console.log(allSites);
+
   useEffect(() => {
     dispatch(getAllSitesThunk());
   }, []);
@@ -55,7 +63,7 @@ function FlightCreateModal() {
     setSiteName(selectedOption ? selectedOption.value : "");
   };
 
-  const siteOptions = Object.values(sites).map((site) => ({
+  const siteOptions = Object.values(allSites).map((site) => ({
     value: site,
     label: site.name,
   }));
