@@ -57,6 +57,20 @@ def flights_by_site(site_id):
 
     return flights_dict
 
+@flight_routes.route('/update/<int:flight_id>', methods = ['POST'])
+def update_flight(flight_id):
+    """
+    this route UPDATES a flight in the DB from a flight OBJ,
+    it returns the made flight as a dict
+    """
+    form = FlightCreateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data, "FORM DATA IN CREATE FLIGHT THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+
+
+
+
+
 
 @flight_routes.route('/new', methods=["POST"])
 def create_flight():

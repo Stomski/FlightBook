@@ -3,38 +3,57 @@
   display: grid;
   grid-template-columns: 2fr 10fr 2fr;
   align-items: center; /* Vertically center the content */
-  border: 2px solid blue;
-  height: 100%;
-}
 
-/* Individual grid items with borders for visibility */
-.navlogodiv {
-  border: 2px solid yellow;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
 }
 
 .navmaindiv {
-  border: 2px solid blueviolet;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
+.logo-container {
+  position: relative;
+  padding-left: 29px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoimg {
+  height: 100px;
+  opacity: 85%;
+}
+.logo-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  background: url("../../../public/PARAGLIDELOGO.png") no-repeat center;
+  background-size: contain;
+  filter: drop-shadow(0 6px 2px rgba(10, 96, 255, 0.758));
+  pointer-events: none;
+  z-index: -1; /* Ensure the shadow is behind the image */
+}
 
 .usermenudiv {
-  border: 2px solid orange;
   display: grid; /* Use grid layout */
   grid-template-rows: 70% 30%; /* 70% top, 30% bottom */
   height: 100%;
 }
 .user-photo {
-  padding-top: 6px;
+  margin-top: 6px;
   height: 70px;
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+}
+.prof-image {
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.758); /* Add box shadow */
 }
 
 .user-pulldown-menu {

@@ -4,7 +4,7 @@
 }
 
 .clickable:hover {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adjust the values as needed */
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.868); /* Adjust the values as needed */
 }
 
 .leftcolumndiv {
@@ -29,6 +29,7 @@
   border-top-right-radius: 10px; /* Add rounded edges */
   border-bottom: none; /* Hide the bottom border */
   border-left: none; /* Hide the left border */
+  box-shadow: 0 1px 10px 5px rgba(0, 0, 0, 0.317); /* Add box shadow */
 }
 
 .navigation-title {

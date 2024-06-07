@@ -1,17 +1,22 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { createFlightThunk } from "../../redux/flights";
-import "./FlightCreateModal.css";
+import { updateFlightThunk } from "../../redux/flights";
+import "./FlightUpdateModal.css";
 
-function FlightCreateModal() {
+function FlightUpdateModal({ flight }) {
+  const startTimeFromDB = flight.start_time;
+  // Convert the startTime to a Date object
+  const startTimeDate = new Date(startTimeFromDB);
+  // Format the Date object to the format accepted by datetime-local input
+  const formattedStartTime = startTimeDate.toISOString().slice(0, 16);
+
   const dispatch = useDispatch();
-  const [siteName, setSiteName] = useState("");
-  const [length, setLength] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [equipment, setEquipment] = useState("");
-  const [log, setLog] = useState("");
-  const [weather, setWeather] = useState("");
+  const [siteName, setSiteName] = useState(flight.site_name);
+  const [length, setLength] = useState(flight.length);
+  const [startTime, setStartTime] = useState(formattedStartTime);
+  const [equipment, setEquipment] = useState(flight.equipment);
+  const [log, setLog] = useState(flight.log);
   const [flightPhoto, setFlightPhoto] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
@@ -28,14 +33,12 @@ function FlightCreateModal() {
     formData.append("start_time", startTime);
     formData.append("equipment", equipment);
     formData.append("log", log);
+
     formData.append("user_id", sessionUser.id);
 
-    console.log(
-      "I HAVE ATTACHED ALL THE THINGS INCLUDING FORM ID",
-      sessionUser.id
+    const serverResponse = await dispatch(
+      updateFlightThunk(flight.id, formData)
     );
-
-    const serverResponse = await dispatch(createFlightThunk(formData));
 
     if (serverResponse) {
       setErrors(serverResponse);
@@ -45,8 +48,8 @@ function FlightCreateModal() {
   };
 
   return (
-    <div className="flight-create-modal">
-      <h1>Log a Flight!</h1>
+    <div className="flight-update-modal">
+      <h1>Update Flight</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
@@ -107,10 +110,10 @@ function FlightCreateModal() {
           />
         </label>
         {errors.flightPhoto && <p>{errors.flightPhoto}</p>}
-        <button type="submit">Create Flight</button>
+        <button type="submit">Update Flight</button>
       </form>
     </div>
   );
 }
 
-export default FlightCreateModal;
+export default FlightUpdateModal;
