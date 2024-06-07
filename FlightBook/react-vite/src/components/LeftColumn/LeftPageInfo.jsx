@@ -67,6 +67,8 @@ function WelcomePage() {
     <>
       <h2>Welcome to the Free Flight Site!</h2>
       <h1>we know you love to explore</h1>
+      <h2>Search Launch Sites:</h2>
+      <h1>(coming soon)</h1>
     </>
   );
 }

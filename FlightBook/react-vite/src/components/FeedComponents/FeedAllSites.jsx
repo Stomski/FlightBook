@@ -18,6 +18,9 @@ export default function FeedAllSites() {
         <div className="site-card-div" key={site["id"]}>
           <h2 className="site-title">{site.name}</h2>
           <p>altitude: {site.altitude} ft</p>
+          {site.site_photo && (
+            <img className="site-photo" src={site.site_photo} alt="" />
+          )}
           <p>
             official ushpa:{" "}
             {site.official ? "yes!" : "nope !!, Fly at your own risk :)"}

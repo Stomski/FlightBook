@@ -25,6 +25,9 @@ export default function FeedMySites() {
       {Object.values(sites).map((site) => (
         <div className="site-card-div" key={site.id}>
           <h2 className="site-title">{site.name}</h2>
+          {site.site_photo && (
+            <img className="site-photo" src={site.site_photo} alt="" />
+          )}
           <div className="site-info">
             <p>Altitude: {site.altitude} ft</p>
             <p>Official Status: {site.official ? "Yes" : "No"}</p>
