@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required
 from app.models import Flight, db
 from ..forms.create_flight import FlightCreateForm
-from ..api.aws_functions import upload_file_to_s3, get_unique_filename
+from ..api.aws_functions import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from sqlalchemy.orm import joinedload
 
 flight_routes = Blueprint('flights', __name__)
@@ -66,10 +66,18 @@ def delete_flight(flight_id):
     """
     flight_to_delete = Flight.query.get(flight_id)
     if not flight_to_delete:
-       {"errors": "failed to locate file"}, 400
+       {"errors": "failed to locate file"}, 404
+    remove_file_from_s3(flight_to_delete.flight_photo)
+
+
+
     db.session.delete(flight_to_delete)
     db.session.commit()
     return flight_to_delete.to_dict()
+
+
+
+
 
 
 @flight_routes.route('/update/<int:flight_id>', methods = ['POST'])

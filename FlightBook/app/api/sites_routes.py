@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required
 from app.models import Site, db
 from ..forms.create_site import SiteCreateForm
-from ..api.aws_functions import upload_file_to_s3, get_unique_filename
+from ..api.aws_functions import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
 
 site_routes = Blueprint('sites', __name__)
@@ -72,8 +72,11 @@ def deleteSite(site_id):
     This route DELETES A SITE FROM THE DB
     """
     site_to_delete = Site.query.get(site_id)
-    if site_to_delete==None:
+    if not site_to_delete:
         {"errors": "failed to locate file"}, 400
+    remove_file_from_s3(site_to_delete.site_photo)
+
+
     print(site_to_delete, "SITE TO DELETE ********************************************************************************")
     db.session.delete(site_to_delete)
     db.session.commit()
