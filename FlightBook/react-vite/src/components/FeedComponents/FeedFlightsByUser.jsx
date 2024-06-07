@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getFlightsByUserThunk } from "../../redux/flights";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import FlightUpdateModal from "../FlightCreateModal/FlightUpdateModal";
+import FlightDeleteModal from "../FlightCreateModal/FlightDeleteModal";
 import "./FeedFlightsByUser.css";
 
 export default function FeedFlightsByUser() {
@@ -26,8 +27,14 @@ export default function FeedFlightsByUser() {
               ).toLocaleDateString()}`}</p>
             </div>
             <OpenModalMenuItem
+              className="clickable"
               itemText="Edit your Flight"
               modalComponent={<FlightUpdateModal flight={flight} />}
+            />
+            <OpenModalMenuItem
+              className="clickable"
+              itemText="Delete this Flight"
+              modalComponent={<FlightDeleteModal flight={flight} />}
             />
           </div>
         ))}
