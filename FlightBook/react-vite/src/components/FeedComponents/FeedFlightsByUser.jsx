@@ -26,6 +26,9 @@ export default function FeedFlightsByUser() {
                 flight.start_time
               ).toLocaleDateString()}`}</p>
             </div>
+            {flight.flight_photo && (
+              <img className="flight-photo" src={flight.flight_photo} alt="" />
+            )}
             <OpenModalMenuItem
               className="clickable"
               itemText="Edit your Flight"

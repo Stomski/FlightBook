@@ -23,7 +23,7 @@ export default function FeedAllSites() {
           )}
           <p>
             official ushpa:{" "}
-            {site.official ? "yes!" : "nope !!, Fly at your own risk :)"}
+            {site.official ? "yes!" : "nope !! Fly at your own risk :)"}
           </p>
           {sessionUser && site.creator_id === sessionUser.id && (
             <>

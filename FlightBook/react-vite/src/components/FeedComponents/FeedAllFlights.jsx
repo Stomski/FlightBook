@@ -28,16 +28,23 @@ export default function FeedAllFlights() {
               <div className="flight-info">
                 {flight.pilot.user_photo && (
                   <img
-                    className="flight-photo"
+                    className="flight-user-photo"
                     src={flight.pilot.user_photo}
                     alt={`${flight.pilot.username}'s profile`}
                   />
                 )}
                 <div>
-                  <h2 className="flight-title">{`${flight.pilot.username} flew at ${flight.site_name}`}</h2>
+                  <h2 className="flight-title">{`${flight.pilot.username} flew from ${flight.site_name}`}</h2>
                   <h3 className="flight-times">{`for ${flight.length} minutes on ${flight.start_time}`}</h3>
                 </div>
               </div>
+              {flight.flight_photo && (
+                <img
+                  className="flight-photo"
+                  src={flight.flight_photo}
+                  alt=""
+                />
+              )}
             </div>
           )
       )}
