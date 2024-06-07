@@ -13,9 +13,6 @@ S3_KEY = os.environ.get("S3_KEY")
 S3_SECRET = os.environ.get("S3_SECRET")
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 
-print(f"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!S3_KEY: {S3_KEY}")
-print(f"S3_SECRET: {S3_SECRET}")
-print(f"S3_BUCKET: {BUCKET_NAME}")
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"http://{BUCKET_NAME}.s3.amazonaws.com/"
