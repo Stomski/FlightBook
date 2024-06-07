@@ -49,17 +49,45 @@ def update_site(site_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     print(form.data, "FORM DATA IN CREATE SITE THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     if form.validate_on_submit():
-        print("form.validate on submit in the update site route!!!!!!!!!!!!!!!!!!")
         site_to_update = Site.query.get(site_id)
+        print("form.validate on submit in the update site route!!!!!!!!!!!!!!!!!!")
         print(site_to_update)
-        site_to_update.name = form.data["name"]
-        site_to_update.lat = form.data["lat"]
-        site_to_update.lon = form.data["lon"]
-        site_to_update.altitude = form.data["altitude"]
-        site_to_update.intro = form.data["intro"]
-        site_to_update.user_id = form.data["user_id"]
-        site_to_update.official = form.data["official"]
-        site_to_update.site_photo = form.data["site_photo"]
+        if not site_to_update:
+            return        {"errors": "failed to locate file"}, 404
+
+        if form.data["site_photo"]:
+            print("SITE PHOTO THERE, I TOTALLY GET THIS SHIT YO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+            if site_to_update.site_photo:
+                remove_file_from_s3(site_to_update.site_photo)
+            image = form.data["site_photo"]
+            print(image, "IMAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            image.filename = get_unique_filename(image.filename)
+            print(image, "IMAGE")
+            print(image.filename, "IMAGE>FILENAME")
+            upload = upload_file_to_s3(image)
+            print(upload, "UPLOAD<<<<<<<<<<<<<<<<")
+
+            if "url" not in upload:
+                    print("File upload failed")
+                    return {"errors": "File upload failed"}, 400
+
+            url = upload["url"]
+            site_to_update.name = form.data["name"]
+            site_to_update.lat = form.data["lat"]
+            site_to_update.lon = form.data["lon"]
+            site_to_update.altitude = form.data["altitude"]
+            site_to_update.intro = form.data["intro"]
+            site_to_update.user_id = form.data["user_id"]
+            site_to_update.site_photo=url
+            site_to_update.official = form.data["official"]
+        else:
+            site_to_update.name = form.data["name"]
+            site_to_update.lat = form.data["lat"]
+            site_to_update.lon = form.data["lon"]
+            site_to_update.altitude = form.data["altitude"]
+            site_to_update.intro = form.data["intro"]
+            site_to_update.user_id = form.data["user_id"]
+            site_to_update.official = form.data["official"]
         db.session.add(site_to_update)
         db.session.commit()
         return site_to_update.to_dict()
@@ -74,7 +102,8 @@ def deleteSite(site_id):
     site_to_delete = Site.query.get(site_id)
     if not site_to_delete:
         {"errors": "failed to locate file"}, 400
-    remove_file_from_s3(site_to_delete.site_photo)
+    if site_to_delete.site_photo:
+        remove_file_from_s3(site_to_delete.site_photo)
 
 
     print(site_to_delete, "SITE TO DELETE ********************************************************************************")
