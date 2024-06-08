@@ -154,10 +154,11 @@ export const createFlightThunk = (flight) => async (dispatch) => {
     body: flight,
   });
   if (response.ok) {
-    console.log(
-      "RESPONSE OK IN CREATE FLIGHT THUNK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    );
     const data = await response.json();
+    console.log(
+      "RESPONSE OK IN CREATE FLIGHT THUNK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+      data
+    );
     dispatch(createFlight(data));
   } else if (response.status < 500) {
     console.log(
@@ -201,9 +202,13 @@ function flightsReducer(state = {}, action) {
       newState["detailView"] = state["detailView"];
       return newState;
     case CREATE_FLIGHT:
+      console.log("CREATE FLIGHT CALLED, asdfasdfasdf", action);
       newState = { ...state };
       newState[action.payload["id"]] = action.payload;
-      newState["selectedUsersFlights"][action.payload["id"]] = action.payload;
+      if (newState["selectedUsersFlights"]) {
+        newState["selectedUsersFlights"][action.payload["id"]] = action.payload;
+      }
+
       return newState;
     default:
       return state;

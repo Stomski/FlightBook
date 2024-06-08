@@ -28,11 +28,6 @@ function SignupFormModal() {
     formData.append("first_name", firstName);
     formData.append("last_name", lastName);
 
-    console.log(
-      formData,
-      "FORM DATA IN HANDLE SUBMIT IN MY SIGNUP FORM MODAL ???????????????????????????????????????????????????????????????????????????????"
-    );
-
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:
@@ -43,7 +38,7 @@ function SignupFormModal() {
     const serverResponse = await dispatch(thunkSignup(formData));
 
     if (serverResponse) {
-      setErrors(serverResponse);
+      return setErrors(serverResponse);
     } else {
       closeModal();
     }
@@ -52,7 +47,7 @@ function SignupFormModal() {
   return (
     <div className="signup-form-modal">
       <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
+      {errors.server && <p className="form-errors">{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Upload a Profile Image
@@ -62,67 +57,83 @@ function SignupFormModal() {
             onChange={(e) => setPhoto(e.target.files[0])}
           />
         </label>
-        {errors.photo && <p>{errors.photo}</p>}
+        <div className="form-errors">
+          {errors.photo}
+          {errors.server}
+        </div>
+
         <label>
           Email
           <input
-            type="text"
+            type="email"
+            className="form-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        <div className="form-errors">{errors.email}</div>
+
         <label>
-          first name
+          First Name
           <input
             type="text"
+            className="form-input"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
+        <div className="form-errors">{errors.first_name}</div>
+
         <label>
-          last name
+          Last Name
           <input
             type="text"
+            className="form-input"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
         </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
+        <div className="form-errors">{errors.last_name}</div>
+
         <label>
           Username
           <input
             type="text"
+            className="form-input"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        <div className="form-errors">{errors.username}</div>
+
         <label>
           Password
           <input
             type="password"
+            className="form-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        <div className="form-errors">{errors.password}</div>
+
         <label>
           Confirm Password
           <input
             type="password"
+            className="form-input"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        <div className="form-errors">{errors.confirmPassword}</div>
+
         <button type="submit">Sign Up</button>
       </form>
     </div>

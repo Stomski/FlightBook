@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createFlightThunk } from "../../redux/flights";
-import { getAllSitesThunk } from "../../redux/sites";
+import { getAllSitesThunk, getSiteDetailsThunk } from "../../redux/sites";
 import Select from "react-select";
 import "./FlightCreateModal.css";
 
@@ -19,6 +19,7 @@ function FlightCreateModal() {
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
   const sites = useSelector((state) => state.sites);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const allSites = {};
   Object.entries(sites).forEach((set) => {
@@ -26,13 +27,14 @@ function FlightCreateModal() {
       allSites[set[1]["id"]] = set[1];
     }
   });
-  console.log(allSites);
 
   useEffect(() => {
     dispatch(getAllSitesThunk());
-  }, []);
+  }, [dispatch]);
 
   const handleSubmit = async (e) => {
+    setErrors({});
+    setIsSubmitting(true);
     e.preventDefault();
     const formData = new FormData();
     if (flightPhoto !== "") {
@@ -47,13 +49,14 @@ function FlightCreateModal() {
     formData.append("site_id", siteName.id);
 
     const serverResponse = await dispatch(createFlightThunk(formData));
-
+    setIsSubmitting(false);
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
       closeModal();
     }
   };
+
   const handleSiteChange = (selectedOption) => {
     setSiteName(selectedOption ? selectedOption.value : "");
   };
@@ -66,7 +69,7 @@ function FlightCreateModal() {
   return (
     <div className="flight-create-modal">
       <h1>Log a Flight!</h1>
-      {errors.server && <p>{errors.server}</p>}
+      {errors.server && <p className="form-errors">{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Site Name
@@ -77,7 +80,8 @@ function FlightCreateModal() {
             placeholder="Select site..."
           />
         </label>
-        {errors.siteName && <p>{errors.siteName}</p>}
+        <div className="form-errors">{errors.siteName}</div>
+
         <label>
           Length (in minutes)
           <input
@@ -87,7 +91,8 @@ function FlightCreateModal() {
             required
           />
         </label>
-        {errors.length && <p>{errors.length}</p>}
+        <div className="form-errors">{errors.length}</div>
+
         <label>
           Start Time
           <input
@@ -97,7 +102,8 @@ function FlightCreateModal() {
             required
           />
         </label>
-        {errors.startTime && <p>{errors.startTime}</p>}
+        <div className="form-errors">{errors.startTime}</div>
+
         <label>
           Equipment
           <input
@@ -106,7 +112,8 @@ function FlightCreateModal() {
             onChange={(e) => setEquipment(e.target.value)}
           />
         </label>
-        {errors.equipment && <p>{errors.equipment}</p>}
+        <div className="form-errors">{errors.equipment}</div>
+
         <label>
           Log
           <textarea
@@ -115,7 +122,7 @@ function FlightCreateModal() {
             required
           />
         </label>
-        {errors.log && <p>{errors.log}</p>}
+        <div className="form-errors">{errors.log}</div>
 
         <label>
           Upload Flight Photo
@@ -125,8 +132,11 @@ function FlightCreateModal() {
             onChange={(e) => setFlightPhoto(e.target.files[0])}
           />
         </label>
-        {errors.flightPhoto && <p>{errors.flightPhoto}</p>}
-        <button type="submit">Create Flight</button>
+        <div className="form-errors">{errors.flightPhoto}</div>
+
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : "Create Flight"}
+        </button>
       </form>
     </div>
   );

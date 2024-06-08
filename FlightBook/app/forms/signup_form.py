@@ -21,12 +21,26 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 
+def testvalidation(form,field):
+    print("#######$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print(form, field)
+
+
+    if(True):
+        raise ValidationError(f"your couch is not very nice")
+
+
+
+
+
+
+
 
 class SignUpForm(FlaskForm):
     username = StringField(
-        'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
-    first_name = StringField('first name')
-    last_name = StringField('last name')
+        'username', validators=[DataRequired(), username_exists,testvalidation])
+    email = StringField('email', validators=[DataRequired(), user_exists,testvalidation])
+    password = StringField('password', validators=[DataRequired(),testvalidation])
+    first_name = StringField('first name', validators=[testvalidation])
+    last_name = StringField('last name', validators=[testvalidation])
     user_photo =FileField('Profile Image', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
