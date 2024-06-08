@@ -109,6 +109,7 @@ function LeftPageInfo() {
           {feedComponentName === "FeedAllSites" && <LeftInfoAllSites />}
           {feedComponentName === "FeedAllFlights" && <LeftInfoAllFlights />}
           {feedComponentName === "FeedMySites" && <LeftInfoMySites />}
+          {feedComponentName === "WelcomePage" && <LeftInfoMySites />}
 
           {feedComponentName === "FeedFlightsByUser" && (
             <LeftInfoFlightsByUser />

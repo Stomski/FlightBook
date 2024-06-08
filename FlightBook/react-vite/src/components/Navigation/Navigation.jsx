@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
+import { setFeedComponent } from "../../redux/view";
 
 const demoUser = () => {
   console.log("DEMO USER CALLED");
@@ -20,13 +21,24 @@ function Navigation() {
     console.log("DEMO USER CALLED");
     dispatch(thunkLogin({ email: "bobby@aa.io", password: "password" }));
   };
+
+  const handleClick = () => {
+    console.log("HANDLE CLICK CALLED IN THE Nav COMPONENT");
+    dispatch(setFeedComponent("WelcomePage"));
+    // dispatch(getSiteDetailsThunk(siteId));
+  };
+
   return (
     <div className="navbardiv">
       <div className="logo-container">
-        <img className="logoimg" src="../../../public/PARAGLIDELOGO.png" />
+        <img
+          onClick={() => handleClick()}
+          className="logoimg clickable"
+          src="../../../public/PARAGLIDELOGO.png"
+        />
       </div>
 
-      <div className="navmaindiv">navmaindiv THIS DIV</div>
+      <div className="navmaindiv"></div>
 
       <div className="usermenudiv">
         {sessionUser && sessionUser["user_photo"] && (
