@@ -29,7 +29,7 @@ function Navigation() {
         <img
           onClick={() => handleClick()}
           className="logoimg clickable"
-          src="../../../public/PARAGLIDELOGO.png"
+          src="../../../PARAGLIDELOGO.png"
         />
       </div>
 
