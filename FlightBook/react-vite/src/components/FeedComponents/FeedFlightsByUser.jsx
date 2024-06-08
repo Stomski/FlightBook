@@ -55,12 +55,6 @@ export default function FeedFlightsByUser() {
               <p>{`Equipment: ${flight.equipment}`}</p>
               <p>{`Log: ${flight.log}`}</p>
               <p>{`Weather: ${flight.weather ? flight.weather : "N/A"}`}</p>
-              <p>{`Created At: ${new Date(
-                flight.created_at
-              ).toLocaleString()}`}</p>
-              <p>{`Updated At: ${new Date(
-                flight.updated_at
-              ).toLocaleString()}`}</p>
             </div>
             <div className="clickable modal-button">
               <OpenModalMenuItem
