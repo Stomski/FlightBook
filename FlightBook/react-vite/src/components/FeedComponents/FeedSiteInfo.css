@@ -1,11 +1,11 @@
-.flight-info-feed {
+.site-info-feed {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
 }
 
-.flight-details-card {
+.site-details-card {
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -17,51 +17,46 @@
   transition: box-shadow 0.3s ease-in-out;
 }
 
-.flight-details-card:hover {
+.site-details-card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.flight-title {
+.site-title {
   font-size: 24px;
   margin-bottom: 10px;
   color: #333;
 }
 
-.flight-photo {
+.site-photo {
   max-width: 100%;
   height: auto;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 
-.flight-log,
-.flight-equipment,
-.flight-length,
-.flight-start-time,
-.flight-weather,
-.flight-created-at,
-.flight-updated-at {
+.site-intro,
+.site-altitude,
+.site-coordinates,
+.site-official,
+.site-updated-at {
   font-size: 16px;
   color: #666;
   margin-bottom: 8px;
 }
 
-.flight-log {
+.site-intro {
   font-style: italic;
   color: #444;
 }
 
-.flight-equipment,
-.flight-length,
-.flight-start-time,
-.flight-weather,
-.flight-created-at,
-.flight-updated-at {
+.site-altitude,
+.site-coordinates,
+.site-official,
+.site-updated-at {
   font-weight: 500;
 }
 
-.flight-created-at,
-.flight-updated-at {
+.site-updated-at {
   font-size: 14px;
   color: #999;
 }

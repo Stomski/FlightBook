@@ -122,7 +122,7 @@ function LeftPageInfo() {
         </>
       ) : (
         <h1>
-          Create a prfile or log in to enjoy all the functionality of the free
+          Create a profile or log in to enjoy all the functionality of the free
           flight site !!!
         </h1>
       )}

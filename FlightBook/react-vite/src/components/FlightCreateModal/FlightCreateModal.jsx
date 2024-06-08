@@ -46,11 +46,6 @@ function FlightCreateModal() {
     formData.append("user_id", sessionUser.id);
     formData.append("site_id", siteName.id);
 
-    console.log(
-      "I HAVE ATTACHED ALL THE THINGS INCLUDING FORM ID",
-      sessionUser.id
-    );
-
     const serverResponse = await dispatch(createFlightThunk(formData));
 
     if (serverResponse) {

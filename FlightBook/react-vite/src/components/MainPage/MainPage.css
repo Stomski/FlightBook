@@ -1,6 +1,7 @@
 .mainpagesection {
   border: 2px solid rgb(0, 0, 0);
   background-color: rgba(93, 174, 255); /* Just for demonstration */
+  border-top: 4px solid black;
   height: 100%;
   display: grid;
   grid-template-columns: 20% 1fr; /* 20% for left column, remaining for feed */

@@ -8,6 +8,7 @@
   background-size: 80% 70%; /* Stretch the image to 100% width and 70% height */
   background-position: calc(170px + 0%) calc(70% + 25px);
   background-repeat: no-repeat; /* Prevent the image from repeating */
+  box-shadow: 5px 4px 7px rgba(0, 0, 0, 0.758); /* Add box shadow */
 }
 
 .navmaindiv {
