@@ -7,11 +7,6 @@ import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { setFeedComponent } from "../../redux/view";
 
-const demoUser = () => {
-  console.log("DEMO USER CALLED");
-  dispatch(thunkLogin({ email: "bobby@aa.io", password: "password" }));
-};
-
 function Navigation() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -51,9 +46,11 @@ function Navigation() {
           </div>
         )}
         {!sessionUser && (
-          <h3 onClick={demoUser} className="demo-user, clickable">
-            demo user
-          </h3>
+          <div className=" user-button" onClick={demoUser}>
+            <h3 onClick={demoUser} className="demo-user, clickable">
+              demo user
+            </h3>
+          </div>
         )}
 
         <div className="user-pulldown-menu">

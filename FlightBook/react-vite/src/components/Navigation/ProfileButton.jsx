@@ -43,9 +43,9 @@ function ProfileButton() {
 
   return (
     <div className="user-pulldown-menu">
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
-      </button>
+      <div onClick={toggleMenu} className="session-button">
+        <h3 className="session-button-title">User Tools</h3>
+      </div>
       {showMenu && (
         <ul
           className={`profile-dropdown ${showMenu ? "show" : ""}`}
