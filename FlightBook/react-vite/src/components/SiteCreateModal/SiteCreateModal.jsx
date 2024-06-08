@@ -43,6 +43,7 @@ function SiteCreateModal() {
   return (
     <div className="signup-form-modal">
       <h1>Create Site</h1>
+      <p>(map input in development :)</p>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>

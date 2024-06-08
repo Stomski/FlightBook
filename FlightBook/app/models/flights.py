@@ -40,6 +40,7 @@ class Flight(db.Model):
             "start_time": self.start_time,
             "length": self.length,
             "equipment": self.equipment,
+            "flight_photo":self.flight_photo,
             "track_data": self.track_data,
             "log": self.log,
             "weather": self.weather,

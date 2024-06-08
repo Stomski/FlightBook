@@ -18,6 +18,7 @@ function LeftInfoAllSites() {
   return (
     <>
       <h2>All the Launch Sites in our DB:</h2>
+      <p>search feature coming soon :)</p>
     </>
   );
 }
@@ -62,11 +63,33 @@ function LeftInfoFeatureComingSoon() {
   );
 }
 
+function LeftInfoFlightInfo() {
+  return (
+    <>
+      <h2>Flight Details</h2>
+      <p>Pilot</p>
+      <p>ETC</p>
+    </>
+  );
+}
+
+function LeftInfoSiteInfo() {
+  return (
+    <>
+      <h2>Site Details</h2>
+      <p>Pilot</p>
+      <p>ETC</p>
+    </>
+  );
+}
+
 function WelcomePage() {
   return (
     <>
       <h2>Welcome to the Free Flight Site!</h2>
       <h1>we know you love to explore</h1>
+      <h2>Search Launch Sites:</h2>
+      <h1>(coming soon)</h1>
     </>
   );
 }
@@ -76,16 +99,13 @@ function LeftPageInfo() {
     (state) => state.view["feedComponentName"]
   );
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(
-    "%c feedComponentName log>",
-    "color:red; font-size: 26px",
-    feedComponentName
-  );
 
   return (
     <section className="left-page-info-div">
       {sessionUser ? (
         <>
+          {feedComponentName === "FeedFlightInfo" && <LeftInfoFlightInfo />}
+          {feedComponentName === "FeedSiteInfo" && <LeftInfoSiteInfo />}
           {feedComponentName === "FeedAllSites" && <LeftInfoAllSites />}
           {feedComponentName === "FeedAllFlights" && <LeftInfoAllFlights />}
           {feedComponentName === "FeedMySites" && <LeftInfoMySites />}

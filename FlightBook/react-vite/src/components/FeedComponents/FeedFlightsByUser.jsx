@@ -4,6 +4,8 @@ import { getFlightsByUserThunk } from "../../redux/flights";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import FlightUpdateModal from "../FlightCreateModal/FlightUpdateModal";
 import FlightDeleteModal from "../FlightCreateModal/FlightDeleteModal";
+import { setFeedComponent } from "../../redux/view";
+import { flightDetailViewThunk } from "../../redux/flights";
 import "./FeedFlightsByUser.css";
 
 export default function FeedFlightsByUser() {
@@ -15,27 +17,57 @@ export default function FeedFlightsByUser() {
     dispatch(getFlightsByUserThunk(sessionUser.id));
   }, [view, sessionUser]);
 
+  const handleClick = (flightId) => {
+    console.log("HANDLE CLICK CALLED IN THE FEED ALL FLIGHTS COMPONENT");
+    dispatch(setFeedComponent("FeedFlightInfo"));
+    // right here i need to dispatch flight detail view thunk with a flight ID
+    dispatch(flightDetailViewThunk(flightId));
+
+    console.log("%c flightId log>", "color:red; font-size: 26px", flightId);
+  };
+
   return (
     <section className="flights-by-user-feed">
       {flights["selectedUsersFlights"] &&
         Object.values(flights["selectedUsersFlights"]).map((flight) => (
           <div className="flight-card-div" key={flight.id}>
-            <h2 className="flight-title">{flight.site_name}</h2>
-            <div className="flight-info">
-              <p>{`Duration: ${flight.length} minutes        Date: ${new Date(
+            <h2
+              onClick={() => handleClick(flight.id)}
+              className="flight-title clickable"
+            >
+              {flight.site_name}
+            </h2>
+            <div
+              onClick={() => handleClick(flight.id)}
+              className="flight-info clickable"
+            >
+              <p>{`Duration: ${flight.length} minutes`}</p>
+              {flight.flight_photo && (
+                <img
+                  className="flight-photo"
+                  src={flight.flight_photo}
+                  alt=""
+                />
+              )}
+              <p>{`Date: ${new Date(
                 flight.start_time
               ).toLocaleDateString()}`}</p>
+              <p>{`Equipment: ${flight.equipment}`}</p>
+              <p>{`Log: ${flight.log}`}</p>
+              <p>{`Weather: ${flight.weather ? flight.weather : "N/A"}`}</p>
             </div>
-            <OpenModalMenuItem
-              className="clickable"
-              itemText="Edit your Flight"
-              modalComponent={<FlightUpdateModal flight={flight} />}
-            />
-            <OpenModalMenuItem
-              className="clickable"
-              itemText="Delete this Flight"
-              modalComponent={<FlightDeleteModal flight={flight} />}
-            />
+            <div className="clickable modal-button">
+              <OpenModalMenuItem
+                itemText="Edit your Flight"
+                modalComponent={<FlightUpdateModal flight={flight} />}
+              />
+            </div>
+            <div className="clickable modal-button">
+              <OpenModalMenuItem
+                itemText="Delete this Flight"
+                modalComponent={<FlightDeleteModal flight={flight} />}
+              />
+            </div>
           </div>
         ))}
     </section>

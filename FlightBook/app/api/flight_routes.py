@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required
 from app.models import Flight, db
 from ..forms.create_flight import FlightCreateForm
-from ..api.aws_functions import upload_file_to_s3, get_unique_filename
+from ..api.aws_functions import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from sqlalchemy.orm import joinedload
 
 flight_routes = Blueprint('flights', __name__)
@@ -44,6 +44,19 @@ def flights_by_user(user_id):
 
     return flights_dict
 
+@flight_routes.route('/detail-view/<int:flight_id>')
+def flight_details(flight_id):
+    """
+    this route returns THE DETAILS OF A FLIGHT, THUROUGHLY
+    """
+    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    flight = Flight.query.get(flight_id)
+    if not flight:
+        return {"errors": "failed to locate flight"}, 404
+    print(flight.to_dict(), "FLIGHT IN THE FLIGHT DETAILS PYTHON ROUTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    return flight.to_dict()
+
+
 @flight_routes.route('/by-site/<int:site_id>')
 def flights_by_site(site_id):
     """
@@ -66,24 +79,58 @@ def delete_flight(flight_id):
     """
     flight_to_delete = Flight.query.get(flight_id)
     if not flight_to_delete:
-       {"errors": "failed to locate file"}, 400
+       {"errors": "failed to locate file"}, 404
+    remove_file_from_s3(flight_to_delete.flight_photo)
+
+
+
     db.session.delete(flight_to_delete)
     db.session.commit()
     return flight_to_delete.to_dict()
 
+@flight_routes.route('/detail-view/<int:flight_id>')
+def detailFlight(flight_id):
+    print('DETAIL FLIGHT ROUTE HIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
-@flight_routes.route('/update/<int:flight_id>', methods = ['POST'])
+
+
+
+
+@flight_routes.route('/update/<int:flight_id>', methods=['POST'])
 def update_flight(flight_id):
     """
-    this route UPDATES a flight in the DB from a flight OBJ,
-    it returns the made flight as a dict
+    This route UPDATES a flight in the DB from a flight OBJ,
+    it returns the updated flight as a dict
     """
     form = FlightCreateForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data, "FORM DATA IN CREATE FLIGHT THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print(form.data, "FORM DATA IN UPDATE FLIGHT THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+
     if form.validate_on_submit():
         flight_to_update = Flight.query.get(flight_id)
+        if not flight_to_update:
+            return {"errors": "failed to locate flight"}, 404
+
         print(flight_to_update)
+        if form.data["flight_photo"]:
+            print("FLIGHT PHOTO THERE, HANDLING FILE UPLOAD ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+            if flight_to_update.flight_photo:
+                remove_file_from_s3(flight_to_update.flight_photo)
+            image = form.data["flight_photo"]
+            print(image, "IMAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            image.filename = get_unique_filename(image.filename)
+            print(image, "IMAGE")
+            print(image.filename, "IMAGE>FILENAME")
+            upload = upload_file_to_s3(image)
+            print(upload, "UPLOAD<<<<<<<<<<<<<<<<")
+
+            if "url" not in upload:
+                print("File upload failed")
+                return {"errors": "File upload failed"}, 400
+
+            url = upload["url"]
+            flight_to_update.flight_photo = url
+
         flight_to_update.site_name = form.data['site_name']
         flight_to_update.length = form.data['length']
         flight_to_update.start_time = form.data['start_time']
@@ -93,7 +140,9 @@ def update_flight(flight_id):
         db.session.add(flight_to_update)
         db.session.commit()
         return flight_to_update.to_dict()
+
     return form.errors, 400
+
 
 
 

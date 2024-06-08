@@ -3,6 +3,12 @@ const CREATE_SITE = "sites/new";
 const GET_MY_SITES = "sites/mine";
 const UPDATE_SITE = "sites/update";
 const DELETE_SITE = "sites/delete";
+const GET_SITE_DETAILS = "sites/detailView";
+
+const getSiteDetails = (siteDetails) => ({
+  type: GET_SITE_DETAILS,
+  payload: siteDetails,
+});
 
 const deleteSite = (site) => ({
   type: DELETE_SITE,
@@ -28,6 +34,32 @@ const getAllSites = (sites) => ({
   type: GET_ALL_SITES,
   payload: sites,
 });
+
+export const getSiteDetailsThunk = (siteId) => async (dispatch) => {
+  console.log(
+    "I THINK THIS IS GETTING CALLED< GET SITRE DETAILS > BEFORE FETCH"
+  );
+
+  const response = await fetch(`/api/sites/details/${siteId}`);
+  if (response.ok) {
+    console.log(
+      "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK > RESPONSE OK"
+    );
+    const data = await response.json();
+    dispatch(getSiteDetails(data));
+  } else if (response.status < 500) {
+    console.log(
+      "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK > err less 500"
+    );
+    const errorMessages = await response.json();
+    return errorMessages;
+  } else {
+    console.log(
+      "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK greater 500"
+    );
+    return { server: "Something went wrong. Please try again" };
+  }
+};
 
 export const deleteSiteThunk = (siteId) => async (dispatch) => {
   console.log(
@@ -148,12 +180,18 @@ export const createSiteThunk = (site) => async (dispatch) => {
 function sitesReducer(state = {}, action) {
   let newState;
   switch (action.type) {
+    case GET_SITE_DETAILS:
+      newState = { ...state };
+      newState["detailView"] = action.payload;
+      return newState;
     case UPDATE_SITE:
       newState = { ...state };
       newState[action.payload["id"]];
       return newState;
     case GET_ALL_SITES:
       newState = { ...action.payload };
+
+      newState["detailView"] = state["detailView"];
       return newState;
     case CREATE_SITE:
       newState = { ...state };

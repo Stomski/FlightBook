@@ -3,6 +3,12 @@ const GET_ALL_FLIGHTS = "flights/getAll";
 const GET_FLIGHTS_BY_USER = "flights/byUser";
 const UPDATE_FLIGHT = "flights/update";
 const DELETE_FLIGHT = "flights/delete";
+const FLIGHT_DETAIL_VIEW = "flights/detailView";
+
+const flightDetailView = (flightDetails) => ({
+  type: FLIGHT_DETAIL_VIEW,
+  payload: flightDetails,
+});
 
 const deleteFlight = (flight) => ({
   type: DELETE_FLIGHT,
@@ -28,6 +34,31 @@ const createFlight = (flight) => ({
   type: CREATE_FLIGHT,
   payload: flight,
 });
+
+export const flightDetailViewThunk = (flightId) => async (dispatch) => {
+  const response = await fetch(`api/flights/detail-view/${flightId}`);
+  if (response.ok) {
+    const data = await response.json();
+    console.log(
+      "%c flightDetailViewThunk response ok data log>",
+      "color:red; font-size: 26px",
+      data
+    );
+    dispatch(flightDetailView(data));
+  } else if (response.status < 500) {
+    console.log(
+      "RESPPONSE NOT OK LESS THAN 500 FLIGHT DETAIL THUNK ?????????????????????????????????????????????????????????????????????????????????????"
+    );
+
+    const errorMessages = await response.json();
+    return errorMessages;
+  } else {
+    console.log(
+      "RESPPONSE BAD GREAATER THAN 500  FLIGHT DETAIL THUNK ?????????????????????????????????????????????????????????????????????????????????????"
+    );
+    return { server: "Something went wrong. Please try again" };
+  }
+};
 
 export const deleteFlightThunk = (flightId) => async (dispatch) => {
   console.log("DELETE FLIGHT THUNK CALLED SUCCESSFGULLY");
@@ -146,6 +177,10 @@ export const createFlightThunk = (flight) => async (dispatch) => {
 function flightsReducer(state = {}, action) {
   let newState;
   switch (action.type) {
+    case FLIGHT_DETAIL_VIEW:
+      newState = { ...state };
+      newState["detailView"] = action.payload;
+      return newState;
     case DELETE_FLIGHT:
       newState = { ...state };
       delete newState["selectedUsersFlights"][action.payload["id"]];
@@ -162,6 +197,8 @@ function flightsReducer(state = {}, action) {
       return newState;
     case GET_ALL_FLIGHTS:
       newState = { ...action.payload };
+      newState["selectedUsersFlights"] = state["selectedUsersFlights"];
+      newState["detailView"] = state["detailView"];
       return newState;
     case CREATE_FLIGHT:
       newState = { ...state };
