@@ -81,6 +81,7 @@
   padding: 10px; /* Add padding */
   width: 16%;
   min-width: 90px;
+  overflow: hidden;
 }
 
 .session-button {

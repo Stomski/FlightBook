@@ -14,10 +14,13 @@ function SignupFormModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const formData = new FormData();
     if (photo !== "") {
       formData.append("user_photo", photo);
@@ -29,17 +32,22 @@ function SignupFormModal() {
     formData.append("last_name", lastName);
 
     if (password !== confirmPassword) {
+      setIsSubmitting(false);
+
       return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
+        confirmPassword: "Passwords do not match",
       });
     }
 
     const serverResponse = await dispatch(thunkSignup(formData));
 
     if (serverResponse) {
+      setIsSubmitting(false);
+
       return setErrors(serverResponse);
     } else {
+      setIsSubmitting(false);
+
       closeModal();
     }
   };
@@ -133,7 +141,14 @@ function SignupFormModal() {
         </label>
         <div className="form-errors">{errors.confirmPassword}</div>
 
-        <button type="submit">Sign Up</button>
+        <div
+          className={`submit-button clickable ${
+            isSubmitting ? "submitting" : ""
+          }`}
+          onClick={handleSubmit}
+        >
+          {isSubmitting ? "Submitting..." : "Sign-up!"}
+        </div>
       </form>
     </div>
   );
