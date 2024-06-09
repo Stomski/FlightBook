@@ -5,11 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
-
-const demoUser = () => {
-  console.log("DEMO USER CALLED");
-  dispatch(thunkLogin({ email: "bobby@aa.io", password: "password" }));
-};
+import { setFeedComponent } from "../../redux/view";
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -20,13 +16,24 @@ function Navigation() {
     console.log("DEMO USER CALLED");
     dispatch(thunkLogin({ email: "bobby@aa.io", password: "password" }));
   };
+
+  const handleClick = () => {
+    console.log("HANDLE CLICK CALLED IN THE Nav COMPONENT");
+    dispatch(setFeedComponent("WelcomePage"));
+    // dispatch(getSiteDetailsThunk(siteId));
+  };
+
   return (
     <div className="navbardiv">
       <div className="logo-container">
-        <img className="logoimg" src="../../../public/PARAGLIDELOGO.png" />
+        <img
+          onClick={() => handleClick()}
+          className="logoimg clickable"
+          src="../../../PARAGLIDELOGO.png"
+        />
       </div>
 
-      <div className="navmaindiv">navmaindiv THIS DIV</div>
+      <div className="navmaindiv"></div>
 
       <div className="usermenudiv">
         {sessionUser && sessionUser["user_photo"] && (
@@ -39,9 +46,11 @@ function Navigation() {
           </div>
         )}
         {!sessionUser && (
-          <h3 onClick={demoUser} className="demo-user, clickable">
-            demo user
-          </h3>
+          <div className=" user-button" onClick={demoUser}>
+            <h3 onClick={demoUser} className="demo-user, clickable">
+              demo user
+            </h3>
+          </div>
         )}
 
         <div className="user-pulldown-menu">

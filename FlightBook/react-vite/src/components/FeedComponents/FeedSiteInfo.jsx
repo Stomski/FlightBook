@@ -4,7 +4,7 @@ import { getFlightsByUserThunk } from "../../redux/flights";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import FlightUpdateModal from "../FlightCreateModal/FlightUpdateModal";
 import FlightDeleteModal from "../FlightCreateModal/FlightDeleteModal";
-import "./FeedFlightsByUser.css";
+import "./FeedSiteInfo.css";
 
 export default function FeedSiteInfo() {
   const site = useSelector((state) => state.sites.detailView);
@@ -21,7 +21,6 @@ export default function FeedSiteInfo() {
   );
   return (
     <section className="site-info-feed">
-      <h2>TOP OF FEED SITE INFO</h2>
       {site ? (
         <div className="site-details-card">
           <h2 className="site-title">{`Details About ${site.name}`}</h2>

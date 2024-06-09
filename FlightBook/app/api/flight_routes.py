@@ -80,7 +80,9 @@ def delete_flight(flight_id):
     flight_to_delete = Flight.query.get(flight_id)
     if not flight_to_delete:
        {"errors": "failed to locate file"}, 404
-    remove_file_from_s3(flight_to_delete.flight_photo)
+    if flight_to_delete.flight_photo:
+        remove_file_from_s3(flight_to_delete.flight_photo)
+
 
 
 

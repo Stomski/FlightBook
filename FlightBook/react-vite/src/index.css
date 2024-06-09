@@ -14,7 +14,7 @@ body {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 15% 84%; /* No comma, correct syntax */
-  gap: 5px;
+
   background-color: rgba(19, 82, 190, 0.847); /* Red background for top div */
 }
 #root {

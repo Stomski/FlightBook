@@ -34,6 +34,7 @@ function Feed() {
       {feedComponentName === "FeedAllFlights" && <FeedAllFlights />}
       {feedComponentName === "FeedFlightsByUser" && <FeedFlightsByUser />}
       {feedComponentName === "featureComingSoon" && <FeedFeatureComingSoon />}
+      {feedComponentName === "WelcomePage" && <FeedAllSites />}
       {!feedComponentName && <FeedAllSites />}
     </section>
   );

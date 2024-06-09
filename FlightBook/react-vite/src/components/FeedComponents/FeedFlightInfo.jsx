@@ -4,7 +4,7 @@ import { getFlightsByUserThunk } from "../../redux/flights";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import FlightUpdateModal from "../FlightCreateModal/FlightUpdateModal";
 import FlightDeleteModal from "../FlightCreateModal/FlightDeleteModal";
-import "./FeedFlightsByUser.css";
+import "./FeedFlightInfo.css";
 
 export default function FeedFlightInfo() {
   const flight = useSelector((state) => state.flights.detailView);

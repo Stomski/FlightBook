@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createFlightThunk } from "../../redux/flights";
-import { getAllSitesThunk } from "../../redux/sites";
+import { getAllSitesThunk, getSiteDetailsThunk } from "../../redux/sites";
 import Select from "react-select";
 import "./FlightCreateModal.css";
 
@@ -15,10 +15,12 @@ function FlightCreateModal() {
   const [log, setLog] = useState("");
   const [weather, setWeather] = useState("");
   const [flightPhoto, setFlightPhoto] = useState("");
+  const [imageURL, setImageURL] = useState("../../../SMALLLOGO.png");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
   const sites = useSelector((state) => state.sites);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const allSites = {};
   Object.entries(sites).forEach((set) => {
@@ -26,15 +28,39 @@ function FlightCreateModal() {
       allSites[set[1]["id"]] = set[1];
     }
   });
-  console.log(allSites);
 
   useEffect(() => {
     dispatch(getAllSitesThunk());
-  }, []);
+  }, [dispatch]);
+
+  const fileWrap = (e) => {
+    e.stopPropagation();
+
+    const tempFile = e.target.files[0];
+
+    // Check for max image size of 5Mb
+    if (tempFile.size > 5000000) {
+      setFilename(maxFileError); // "Selected image exceeds the maximum file size of 5Mb"
+      return;
+    }
+
+    const newImageURL = URL.createObjectURL(tempFile); // Generate a local URL to render the image file inside of the <img> tag.
+    setImageURL(newImageURL);
+
+    setFlightPhoto(e.target.files[0]);
+  };
 
   const handleSubmit = async (e) => {
+    setErrors({});
+    setIsSubmitting(true);
     e.preventDefault();
+
+    if (siteName === "") {
+      setIsSubmitting(false);
+      return setErrors({ site_name: "you must choose a site" });
+    }
     const formData = new FormData();
+
     if (flightPhoto !== "") {
       formData.append("flight_photo", flightPhoto);
     }
@@ -46,19 +72,15 @@ function FlightCreateModal() {
     formData.append("user_id", sessionUser.id);
     formData.append("site_id", siteName.id);
 
-    console.log(
-      "I HAVE ATTACHED ALL THE THINGS INCLUDING FORM ID",
-      sessionUser.id
-    );
-
     const serverResponse = await dispatch(createFlightThunk(formData));
-
+    setIsSubmitting(false);
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
       closeModal();
     }
   };
+
   const handleSiteChange = (selectedOption) => {
     setSiteName(selectedOption ? selectedOption.value : "");
   };
@@ -67,11 +89,15 @@ function FlightCreateModal() {
     value: site,
     label: site.name,
   }));
+  console.log(
+    "ERRORS BEFORE RENDE#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    errors
+  );
 
   return (
     <div className="flight-create-modal">
       <h1>Log a Flight!</h1>
-      {errors.server && <p>{errors.server}</p>}
+      {errors.server && <p className="form-errors">{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Site Name
@@ -82,7 +108,8 @@ function FlightCreateModal() {
             placeholder="Select site..."
           />
         </label>
-        {errors.siteName && <p>{errors.siteName}</p>}
+        <div className="form-errors">{errors.site_name}</div>
+
         <label>
           Length (in minutes)
           <input
@@ -92,7 +119,8 @@ function FlightCreateModal() {
             required
           />
         </label>
-        {errors.length && <p>{errors.length}</p>}
+        <div className="form-errors">{errors.length}</div>
+
         <label>
           Start Time
           <input
@@ -102,7 +130,8 @@ function FlightCreateModal() {
             required
           />
         </label>
-        {errors.startTime && <p>{errors.startTime}</p>}
+        <div className="form-errors">{errors.startTime}</div>
+
         <label>
           Equipment
           <input
@@ -111,7 +140,8 @@ function FlightCreateModal() {
             onChange={(e) => setEquipment(e.target.value)}
           />
         </label>
-        {errors.equipment && <p>{errors.equipment}</p>}
+        <div className="form-errors">{errors.equipment}</div>
+
         <label>
           Log
           <textarea
@@ -120,18 +150,33 @@ function FlightCreateModal() {
             required
           />
         </label>
-        {errors.log && <p>{errors.log}</p>}
+        <div className="form-errors">{errors.log}</div>
 
-        <label>
+        <label className="form-label">
           Upload Flight Photo
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setFlightPhoto(e.target.files[0])}
-          />
+          <div className="file-inputs-container">
+            <img src={imageURL} alt="Flight" className="thumbnails-noname" />
+            <a htmlFor="post-image-input" className="file-input-labels">
+              Upload a photo
+            </a>
+            <input
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              id="post-image-input"
+              onChange={fileWrap}
+              className="form-input"
+            />
+          </div>
         </label>
-        {errors.flightPhoto && <p>{errors.flightPhoto}</p>}
-        <button type="submit">Create Flight</button>
+        <div className="form-errors">{errors.flightPhoto}</div>
+        <div
+          className={`submit-button clickable ${
+            isSubmitting ? "submitting" : ""
+          }`}
+          onClick={handleSubmit}
+        >
+          {isSubmitting ? "Submitting..." : "Create Site"}
+        </div>
       </form>
     </div>
   );

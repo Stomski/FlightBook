@@ -26,7 +26,8 @@ function LeftInfoAllSites() {
 function LeftInfoAllFlights() {
   return (
     <>
-      <h1>THIS IS THE GET ALL FLIGHTS YOU KNOW WHAT IT IS </h1>
+      <h1>These are the most recent contributions to our flight DB! </h1>
+      <p>new ways to explore and interact coming soon :)</p>
     </>
   );
 }
@@ -109,6 +110,7 @@ function LeftPageInfo() {
           {feedComponentName === "FeedAllSites" && <LeftInfoAllSites />}
           {feedComponentName === "FeedAllFlights" && <LeftInfoAllFlights />}
           {feedComponentName === "FeedMySites" && <LeftInfoMySites />}
+          {feedComponentName === "WelcomePage" && <WelcomePage />}
 
           {feedComponentName === "FeedFlightsByUser" && (
             <LeftInfoFlightsByUser />
@@ -120,7 +122,7 @@ function LeftPageInfo() {
         </>
       ) : (
         <h1>
-          Create a prfile or log in to enjoy all the functionality of the free
+          Create a profile or log in to enjoy all the functionality of the free
           flight site !!!
         </h1>
       )}
