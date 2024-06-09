@@ -47,8 +47,11 @@ function SignupFormModal() {
   return (
     <div className="signup-form-modal">
       <h1>Sign Up</h1>
-      {errors.server && <p className="form-errors">{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <div className="form-errors">
+          {errors.photo}
+          {errors.server}
+        </div>
         <label>
           Upload a Profile Image
           <input
@@ -57,10 +60,6 @@ function SignupFormModal() {
             onChange={(e) => setPhoto(e.target.files[0])}
           />
         </label>
-        <div className="form-errors">
-          {errors.photo}
-          {errors.server}
-        </div>
 
         <label>
           Email

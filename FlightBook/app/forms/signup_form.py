@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import DataRequired, Email, ValidationError, Length
 from app.models import User
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from ..api.aws_functions import ALLOWED_EXTENSIONS
@@ -38,9 +38,9 @@ def testvalidation(form,field):
 
 class SignUpForm(FlaskForm):
     username = StringField(
-        'username', validators=[DataRequired(), username_exists,testvalidation])
-    email = StringField('email', validators=[DataRequired(), user_exists,testvalidation])
-    password = StringField('password', validators=[DataRequired(),testvalidation])
-    first_name = StringField('first name', validators=[testvalidation])
-    last_name = StringField('last name', validators=[testvalidation])
+        'username', validators=[DataRequired(), username_exists,])
+    email = StringField('email', validators=[DataRequired(), user_exists,])
+    password = StringField('password', validators=[DataRequired(),Length(min=8, max=25)])
+    first_name = StringField('first name', validators=[Length(min=3, max=35)])
+    last_name = StringField('last name', validators=[Length(min=3, max=35)])
     user_photo =FileField('Profile Image', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
