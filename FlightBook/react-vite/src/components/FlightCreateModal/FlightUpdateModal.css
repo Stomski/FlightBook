@@ -67,3 +67,45 @@
 .flight-update-modal button:hover {
   background-color: #0056b3;
 }
+
+.file-input-labels {
+  display: flex;
+  border-radius: 6px;
+  color: var(--minimal-border);
+  background-color: var(--minimal-background);
+  padding: 3px;
+
+  transition: all 0.3s ease-in-out;
+  border: 1px solid black;
+}
+
+.file-input-labels:hover {
+  cursor: pointer;
+}
+
+.file-inputs-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thumbnails-noname {
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--minimal-border);
+  border-radius: 6px;
+}
+#post-image-input {
+  visibility: hidden;
+  height: 1px;
+  /* Here we make the default file input button invisible on the page.
+     As the label for this input is connected to it using the htmlFor property, we can style the label as a button instead, and have it behave the same as the <input type="file" />
+     This extra step is necessary as the default <input type="file" /> CANNOT be styled with CSS!!
+  */
+  padding: 0px;
+  margin-top: 0px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
