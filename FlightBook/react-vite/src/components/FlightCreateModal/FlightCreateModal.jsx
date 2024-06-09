@@ -169,10 +169,14 @@ function FlightCreateModal() {
           </div>
         </label>
         <div className="form-errors">{errors.flightPhoto}</div>
-
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Create Flight"}
-        </button>
+        <div
+          className={`submit-button clickable ${
+            isSubmitting ? "submitting" : ""
+          }`}
+          onClick={handleSubmit}
+        >
+          {isSubmitting ? "Submitting..." : "Create Site"}
+        </div>
       </form>
     </div>
   );

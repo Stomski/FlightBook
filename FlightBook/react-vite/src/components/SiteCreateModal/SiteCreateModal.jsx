@@ -14,11 +14,33 @@ function SiteCreateModal() {
   const [official, setOfficial] = useState(false);
   const [sitePhoto, setSitePhoto] = useState("");
   const [errors, setErrors] = useState({});
+  const [imageURL, setImageURL] = useState("../../../SMALLLOGO.png");
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const fileWrap = (e) => {
+    e.stopPropagation();
+
+    const tempFile = e.target.files[0];
+
+    // Check for max image size of 5Mb
+    if (tempFile.size > 5000000) {
+      setFilename(maxFileError); // "Selected image exceeds the maximum file size of 5Mb"
+      return;
+    }
+
+    const newImageURL = URL.createObjectURL(tempFile); // Generate a local URL to render the image file inside of the <img> tag.
+    setImageURL(newImageURL);
+
+    setSitePhoto(e.target.files[0]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
+    setIsSubmitting(true);
+
     const formData = new FormData();
     if (sitePhoto !== "") {
       formData.append("site_photo", sitePhoto);
@@ -32,6 +54,7 @@ function SiteCreateModal() {
     formData.append("user_id", sessionUser.id);
 
     const serverResponse = await dispatch(createSiteThunk(formData));
+    setIsSubmitting(false);
 
     if (serverResponse) {
       setErrors(serverResponse);
@@ -44,7 +67,7 @@ function SiteCreateModal() {
     <div className="signup-form-modal">
       <h1>Create Site</h1>
       <p>(map input in development :)</p>
-      {errors.server && <p>{errors.server}</p>}
+      {errors.server && <p className="form-errors">{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Site Name
@@ -55,7 +78,8 @@ function SiteCreateModal() {
             required
           />
         </label>
-        {errors.name && <p>{errors.name}</p>}
+        <div className="form-errors">{errors.name}</div>
+
         <label>
           Latitude
           <input
@@ -64,7 +88,8 @@ function SiteCreateModal() {
             onChange={(e) => setLat(e.target.value)}
           />
         </label>
-        {errors.lat && <p>{errors.lat}</p>}
+        <div className="form-errors">{errors.lat}</div>
+
         <label>
           Longitude
           <input
@@ -73,7 +98,8 @@ function SiteCreateModal() {
             onChange={(e) => setLon(e.target.value)}
           />
         </label>
-        {errors.lon && <p>{errors.lon}</p>}
+        <div className="form-errors">{errors.lon}</div>
+
         <label>
           Altitude
           <input
@@ -82,7 +108,8 @@ function SiteCreateModal() {
             onChange={(e) => setAltitude(e.target.value)}
           />
         </label>
-        {errors.altitude && <p>{errors.altitude}</p>}
+        <div className="form-errors">{errors.altitude}</div>
+
         <label>
           Site Intro
           <textarea
@@ -91,17 +118,40 @@ function SiteCreateModal() {
             required
           />
         </label>
-        {errors.intro && <p>{errors.intro}</p>}
-        <label>
+        <div className="form-errors">{errors.intro}</div>
+
+        <label className="form-label">
           Upload Site Photo
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setSitePhoto(e.target.files[0])}
-          />
+          <span id="site-label-info">
+            a site photo is required, a good one shows a launch in progress!
+          </span>
+          <div className="file-inputs-container">
+            <img src={imageURL} alt="Flight" className="thumbnails-noname" />
+            <h4
+              htmlFor="post-image-input"
+              className="file-input-labels clickable"
+            >
+              Upload a photo
+            </h4>
+            <input
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              id="post-image-input"
+              onChange={fileWrap}
+              className="form-input"
+            />
+          </div>
         </label>
-        {errors.sitePhoto && <p>{errors.sitePhoto}</p>}
-        <button type="submit">Create Site</button>
+        <div className="form-errors">{errors.site_photo}</div>
+
+        <div
+          className={`submit-button clickable ${
+            isSubmitting ? "submitting" : ""
+          }`}
+          onClick={handleSubmit}
+        >
+          {isSubmitting ? "Submitting..." : "Create Site"}
+        </div>
       </form>
     </div>
   );

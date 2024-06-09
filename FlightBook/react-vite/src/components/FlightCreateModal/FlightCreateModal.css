@@ -58,7 +58,7 @@
 }
 
 /* Style the submit button */
-.flight-create-modal button {
+.submit-button {
   padding: 5px 10px; /* Reduced padding */
   background-color: #007bff;
   color: white;
@@ -67,9 +67,11 @@
   font-size: 14px;
   cursor: pointer;
   margin-top: 5px; /* Reduced margin */
+  display: flex;
+  justify-content: center;
 }
 
-.flight-create-modal button:hover {
+.submit-button:hover {
   background-color: #0056b3;
 }
 

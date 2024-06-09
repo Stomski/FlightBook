@@ -8,7 +8,7 @@ class SiteCreateForm(FlaskForm):
     name = StringField('Site Name', validators=[DataRequired(), Length(min=7,max=40)])
     lat = IntegerField('latitude')
     lon = IntegerField('longitude')
-    altitude = IntegerField('altitude', NumberRange(min=0, max=17999))
+    altitude = IntegerField('altitude', validators=[NumberRange(min=0, max=17999)])
     intro = TextAreaField('Log', validators=[DataRequired(), Length(max=1024)])
     user_id = IntegerField('user_id')
     official= BooleanField('official')
