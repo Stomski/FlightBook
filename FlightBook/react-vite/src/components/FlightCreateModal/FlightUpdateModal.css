@@ -6,7 +6,7 @@
 }
 
 /* Style the modal container */
-.signup-form-modal {
+.flight-update-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,21 +18,21 @@
   margin: auto;
 }
 
-.signup-form-modal h1 {
+.flight-update-modal h1 {
   margin-bottom: 10px; /* Reduced margin */
   font-size: 24px;
   text-align: center;
 }
 
 /* Style the form */
-.signup-form-modal form {
+.flight-update-modal form {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 /* Style the labels and inputs */
-.signup-form-modal label {
+.flight-update-modal label {
   display: flex;
   flex-direction: column;
   margin-bottom: 5px; /* Reduced margin */
@@ -40,8 +40,8 @@
   color: #333;
 }
 
-.signup-form-modal input,
-.signup-form-modal textarea {
+.flight-update-modal input,
+.flight-update-modal textarea {
   padding: 5px; /* Reduced padding */
   margin-top: 3px; /* Reduced margin */
   border: 1px solid #ccc;
@@ -50,7 +50,7 @@
 }
 
 /* Style the error messages */
-.signup-form-modal p {
+.flight-update-modal p {
   margin-top: 3px; /* Reduced margin */
   margin-bottom: 5px; /* Reduced margin */
   font-size: 12px;
@@ -58,7 +58,7 @@
 }
 
 /* Style the submit button */
-.signup-form-modal button {
+.flight-update-modal button {
   padding: 5px 10px; /* Reduced padding */
   background-color: #007bff;
   color: white;
@@ -69,7 +69,7 @@
   margin-top: 5px; /* Reduced margin */
 }
 
-.signup-form-modal button:hover {
+.flight-update-modal button:hover {
   background-color: #0056b3;
 }
 

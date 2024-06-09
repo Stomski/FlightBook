@@ -146,6 +146,7 @@ function FlightCreateModal() {
           Log
           <textarea
             value={log}
+            className="text-area"
             onChange={(e) => setLog(e.target.value)}
             required
           />
@@ -175,7 +176,7 @@ function FlightCreateModal() {
           }`}
           onClick={handleSubmit}
         >
-          {isSubmitting ? "Submitting..." : "Create Site"}
+          {isSubmitting ? "Submitting..." : "Log Your Flight!"}
         </div>
       </form>
     </div>

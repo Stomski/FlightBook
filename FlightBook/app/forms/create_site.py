@@ -12,4 +12,4 @@ class SiteCreateForm(FlaskForm):
     intro = TextAreaField('Log', validators=[DataRequired(), Length(max=1024)])
     user_id = IntegerField('user_id')
     official= BooleanField('official')
-    site_photo = FileField('Flight Photo', validators=[FileAllowed(list(ALLOWED_EXTENSIONS), 'Invalid file type.'), DataRequired()])
+    site_photo = FileField('Flight Photo', validators=[FileAllowed(list(ALLOWED_EXTENSIONS), 'Invalid file type.')])
