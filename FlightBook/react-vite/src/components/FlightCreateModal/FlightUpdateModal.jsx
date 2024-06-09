@@ -127,7 +127,7 @@ function FlightUpdateModal({ flight }) {
         </label>
         {errors.log && <p className="error-message">{errors.log}</p>}
 
-        <label htmlFor="post-image-input" className="form-label">
+        <label className="form-label">
           Upload Flight Photo
           <div className="file-inputs-container">
             <img src={imageURL} alt="Flight" className="thumbnails-noname" />

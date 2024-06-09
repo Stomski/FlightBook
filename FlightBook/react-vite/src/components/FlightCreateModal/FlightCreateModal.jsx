@@ -15,6 +15,7 @@ function FlightCreateModal() {
   const [log, setLog] = useState("");
   const [weather, setWeather] = useState("");
   const [flightPhoto, setFlightPhoto] = useState("");
+  const [imageURL, setImageURL] = useState("../../../SMALLLOGO.png");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
@@ -32,11 +33,34 @@ function FlightCreateModal() {
     dispatch(getAllSitesThunk());
   }, [dispatch]);
 
+  const fileWrap = (e) => {
+    e.stopPropagation();
+
+    const tempFile = e.target.files[0];
+
+    // Check for max image size of 5Mb
+    if (tempFile.size > 5000000) {
+      setFilename(maxFileError); // "Selected image exceeds the maximum file size of 5Mb"
+      return;
+    }
+
+    const newImageURL = URL.createObjectURL(tempFile); // Generate a local URL to render the image file inside of the <img> tag.
+    setImageURL(newImageURL);
+
+    setFlightPhoto(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     setErrors({});
     setIsSubmitting(true);
     e.preventDefault();
+
+    if (siteName === "") {
+      setIsSubmitting(false);
+      return setErrors({ site_name: "you must choose a site" });
+    }
     const formData = new FormData();
+
     if (flightPhoto !== "") {
       formData.append("flight_photo", flightPhoto);
     }
@@ -65,6 +89,10 @@ function FlightCreateModal() {
     value: site,
     label: site.name,
   }));
+  console.log(
+    "ERRORS BEFORE RENDE#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    errors
+  );
 
   return (
     <div className="flight-create-modal">
@@ -80,7 +108,7 @@ function FlightCreateModal() {
             placeholder="Select site..."
           />
         </label>
-        <div className="form-errors">{errors.siteName}</div>
+        <div className="form-errors">{errors.site_name}</div>
 
         <label>
           Length (in minutes)
@@ -124,13 +152,21 @@ function FlightCreateModal() {
         </label>
         <div className="form-errors">{errors.log}</div>
 
-        <label>
+        <label className="form-label">
           Upload Flight Photo
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setFlightPhoto(e.target.files[0])}
-          />
+          <div className="file-inputs-container">
+            <img src={imageURL} alt="Flight" className="thumbnails-noname" />
+            <a htmlFor="post-image-input" className="file-input-labels">
+              Upload a photo
+            </a>
+            <input
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              id="post-image-input"
+              onChange={fileWrap}
+              className="form-input"
+            />
+          </div>
         </label>
         <div className="form-errors">{errors.flightPhoto}</div>
 
