@@ -6,7 +6,7 @@
 }
 
 /* Style the modal container */
-.flight-create-modal {
+.site-create-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,30 +18,36 @@
   margin: auto;
 }
 
-.flight-create-modal h1 {
+.site-create-modal h1 {
   margin-bottom: 2.5px;
   font-size: 24px;
   text-align: center;
 }
 
 /* Style the form */
-.flight-create-modal form {
+.site-create-modal form {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 /* Style the labels and inputs */
-.flight-create-modal label {
+.site-create-modal label {
   display: flex;
   flex-direction: column;
   margin-bottom: 1.25px;
   font-size: 14px;
   color: #333;
 }
+.site-create-modal textarea {
+  resize: none;
+  height: 40px; /* Set the height to fit two lines */
+  max-height: 40px; /* Ensure the height doesn't exceed this value */
+  overflow-y: auto; /* Allow vertical scrolling */
+}
 
-.flight-create-modal input,
-.flight-create-modal textarea {
+.site-create-modal input,
+.site-create-modal textarea {
   padding: 1.25px 5px;
   margin-top: 0.75px;
   border: 1px solid #ccc;
@@ -52,7 +58,7 @@
 /* Style the error messages */
 
 /* Style the submit button */
-.flight-create-modal button {
+.site-create-modal button {
   padding: 1.25px 2.5px;
   background-color: #007bff;
   color: white;
@@ -63,7 +69,7 @@
   margin-top: 1.25px;
 }
 
-.flight-create-modal button:hover {
+.site-create-modal button:hover {
   background-color: #0056b3;
 }
 

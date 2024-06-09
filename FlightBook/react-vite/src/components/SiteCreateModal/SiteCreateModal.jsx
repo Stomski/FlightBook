@@ -70,7 +70,7 @@ function SiteCreateModal() {
   };
 
   return (
-    <div className="signup-form-modal">
+    <div className="site-create-modal">
       <h1>Create Site</h1>
       <p>(map input in development :)</p>
       {/* {errors.server && <p className="form-errors">{errors.server}</p>} */}
@@ -121,6 +121,7 @@ function SiteCreateModal() {
           Site Intro
           <textarea
             value={intro}
+            className="text-area"
             onChange={(e) => setIntro(e.target.value)}
             required
           />

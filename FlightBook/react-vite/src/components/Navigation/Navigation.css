@@ -98,8 +98,8 @@
 }
 
 .user-button {
-  margin-top: 60px;
-  margin-right: 7px;
+  margin-top: 20px;
+  margin-right: 9px;
   border: 1px solid #ccc; /* Add a light border */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1); /* Add drop shadow */
