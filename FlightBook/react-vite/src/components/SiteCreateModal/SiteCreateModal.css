@@ -92,14 +92,16 @@
   margin-bottom: 5px;
 }
 
-.file-inputs-container a.file-input-labels {
+.file-inputs-container h4.file-input-labels {
   color: #007bff;
   cursor: pointer;
   text-decoration: none;
   margin-bottom: 5px;
+  border: 1px solid #000000;
+  padding: 3px;
 }
 
-.file-inputs-container a.file-input-labels:hover {
+.file-inputs-container h4.file-input-labels:hover {
   text-decoration: underline;
 }
 
