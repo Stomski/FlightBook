@@ -45,6 +45,8 @@ function FlightUpdateModal({ flight }) {
   };
 
   const handleSubmit = async (e) => {
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
     e.preventDefault();
     const formData = new FormData();

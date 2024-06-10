@@ -21,6 +21,7 @@ function SiteUpdateModal({ site }) {
   const [imageURL, setImageURL] = useState(site.site_photo);
 
   const handleSubmit = async (e) => {
+    if (isSubmitting) return;
     setIsSubmitting(true);
     e.preventDefault();
     const formData = new FormData();
