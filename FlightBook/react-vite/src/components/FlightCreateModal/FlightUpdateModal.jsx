@@ -18,13 +18,15 @@ function FlightUpdateModal({ flight }) {
   const [equipment, setEquipment] = useState(flight.equipment);
   const [log, setLog] = useState(flight.log);
   const [flightPhoto, setFlightPhoto] = useState("");
-  const [imageURL, setImageURL] = useState(flight.flight_photo ?? "");
+  const [imageURL, setImageURL] = useState(
+    flight.flight_photo ?? "../../../SMALLLOGO.png"
+  );
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
   const [isSubmitting, setIsSubmitting] = useState(false);
   console.log(imageURL);
-
+  console.log("%c imageURL log>", "color:red; font-size: 26px", imageURL);
   const fileWrap = (e) => {
     e.stopPropagation();
 

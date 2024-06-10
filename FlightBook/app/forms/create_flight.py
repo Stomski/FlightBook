@@ -13,7 +13,7 @@ class FlightCreateForm(FlaskForm):
     length = IntegerField('Length', validators=[Optional(), NumberRange(min=0,max=500, message="i dont really believe you")])
     start_time = DateTimeField('Start Time', format='%Y-%m-%dT%H:%M', validators=[DataRequired()])
     equipment = StringField('Equipment',validators=[ Length(max=1024)])
-    log = TextAreaField('Log', validators=[DataRequired(),Length(max=3000)])
+    log = TextAreaField('Log', validators=[DataRequired(),Length(max=1017)])
     weather = IntegerField('Weather')
     flight_photo = FileField('Flight Photo', validators=[FileAllowed(list(ALLOWED_EXTENSIONS), 'Invalid file type.')])
     user_id = IntegerField('user_id')
