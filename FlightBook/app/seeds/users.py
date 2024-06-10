@@ -11,7 +11,7 @@ def seed_users():
             last_name='User',
             email='demo@aa.io',
             password='password',
-            user_photo = 'https://flightbook1may2024.s3.us-east-2.amazonaws.com/704484a5b6914597be69b584ae347d10.jpg'
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1717995970/71623398387__0CA75F1E-C4FB-4A7E-AAC7-F147A3A8C9D2_copy_idvyc2.jpg'
         ),
         User(
             username='marnie',
@@ -19,7 +19,7 @@ def seed_users():
             last_name='Smith',
             email='marnie@aa.io',
             password='password',
-            user_photo = 'https://flightbook1may2024.s3.us-east-2.amazonaws.com/704484a5b6914597be69b584ae347d10.jpg'
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1713558531/123photo-86634_xf73wh.jpg'
         ),
         User(
             username='bobby',
@@ -27,7 +27,7 @@ def seed_users():
             last_name='Brown',
             email='bobby@aa.io',
             password='password',
-            user_photo = 'https://flightbook1may2024.s3.us-east-2.amazonaws.com/f5b638ae605342d8afe210c37d77ca8a.jpg'
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1717995970/71623398387__0CA75F1E-C4FB-4A7E-AAC7-F147A3A8C9D2_copy_idvyc2.jpg'
         ),
         User(
             username='alice',
@@ -35,7 +35,7 @@ def seed_users():
             last_name='Johnson',
             email='alice@aa.io',
                  password='password',
-            user_photo = 'https://flightbook1may2024.s3.us-east-2.amazonaws.com/704484a5b6914597be69b584ae347d10.jpg'
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1713558496/samples/chair-and-coffee-table.jpg'
         ),
         User(
             username='john',
@@ -43,7 +43,7 @@ def seed_users():
             last_name='Doe',
             email='john@aa.io',
             password='password',
-            user_photo = 'https://flightbook1may2024.s3.us-east-2.amazonaws.com/f5b638ae605342d8afe210c37d77ca8a.jpg'
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1713558495/samples/man-portrait.jpg'
         ),
     ]
 

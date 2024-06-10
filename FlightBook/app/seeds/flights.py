@@ -14,7 +14,7 @@ def seed_flights():
             track_data=None,
             log='Great weather, smooth flight over the Wonderland.',
             weather=None,
-            flight_photo="https://flightbook1may2024.s3.us-east-2.amazonaws.com/fc446e7016674f19a90d71716c6d5042.jpg",
+            flight_photo="https://res.cloudinary.com/dvnr49gnx/image/upload/v1717996132/IMG_1887_g5wpts.jpg",
         ),
         Flight(
             user_id=2,
@@ -26,7 +26,7 @@ def seed_flights():
             track_data=None,
             log='Beautiful evening thermals and glassoffs.',
             weather=None,
-            flight_photo="https://flightbook1may2024.s3.us-east-2.amazonaws.com/2ecfe03bb9224f36b388f1cc3d302095.jpg"),
+            flight_photo="https://res.cloudinary.com/dvnr49gnx/image/upload/v1717995946/IMG_6648_pphute.jpg"),
         Flight(
             user_id=2,
             site_id=1,  # Boulder - Wonderland
@@ -48,7 +48,7 @@ def seed_flights():
             track_data=None,
             log='Long flight with consistent updrafts.',
             weather=None,
-            flight_photo="https://flightbook1may2024.s3.us-east-2.amazonaws.com/9a64ce28996f4cf49ce070a3125d13e6.jpg"
+            flight_photo="https://res.cloudinary.com/dvnr49gnx/image/upload/v1717995950/IMG_3C312DC85957-1_iit4ek.jpg"
         ),
         Flight(
             user_id=3,
@@ -60,7 +60,7 @@ def seed_flights():
             track_data=None,
             log='Amazing experience, flew over the summit.',
             weather=None,
-            flight_photo="https://flightbook1may2024.s3.us-east-2.amazonaws.com/9a64ce28996f4cf49ce070a3125d13e6.jpg"
+            flight_photo="https://res.cloudinary.com/dvnr49gnx/image/upload/v1717995924/IMG_6657_jqbav6.jpg"
         ),
         Flight(
             user_id=1,
@@ -83,7 +83,7 @@ def seed_flights():
             track_data=None,
             log='Windy but manageable, beautiful sunset.',
             weather=None,
-            flight_photo="https://flightbook1may2024.s3.us-east-2.amazonaws.com/9a64ce28996f4cf49ce070a3125d13e6.jpg"
+            flight_photo="https://res.cloudinary.com/dvnr49gnx/image/upload/v1717995924/IMG_FDEE7AE5342A-1_d4objp.jpg"
         ),
         Flight(
             user_id=2,
@@ -95,7 +95,7 @@ def seed_flights():
             track_data=None,
             log='Short flight, but great lift near the peak.',
             weather=None,
-            flight_photo="https://flightbook1may2024.s3.us-east-2.amazonaws.com/9a64ce28996f4cf49ce070a3125d13e6.jpg"
+            flight_photo="https://res.cloudinary.com/dvnr49gnx/image/upload/v1717996060/IMG_5200_qpe7oz.png"
         ),
         Flight(
             user_id=3,
@@ -107,7 +107,7 @@ def seed_flights():
             track_data=None,
             log='Longest flight yet, spectacular views.',
             weather=None,
-            flight_photo="https://flightbook1may2024.s3.us-east-2.amazonaws.com/9a64ce28996f4cf49ce070a3125d13e6.jpg"
+            flight_photo="https://res.cloudinary.com/dvnr49gnx/image/upload/v1717996132/IMG_1887_g5wpts.jpg"
         ),
         Flight(
             user_id=1,
@@ -119,7 +119,7 @@ def seed_flights():
             track_data=None,
             log='Challenging but rewarding flight over the pass.',
             weather=None,
-            flight_photo="https://flightbook1may2024.s3.us-east-2.amazonaws.com/9a64ce28996f4cf49ce070a3125d13e6.jpg"
+            flight_photo="https://res.cloudinary.com/dvnr49gnx/image/upload/v1717995927/GPTempDownload_tlsubv.jpg"
         ),
     ]
 
