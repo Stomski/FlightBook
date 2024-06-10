@@ -51,6 +51,7 @@ function FlightCreateModal() {
   };
 
   const handleSubmit = async (e) => {
+    if (isSubmitting) return;
     setErrors({});
     setIsSubmitting(true);
     e.preventDefault();
@@ -73,10 +74,12 @@ function FlightCreateModal() {
     formData.append("site_id", siteName.id);
 
     const serverResponse = await dispatch(createFlightThunk(formData));
-    setIsSubmitting(false);
     if (serverResponse) {
       setErrors(serverResponse);
+      setIsSubmitting(false);
+      return;
     } else {
+      setIsSubmitting(false);
       closeModal();
     }
   };

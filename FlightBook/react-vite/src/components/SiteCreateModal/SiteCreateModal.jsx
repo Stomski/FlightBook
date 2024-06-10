@@ -38,6 +38,10 @@ function SiteCreateModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
     setErrors({});
     setIsSubmitting(true);
 
