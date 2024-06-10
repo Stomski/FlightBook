@@ -56,18 +56,31 @@ function SignupFormModal() {
     <div className="signup-form-modal">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <div className="form-errors">
-          {errors.photo}
-          {errors.server}
-        </div>
-        <label>
+        {/* <label>
           Upload a Profile Image
           <input
             type="file"
-            accept="image/*"
+            accept="image/png, image/jpeg, image/jpg"
             onChange={(e) => setPhoto(e.target.files[0])}
           />
+        </label> */}
+        <label className="file-inputs-container">
+          <h4
+            htmlFor="post-image-input"
+            className="file-input-labels clickable"
+          >
+            Upload a photo
+          </h4>
+          <input
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            id="post-image-input"
+            onChange={(e) => setPhoto(e.target.files[0])}
+            className="form-input"
+          />
         </label>
+
+        <div className="form-errors">{errors.photo || errors.server || ""}</div>
 
         <label>
           Email

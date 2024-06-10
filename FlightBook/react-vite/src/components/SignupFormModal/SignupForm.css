@@ -80,3 +80,7 @@
   margin-top: 3px; /* Reduced margin */
   margin-bottom: 5px; /* Reduced margin */
 }
+
+.file-inputs-container input.form-input {
+  display: none;
+}
