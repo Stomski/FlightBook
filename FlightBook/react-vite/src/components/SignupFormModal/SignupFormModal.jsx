@@ -15,6 +15,7 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageURL, setImageURL] = useState("../../../SMALLLOGO.png");
 
   const { closeModal } = useModal();
 
@@ -52,6 +53,23 @@ function SignupFormModal() {
     }
   };
 
+  const fileWrap = (e) => {
+    e.stopPropagation();
+
+    const tempFile = e.target.files[0];
+
+    // Check for max image size of 5Mb
+    if (tempFile.size > 5000000) {
+      setErrors({ server: "max file size exceeded" }); // "Selected image exceeds the maximum file size of 5Mb"
+      return;
+    }
+
+    const newImageURL = URL.createObjectURL(tempFile); // Generate a local URL to render the image file inside of the <img> tag.
+    setImageURL(newImageURL);
+
+    setSitePhoto(e.target.files[0]);
+  };
+
   return (
     <div className="signup-form-modal">
       <h1>Sign Up</h1>
@@ -67,15 +85,16 @@ function SignupFormModal() {
         <label className="file-inputs-container">
           <h4
             htmlFor="post-image-input"
-            className="file-input-labels clickable"
+            className="file-input-labels-signup clickable"
           >
             Upload a photo
+            <img src={imageURL} alt="Flight" className="thumbnails-noname" />
           </h4>
           <input
             type="file"
             accept="image/png, image/jpeg, image/jpg"
             id="post-image-input"
-            onChange={(e) => setPhoto(e.target.files[0])}
+            onChange={fileWrap}
             className="form-input"
           />
         </label>
