@@ -21,6 +21,14 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.flight-log {
+  font-style: italic;
+  color: #444;
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Hides overflowing content */
+  text-overflow: ellipsis; /* Displays ellipses ('...') for overflow text */
+}
+
 .flight-title {
   font-size: 24px;
   margin-bottom: 10px;

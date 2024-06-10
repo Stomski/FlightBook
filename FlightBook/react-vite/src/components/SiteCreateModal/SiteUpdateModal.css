@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 4px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -14,7 +14,7 @@
 }
 
 .site-update-modal h1 {
-  margin-bottom: 20px;
+  margin-bottom: 4px;
   font-size: 24px;
   text-align: center;
 }
@@ -30,37 +30,44 @@
 .site-update-modal label {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 3px;
   font-size: 14px;
   color: #333;
 }
 
 .site-update-modal input {
-  padding: 10px;
-  margin-top: 5px;
+  padding: 2px;
+  margin-top: 1px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
 }
 
+.text-area {
+  resize: none;
+  height: 40px; /* Set the height to fit two lines */
+  max-height: 40px; /* Ensure the height doesn't exceed this value */
+  overflow-y: auto; /* Allow vertical scrolling */
+}
+
 /* Style the error messages */
-.site-update-modal p {
-  margin-top: 5px;
-  margin-bottom: 10px;
+.site-update-modal .form-errors {
+  margin-top: 1px;
+  margin-bottom: 2px;
   font-size: 12px;
   color: red;
 }
 
 /* Style the submit button */
 .site-update-modal button {
-  padding: 10px 15px;
+  padding: 2px 3px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 2px;
 }
 
 .site-update-modal button:hover {

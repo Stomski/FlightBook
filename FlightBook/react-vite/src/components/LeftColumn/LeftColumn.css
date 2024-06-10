@@ -17,9 +17,10 @@
   background-color: rgba(93, 174, 255, 0.37); /* Just for demonstration */
 
   padding: 10px;
-  padding-left: 15px;
-  padding-top: 20px;
+  padding-left: 10px;
+  padding-top: 10px;
   position: relative;
+  overflow-y: scroll;
 }
 
 .left-nav-tree-div {

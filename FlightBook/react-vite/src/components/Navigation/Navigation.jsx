@@ -48,7 +48,7 @@ function Navigation() {
         {!sessionUser && (
           <div className=" user-button" onClick={demoUser}>
             <h3 onClick={demoUser} className="demo-user, clickable">
-              demo user
+              Demo User
             </h3>
           </div>
         )}

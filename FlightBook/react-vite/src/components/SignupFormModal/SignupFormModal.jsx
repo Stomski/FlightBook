@@ -14,10 +14,14 @@ function SignupFormModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageURL, setImageURL] = useState("../../../SMALLLOGO.png");
+
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const formData = new FormData();
     if (photo !== "") {
       formData.append("user_photo", photo);
@@ -29,38 +33,77 @@ function SignupFormModal() {
     formData.append("last_name", lastName);
 
     if (password !== confirmPassword) {
+      setIsSubmitting(false);
+
       return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
+        confirmPassword: "Passwords do not match",
       });
     }
 
     const serverResponse = await dispatch(thunkSignup(formData));
 
     if (serverResponse) {
+      setIsSubmitting(false);
+
       return setErrors(serverResponse);
     } else {
+      setIsSubmitting(false);
+
       closeModal();
     }
+  };
+
+  const fileWrap = (e) => {
+    e.stopPropagation();
+
+    const tempFile = e.target.files[0];
+
+    // Check for max image size of 5Mb
+    if (tempFile.size > 5000000) {
+      setErrors({ server: "max file size exceeded" }); // "Selected image exceeds the maximum file size of 5Mb"
+      return;
+    }
+
+    const newImageURL = URL.createObjectURL(tempFile); // Generate a local URL to render the image file inside of the <img> tag.
+    setImageURL(newImageURL);
+
+    setSitePhoto(e.target.files[0]);
   };
 
   return (
     <div className="signup-form-modal">
       <h1>Sign Up</h1>
-      {errors.server && <p className="form-errors">{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <label>
+        {/* <label>
           Upload a Profile Image
           <input
             type="file"
-            accept="image/*"
+            accept="image/png, image/jpeg, image/jpg"
             onChange={(e) => setPhoto(e.target.files[0])}
           />
+        </label> */}
+        <label className="file-inputs-container">
+          <h4
+            htmlFor="post-image-input"
+            className="file-input-labels-signup clickable"
+          >
+            Upload a photo
+            <img
+              src={imageURL}
+              alt="Flight"
+              className="thumbnails-noname-signup"
+            />
+          </h4>
+          <input
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            id="post-image-input"
+            onChange={fileWrap}
+            className="form-input"
+          />
         </label>
-        <div className="form-errors">
-          {errors.photo}
-          {errors.server}
-        </div>
+
+        <div className="form-errors">{errors.photo || errors.server || ""}</div>
 
         <label>
           Email
@@ -134,7 +177,14 @@ function SignupFormModal() {
         </label>
         <div className="form-errors">{errors.confirmPassword}</div>
 
-        <button type="submit">Sign Up</button>
+        <div
+          className={`submit-button clickable ${
+            isSubmitting ? "submitting" : ""
+          }`}
+          onClick={handleSubmit}
+        >
+          {isSubmitting ? "Submitting..." : "Sign-up!"}
+        </div>
       </form>
     </div>
   );

@@ -38,10 +38,20 @@ function SiteCreateModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
     setErrors({});
     setIsSubmitting(true);
 
     const formData = new FormData();
+    if (sitePhoto === "") {
+      setIsSubmitting(false);
+
+      return setErrors({ site_photo: "Site Photos ARE required :)" });
+    }
+
     if (sitePhoto !== "") {
       formData.append("site_photo", sitePhoto);
     }
@@ -64,10 +74,11 @@ function SiteCreateModal() {
   };
 
   return (
-    <div className="signup-form-modal">
+    <div className="site-create-modal">
       <h1>Create Site</h1>
       <p>(map input in development :)</p>
-      {errors.server && <p className="form-errors">{errors.server}</p>}
+      {/* {errors.server && <p className="form-errors">{errors.server}</p>} */}
+      <div className="form-errors">{errors.server}</div>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Site Name
@@ -114,6 +125,7 @@ function SiteCreateModal() {
           Site Intro
           <textarea
             value={intro}
+            className="text-area"
             onChange={(e) => setIntro(e.target.value)}
             required
           />
@@ -123,7 +135,7 @@ function SiteCreateModal() {
         <label className="form-label">
           Upload Site Photo
           <span id="site-label-info">
-            a site photo is required, a good one shows a launch in progress!
+            A site photo is required & a good one shows a launch in progress!
           </span>
           <div className="file-inputs-container">
             <img src={imageURL} alt="Flight" className="thumbnails-noname" />

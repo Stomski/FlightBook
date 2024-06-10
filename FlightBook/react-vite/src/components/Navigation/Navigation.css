@@ -81,6 +81,22 @@
   padding: 10px; /* Add padding */
   width: 16%;
   min-width: 90px;
+  overflow: hidden;
+}
+
+.profile-dropdown li {
+  border: 1px solid black; /* Add border */
+  padding: 2px;
+  margin: 3px;
+  border-radius: 4px;
+  background-color: aliceblue;
+}
+.profile-dropdown li:hover {
+  border: 1px solid black; /* Add border */
+  padding: 2px;
+  color: white;
+  background-color: rgb(147, 192, 231);
+  cursor: pointer;
 }
 
 .session-button {
@@ -97,8 +113,8 @@
 }
 
 .user-button {
-  margin-top: 60px;
-  margin-right: 7px;
+  margin-top: 20px;
+  margin-right: 9px;
   border: 1px solid #ccc; /* Add a light border */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1); /* Add drop shadow */
@@ -114,14 +130,24 @@
 }
 
 .user-button:hover {
-  background-color: #e0e0e0; /* Slightly darker background on hover */
+  background-color: rgb(147, 192, 231);
 }
 
 .session-button:hover {
-  background-color: #e0e0e0; /* Slightly darker background on hover */
+  background-color: rgb(147, 192, 231);
 }
 
 .session-button-title {
   font-size: 0.9em; /* Decrease font size for better readability */
   color: #333; /* Dark text color */
+}
+.logout-button {
+  border: 1px solid black; /* Add border */
+  margin-top: 4px;
+  padding: 3px;
+  max-width: fit-content;
+  background-color: rgb(13, 68, 186);
+  border-radius: 4px; /* Rounded corners */
+  color: white;
+  margin-left: 3px;
 }

@@ -19,6 +19,16 @@
   transition: box-shadow 0.3s ease-in-out;
 }
 
+.flight-log {
+  font-style: italic;
+  color: #444;
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Hides overflowing content */
+  text-overflow: ellipsis; /* Displays ellipses ('...') for overflow text */
+}
+p {
+  text-overflow: ellipsis; /* Displays ellipses ('...') for overflow text */
+}
 .flight-card-div:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }

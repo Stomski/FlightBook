@@ -53,8 +53,10 @@ export default function FeedFlightsByUser() {
                 flight.start_time
               ).toLocaleDateString()}`}</p>
               <p>{`Equipment: ${flight.equipment}`}</p>
-              <p>{`Log: ${flight.log}`}</p>
-              <p>{`Weather: ${flight.weather ? flight.weather : "N/A"}`}</p>
+              <p className="flight-log">{`Log: ${flight.log}`}</p>
+              <p>{`Weather: ${
+                flight.weather ? flight.weather : "COMING SOON"
+              }`}</p>
             </div>
             <div className="clickable modal-button">
               <OpenModalMenuItem

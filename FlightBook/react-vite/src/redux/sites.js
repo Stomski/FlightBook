@@ -104,6 +104,12 @@ export const updateSiteThunk = (siteId, site) => async (dispatch) => {
     );
 
     const errorMessages = await response.json();
+    console.log(
+      "%c errorMessages log>",
+      "color:red; font-size: 26px",
+      errorMessages
+    );
+
     return errorMessages;
   } else {
     console.log(
