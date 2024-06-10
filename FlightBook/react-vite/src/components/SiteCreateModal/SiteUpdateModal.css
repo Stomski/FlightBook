@@ -43,6 +43,13 @@
   font-size: 14px;
 }
 
+.text-area {
+  resize: none;
+  height: 40px; /* Set the height to fit two lines */
+  max-height: 40px; /* Ensure the height doesn't exceed this value */
+  overflow-y: auto; /* Allow vertical scrolling */
+}
+
 /* Style the error messages */
 .site-update-modal .form-errors {
   margin-top: 1px;

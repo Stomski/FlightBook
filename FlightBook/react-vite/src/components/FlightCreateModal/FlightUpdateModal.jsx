@@ -22,6 +22,7 @@ function FlightUpdateModal({ flight }) {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const fileWrap = (e) => {
     e.stopPropagation();
@@ -30,7 +31,10 @@ function FlightUpdateModal({ flight }) {
 
     // Check for max image size of 5Mb
     if (tempFile.size > 5000000) {
-      setFilename(maxFileError); // "Selected image exceeds the maximum file size of 5Mb"
+      setErrors({
+        ...errors,
+        flightPhoto: "Selected image exceeds the maximum file size of 5Mb",
+      });
       return;
     }
 
@@ -41,6 +45,7 @@ function FlightUpdateModal({ flight }) {
   };
 
   const handleSubmit = async (e) => {
+    setIsSubmitting(true);
     e.preventDefault();
     const formData = new FormData();
     if (flightPhoto !== "") {
@@ -59,20 +64,18 @@ function FlightUpdateModal({ flight }) {
     );
 
     if (serverResponse) {
+      setIsSubmitting(false);
       setErrors(serverResponse);
     } else {
       closeModal();
+      setIsSubmitting(false);
     }
   };
-
-  if (imageURL === "") {
-    setImageURL("../../../SMALLLOGO.png");
-  }
 
   return (
     <div className="flight-update-modal">
       <h1>Update Flight</h1>
-      {errors.server && <p className="error-message">{errors.server}</p>}
+
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <h2 className="site-name">{flight.site_name}</h2>
 
@@ -87,7 +90,8 @@ function FlightUpdateModal({ flight }) {
             className="form-input"
           />
         </label>
-        {errors.length && <p className="error-message">{errors.length}</p>}
+        <div className="form-errors">{errors.length}</div>
+
         <label htmlFor="start-time" className="form-label">
           Start Time
           <input
@@ -99,9 +103,8 @@ function FlightUpdateModal({ flight }) {
             className="form-input"
           />
         </label>
-        {errors.startTime && (
-          <p className="error-message">{errors.startTime}</p>
-        )}
+        <div className="form-errors">{errors.startTime}</div>
+
         <label htmlFor="equipment" className="form-label">
           Equipment
           <input
@@ -112,9 +115,8 @@ function FlightUpdateModal({ flight }) {
             className="form-input"
           />
         </label>
-        {errors.equipment && (
-          <p className="error-message">{errors.equipment}</p>
-        )}
+        <div className="form-errors">{errors.equipment}</div>
+
         <label htmlFor="log" className="form-label">
           Log
           <textarea
@@ -122,18 +124,16 @@ function FlightUpdateModal({ flight }) {
             value={log}
             onChange={(e) => setLog(e.target.value)}
             required
-            className="form-textarea"
+            className="text-area"
           />
         </label>
-        {errors.log && <p className="error-message">{errors.log}</p>}
+        <div className="form-errors">{errors.log}</div>
 
         <label className="form-label">
           Upload Flight Photo
           <div className="file-inputs-container">
             <img src={imageURL} alt="Flight" className="thumbnails-noname" />
-            <a htmlFor="post-image-input" className="file-input-labels">
-              Upload a photo
-            </a>
+            <h4 className="file-input-labels clickable">Upload a photo</h4>
             <input
               type="file"
               accept="image/png, image/jpeg, image/jpg"
@@ -143,12 +143,19 @@ function FlightUpdateModal({ flight }) {
             />
           </div>
         </label>
-        {errors.flightPhoto && (
-          <p className="error-message">{errors.flightPhoto}</p>
-        )}
-        <button type="submit" className="submit-button">
-          Update Flight
-        </button>
+        <div className="form-errors">
+          {errors.flightPhoto}
+          {errors.server}
+        </div>
+
+        <div
+          className={`submit-button clickable ${
+            isSubmitting ? "submitting" : ""
+          }`}
+          onClick={handleSubmit}
+        >
+          {isSubmitting ? "Submitting..." : "Update Flight"}
+        </div>
       </form>
     </div>
   );

@@ -113,6 +113,7 @@ function SiteUpdateModal({ site }) {
           Site Intro
           <textarea
             value={intro}
+            className="text-area"
             onChange={(e) => setIntro(e.target.value)}
             required
           />
