@@ -1,1 +1,22 @@
-/* TODO: Add sitewide styles */
+/* Ensure the html and body take up the full height of the viewport */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Apply sitewide styles to the root div */
+.rootdiv {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 16% 84%;
+
+  background-color: rgba(19, 82, 190, 0.847);
+}
+#root {
+  height: 100%;
+}

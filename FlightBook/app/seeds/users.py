@@ -10,35 +10,40 @@ def seed_users():
             first_name='Demo',
             last_name='User',
             email='demo@aa.io',
-            password='password'
+            password='password',
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1717995970/71623398387__0CA75F1E-C4FB-4A7E-AAC7-F147A3A8C9D2_copy_idvyc2.jpg'
         ),
         User(
             username='marnie',
             first_name='Marnie',
             last_name='Smith',
             email='marnie@aa.io',
-            password='password'
+            password='password',
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1713558531/123photo-86634_xf73wh.jpg'
         ),
         User(
             username='bobby',
             first_name='Bobby',
             last_name='Brown',
             email='bobby@aa.io',
-            password='password'
+            password='password',
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1717995970/71623398387__0CA75F1E-C4FB-4A7E-AAC7-F147A3A8C9D2_copy_idvyc2.jpg'
         ),
         User(
             username='alice',
             first_name='Alice',
             last_name='Johnson',
             email='alice@aa.io',
-            password='password'
+                 password='password',
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1713558496/samples/chair-and-coffee-table.jpg'
         ),
         User(
             username='john',
             first_name='John',
             last_name='Doe',
             email='john@aa.io',
-            password='password'
+            password='password',
+            user_photo = 'https://res.cloudinary.com/dvnr49gnx/image/upload/v1713558495/samples/man-portrait.jpg'
         ),
     ]
 

@@ -1,3 +1,153 @@
-.profile-dropdown {
+/* Navbar container styled as a grid */
+.navbardiv {
+  display: grid;
+  grid-template-columns: 7fr 5fr 2fr;
+  align-items: center; /* Vertically center the content */
+  height: 100%;
+  background-image: url("../../../public/wideMountains.png"); /* Add the background image */
+  background-size: 80% 70%; /* Stretch the image to 100% width and 70% height */
+  background-position: calc(170px + 0%) calc(70% + 25px);
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  box-shadow: 5px 4px 7px rgba(0, 0, 0, 0.758); /* Add box shadow */
+}
+
+.navmaindiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.logo-container {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 4px;
+  height: 100px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.logoimg {
+  height: 100px;
+  opacity: 100%;
+
+  /* display: none; */
+}
+.logo-container::after {
+  content: "";
   position: absolute;
+  top: 35px; /* Moved down by 10 pixels */
+  left: -100px; /* Moved left by 20 pixels */
+  right: 0;
+  bottom: -5px;
+  background: url("../../../public/PARAGLIDELOGO.png") no-repeat center;
+  background-size: contain;
+  filter: drop-shadow(0 6px 2px rgba(10, 96, 255, 0.758));
+  pointer-events: none;
+  z-index: -1; /* Ensure the shadow is behind the image */
+}
+
+.usermenudiv {
+  display: grid; /* Use grid layout */
+  grid-template-rows: 70% 30%; /* 70% top, 30% bottom */
+  height: 100%;
+}
+.user-photo {
+  margin-top: 6px;
+  height: 70px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+.prof-image {
+  box-shadow: 5px 4px 7px rgba(0, 0, 0, 0.758); /* Add box shadow */
+}
+
+.user-pulldown-menu {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+.profile-dropdown {
+  position: absolute; /* Position the dropdown absolutely */
+  top: 11%; /* Align the top of the dropdown with the bottom of the button */
+  right: 0%;
+  list-style: none;
+  z-index: 1; /* Ensure the dropdown appears above other content */
+  background-color: white; /* Add background color */
+  border: 1px solid black; /* Add border */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 10px; /* Add padding */
+  width: 16%;
+  min-width: 90px;
+  overflow: hidden;
+}
+
+.profile-dropdown li {
+  border: 1px solid black; /* Add border */
+  padding: 2px;
+  margin: 3px;
+  border-radius: 4px;
+  background-color: aliceblue;
+}
+.profile-dropdown li:hover {
+  border: 1px solid black; /* Add border */
+  padding: 2px;
+  color: white;
+  background-color: rgb(147, 192, 231);
+  cursor: pointer;
+}
+
+.session-button {
+  padding: 3px 7px; /* Add padding for better spacing */
+  border: 1px solid #ccc; /* Add a light border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1); /* Add drop shadow */
+  background-color: #f9f9f9; /* Light background color */
+  cursor: pointer; /* Pointer cursor on hover */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.user-button {
+  margin-top: 20px;
+  margin-right: 9px;
+  border: 1px solid #ccc; /* Add a light border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1); /* Add drop shadow */
+  background-color: #f9f9f9; /* Light background color */
+  cursor: pointer; /* Pointer cursor on hover */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  color: #333; /* Text color */
+  text-decoration: none; /* Remove underline from text */
+  height: 20px;
+}
+
+.user-button:hover {
+  background-color: rgb(147, 192, 231);
+}
+
+.session-button:hover {
+  background-color: rgb(147, 192, 231);
+}
+
+.session-button-title {
+  font-size: 0.9em; /* Decrease font size for better readability */
+  color: #333; /* Dark text color */
+}
+.logout-button {
+  border: 1px solid black; /* Add border */
+  margin-top: 4px;
+  padding: 3px;
+  max-width: fit-content;
+  background-color: rgb(13, 68, 186);
+  border-radius: 4px; /* Rounded corners */
+  color: white;
+  margin-left: 3px;
 }

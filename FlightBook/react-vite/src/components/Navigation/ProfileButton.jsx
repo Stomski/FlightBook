@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle } from "react-icons/fa";
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { setFeedComponent } from "../../redux/view";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -36,24 +37,28 @@ function ProfileButton() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
+    dispatch(setFeedComponent("FeedAllSites"));
     closeMenu();
   };
 
   return (
-    <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
-      </button>
+    <div className="user-pulldown-menu">
+      <div onClick={toggleMenu} className="session-button">
+        <h3 className="session-button-title">User Tools</h3>
+      </div>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <ul
+          className={`profile-dropdown ${showMenu ? "show" : ""}`}
+          ref={ulRef}
+        >
           {user ? (
-            <>
+            <div className="user-pullout">
               <li>{user.username}</li>
               <li>{user.email}</li>
-              <li>
-                <button onClick={logout}>Log Out</button>
-              </li>
-            </>
+              <div className="logout-button clickable" onClick={logout}>
+                logout
+              </div>
+            </div>
           ) : (
             <>
               <OpenModalMenuItem
@@ -70,7 +75,7 @@ function ProfileButton() {
           )}
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

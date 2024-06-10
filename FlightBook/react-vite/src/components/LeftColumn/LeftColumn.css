@@ -1,0 +1,50 @@
+.clickable {
+  cursor: pointer;
+  transition: text-shadow 0.3s ease;
+}
+
+.clickable:hover {
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.868); /* Adjust the values as needed */
+}
+
+.leftcolumndiv {
+  display: grid;
+  grid-template-rows: 32% 1fr; /* 32% for top div, remaining for bottom div */
+  gap: 6px; /* 6px gap between rows */
+}
+
+.left-page-info-div {
+  background-color: rgba(93, 174, 255, 0.37); /* Just for demonstration */
+
+  padding: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.left-nav-tree-div {
+  background-color: rgba(19, 82, 190, 0.847); /* Red background for top div */
+  border: 2px solid black; /* Black border for bottom div */
+  padding-left: 4px;
+  border-top-right-radius: 10px; /* Add rounded edges */
+  border-bottom: none; /* Hide the bottom border */
+  border-left: none; /* Hide the left border */
+  box-shadow: 0 1px 10px 5px rgba(0, 0, 0, 0.317); /* Add box shadow */
+}
+
+.navigation-title {
+  padding-bottom: 10px;
+}
+
+.left-nav-tree-title {
+  padding-top: 6px;
+  font-size: 1.5em; /* Increase the font size */
+  font-weight: bold; /* Make the text bold */
+  padding-left: 4px;
+}
+
+.tree-title {
+  padding-top: 10px;
+  padding-left: 4px;
+}

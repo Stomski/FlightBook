@@ -18,7 +18,9 @@ class Site(db.Model):
     altitude =  db.Column(db.Integer, nullable=False)
     intro = db.Column(db.String(1029), nullable = False)
     official = db.Column(db.Boolean, nullable= False)
+
     license_required=db.Column(db.Integer)
+    site_photo = db.Column(db.String(264))
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
@@ -26,3 +28,19 @@ class Site(db.Model):
 
     creator = db.relationship('User', back_populates = "sites")
     reviews = db.relationship('Review', back_populates = "site", cascade="all, delete-orphan")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "creator_id": self.creator_id,
+            "name": self.name,
+            "lat": self.lat,
+            "lon": self.lon,
+            "altitude": self.altitude,
+            "intro": self.intro,
+            "official": self.official,
+            "license_required": self.license_required,
+            "site_photo": self.site_photo,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }

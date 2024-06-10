@@ -1,0 +1,42 @@
+.flights-by-user-feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-height: 100%;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.flight-card-div {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.flight-log {
+  font-style: italic;
+  color: #444;
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Hides overflowing content */
+  text-overflow: ellipsis; /* Displays ellipses ('...') for overflow text */
+}
+p {
+  text-overflow: ellipsis; /* Displays ellipses ('...') for overflow text */
+}
+.flight-card-div:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.flight-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.flight-photo {
+  max-width: 80%;
+}

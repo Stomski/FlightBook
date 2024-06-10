@@ -1,0 +1,5 @@
+.FeedDiv {
+  background-color: rgba(93, 174, 255, 0.37); /* Just for demonstration */
+  max-height: 100%;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
