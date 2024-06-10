@@ -88,7 +88,11 @@ function SignupFormModal() {
             className="file-input-labels-signup clickable"
           >
             Upload a photo
-            <img src={imageURL} alt="Flight" className="thumbnails-noname" />
+            <img
+              src={imageURL}
+              alt="Flight"
+              className="thumbnails-noname-signup"
+            />
           </h4>
           <input
             type="file"
