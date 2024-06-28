@@ -15,10 +15,10 @@ export default function FeedSiteInfo() {
   // useEffect(() => {
   //   dispatch();
   // }, [view, sessionUser]);
-  console.log(
-    site,
-    "SITE@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-  );
+  // console.log(
+  //   site,
+  //   "SITE@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+  // );
   return (
     <section className="site-info-feed">
       {site ? (

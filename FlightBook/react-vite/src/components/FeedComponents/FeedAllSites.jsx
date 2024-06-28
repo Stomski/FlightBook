@@ -11,21 +11,21 @@ export default function FeedAllSites() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
-  console.log(Object.entries(sites), "OBJECT>ENTRIES OF SITES");
+  // console.log(Object.entries(sites), "OBJECT>ENTRIES OF SITES");
   const allSites = {};
   Object.entries(sites).forEach((set) => {
     if (!isNaN(parseFloat(set[0]))) {
       allSites[set[1]["id"]] = set[1];
     }
   });
-  console.log(allSites);
+  // console.log(allSites);
 
   useEffect(() => {
     dispatch(getAllSitesThunk());
   }, []);
 
   const handleClick = (siteId) => {
-    console.log("HANDLE CLICK CALLED IN THE FEED ALL SITES COMPONENT", siteId);
+    // console.log("HANDLE CLICK CALLED IN THE FEED ALL SITES COMPONENT", siteId);
     dispatch(setFeedComponent("FeedSiteInfo"));
     dispatch(getSiteDetailsThunk(siteId));
   };

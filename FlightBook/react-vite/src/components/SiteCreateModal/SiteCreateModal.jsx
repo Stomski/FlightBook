@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createSiteThunk } from "../../redux/sites"; // You'll need to create this thunk
 import "./SiteCreateModal.css";
+import {
+  APIProvider,
+  Map,
+  AdvancedMarker,
+  Pin,
+  InfoWindow,
+} from "@vis.gl/react-google-maps";
 
 function SiteCreateModal() {
   const dispatch = useDispatch();
@@ -76,9 +83,23 @@ function SiteCreateModal() {
   return (
     <div className="site-create-modal">
       <h1>Create Site</h1>
-      <p>(map input in development :)</p>
+
       {/* {errors.server && <p className="form-errors">{errors.server}</p>} */}
       <div className="form-errors">{errors.server}</div>
+      <div style={{ height: "200px", width: "200px" }}>
+        <Map
+          defaultZoom={13}
+          defaultCenter={{ lat: -33.860664, lng: 151.208138 }}
+          onCameraChanged={(ev) =>
+            console.log(
+              "camera changed:",
+              ev.detail.center,
+              "zoom:",
+              ev.detail.zoom
+            )
+          }
+        ></Map>
+      </div>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Site Name
@@ -91,7 +112,7 @@ function SiteCreateModal() {
         </label>
         <div className="form-errors">{errors.name}</div>
 
-        <label>
+        {/* <label>
           Latitude
           <input
             type="number"
@@ -109,7 +130,7 @@ function SiteCreateModal() {
             onChange={(e) => setLon(e.target.value)}
           />
         </label>
-        <div className="form-errors">{errors.lon}</div>
+        <div className="form-errors">{errors.lon}</div> */}
 
         <label>
           Altitude

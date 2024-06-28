@@ -22,12 +22,12 @@ export default function FeedAllFlights() {
   // });
 
   const handleClick = (flightId) => {
-    console.log("HANDLE CLICK CALLED IN THE FEED ALL FLIGHTS COMPONENT");
+    // console.log("HANDLE CLICK CALLED IN THE FEED ALL FLIGHTS COMPONENT");
     dispatch(setFeedComponent("FeedFlightInfo"));
     // right here i need to dispatch flight detail view thunk with a flight ID
     dispatch(flightDetailViewThunk(flightId));
 
-    console.log("%c flightId log>", "color:red; font-size: 26px", flightId);
+    // console.log("%c flightId log>", "color:red; font-size: 26px", flightId);
   };
 
   return (

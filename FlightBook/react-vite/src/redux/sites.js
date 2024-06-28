@@ -36,40 +36,40 @@ const getAllSites = (sites) => ({
 });
 
 export const getSiteDetailsThunk = (siteId) => async (dispatch) => {
-  console.log(
-    "I THINK THIS IS GETTING CALLED< GET SITRE DETAILS > BEFORE FETCH"
-  );
+  // console.log(
+  //   "I THINK THIS IS GETTING CALLED< GET SITRE DETAILS > BEFORE FETCH"
+  // );
 
   const response = await fetch(`/api/sites/details/${siteId}`);
   if (response.ok) {
-    console.log(
-      "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK > RESPONSE OK"
-    );
+    // console.log(
+    //   "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK > RESPONSE OK"
+    // );
     const data = await response.json();
     dispatch(getSiteDetails(data));
   } else if (response.status < 500) {
-    console.log(
-      "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK > err less 500"
-    );
+    // console.log(
+    //   "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK > err less 500"
+    // );
     const errorMessages = await response.json();
     return errorMessages;
   } else {
-    console.log(
-      "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK greater 500"
-    );
+    // console.log(
+    //   "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK greater 500"
+    // );
     return { server: "Something went wrong. Please try again" };
   }
 };
 
 export const deleteSiteThunk = (siteId) => async (dispatch) => {
-  console.log(
-    " THIS IS GETTING CALLED< Delete DELETE SITES THUNK > BEFORE FETCH"
-  );
+  // console.log(
+  //   " THIS IS GETTING CALLED< Delete DELETE SITES THUNK > BEFORE FETCH"
+  // );
 
   const response = await fetch(`/api/sites/delete/${siteId}`);
 
   if (response.ok) {
-    console.log("I THINK THIS IS GETTING CALLED< DELETE > RESPONSE OK");
+    // console.log("I THINK THIS IS GETTING CALLED< DELETE > RESPONSE OK");
     const data = await response.json();
     dispatch(deleteSite(data));
   } else if (response.status < 500) {
@@ -81,52 +81,52 @@ export const deleteSiteThunk = (siteId) => async (dispatch) => {
 };
 
 export const updateSiteThunk = (siteId, site) => async (dispatch) => {
-  console.log(" THIS IS GETTING CALLED< UPDATE SITES THUNK > BEFORE FETCH");
+  // console.log(" THIS IS GETTING CALLED< UPDATE SITES THUNK > BEFORE FETCH");
   const response = await fetch(`/api/sites/update/${siteId}`, {
     method: "POST",
     body: site,
   });
   if (response.ok) {
-    console.log(
-      "RESPONSE OK IN  update SITETHUNK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    );
+    // console.log(
+    //   "RESPONSE OK IN  update SITETHUNK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    // );
     const data = await response.json();
 
-    console.log(
-      "%c data log in site thunjk response>",
-      "color:blue; font-size: 26px",
-      data
-    );
+    // console.log(
+    //   "%c data log in site thunjk response>",
+    //   "color:blue; font-size: 26px",
+    //   data
+    // );
     dispatch(updateSite(data));
   } else if (response.status < 500) {
-    console.log(
-      "RESPPONSE NOT OK LESS THAN 500 UPDATE SITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
-    );
+    // console.log(
+    //   "RESPPONSE NOT OK LESS THAN 500 UPDATE SITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
+    // );
 
     const errorMessages = await response.json();
-    console.log(
-      "%c errorMessages log>",
-      "color:red; font-size: 26px",
-      errorMessages
-    );
+    // console.log(
+    //   "%c errorMessages log>",
+    //   "color:red; font-size: 26px",
+    //   errorMessages
+    // );
 
     return errorMessages;
   } else {
-    console.log(
-      "RESPPONSE BAD GREAATER THAN 500  vUPDATE SITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
-    );
+    // console.log(
+    //   "RESPPONSE BAD GREAATER THAN 500  vUPDATE SITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
+    // );
     return { server: "Something went wrong. Please try again" };
   }
 };
 
 export const getMySitesThunk = (userId) => async (dispatch) => {
-  console.log(" THIS IS GETTING CALLED< GET MY SITES THUNK > BEFORE FETCH");
+  // console.log(" THIS IS GETTING CALLED< GET MY SITES THUNK > BEFORE FETCH");
 
   const response = await fetch(`/api/sites/by-user/${userId}`);
   if (response.ok) {
-    console.log(
-      "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > RESPONSE OK"
-    );
+    // console.log(
+    //   "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > RESPONSE OK"
+    // );
     const data = await response.json();
     dispatch(getAllSites(data));
   } else if (response.status < 500) {
@@ -138,15 +138,15 @@ export const getMySitesThunk = (userId) => async (dispatch) => {
 };
 
 export const getAllSitesThunk = () => async (dispatch) => {
-  console.log(
-    "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > BEFORE FETCH"
-  );
+  // console.log(
+  //   "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > BEFORE FETCH"
+  // );
 
   const response = await fetch("/api/sites/all");
   if (response.ok) {
-    console.log(
-      "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > RESPONSE OK"
-    );
+    // console.log(
+    //   "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > RESPONSE OK"
+    // );
     const data = await response.json();
     dispatch(getAllSites(data));
   } else if (response.status < 500) {
@@ -163,22 +163,22 @@ export const createSiteThunk = (site) => async (dispatch) => {
     body: site,
   });
   if (response.ok) {
-    console.log(
-      "RESPONSE OK IN  CREATE SITETHUNK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    );
+    // console.log(
+    //   "RESPONSE OK IN  CREATE SITETHUNK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    // );
     const data = await response.json();
     dispatch(createSite(data));
   } else if (response.status < 500) {
-    console.log(
-      "RESPPONSE NOT OK LESS THAN 500 CREATSITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
-    );
+    // console.log(
+    //   "RESPPONSE NOT OK LESS THAN 500 CREATSITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
+    // );
 
     const errorMessages = await response.json();
     return errorMessages;
   } else {
-    console.log(
-      "RESPPONSE BAD GREAATER THAN 500  vCREATSITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
-    );
+    // console.log(
+    //   "RESPPONSE BAD GREAATER THAN 500  vCREATSITE THUNK ?????????????????????????????????????????????????????????????????????????????????????"
+    // );
     return { server: "Something went wrong. Please try again" };
   }
 };

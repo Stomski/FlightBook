@@ -19,14 +19,14 @@ export default function FeedMySites() {
       mySites[set[1]["id"]] = set[1];
     }
   });
-  console.log(mySites);
+  // console.log(mySites);
 
   useEffect(() => {
     dispatch(getMySitesThunk(sessionUser.id));
   }, [view]);
 
   const handleClick = (siteId) => {
-    console.log("HANDLE CLICK CALLED IN THE FEED ALL SITES COMPONENT", siteId);
+    // console.log("HANDLE CLICK CALLED IN THE FEED ALL SITES COMPONENT", siteId);
     dispatch(setFeedComponent("FeedSiteInfo"));
     dispatch(getSiteDetailsThunk(siteId));
   };

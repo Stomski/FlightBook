@@ -92,10 +92,10 @@ function FlightCreateModal() {
     value: site,
     label: site.name,
   }));
-  console.log(
-    "ERRORS BEFORE RENDE#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-    errors
-  );
+  // console.log(
+  //   "ERRORS BEFORE RENDE#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+  //   errors
+  // );
 
   return (
     <div className="flight-create-modal">
