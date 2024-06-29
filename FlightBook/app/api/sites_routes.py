@@ -132,7 +132,7 @@ def createSite():
     """
     This route creates a new site in the database from the form data in the SiteCreateForm
     """
-    print("CREATE SITE THUNK CALLED $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print("CREATE SITE route CALLED $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     form = SiteCreateForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print(form.data, "FORM DATA IN CREATE SITE THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")

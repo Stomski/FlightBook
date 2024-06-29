@@ -14,7 +14,7 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -134,4 +134,9 @@
   margin-top: 0px; /* Reduced margin */
   display: flex;
   justify-content: center;
+}
+
+.photo-and-map-div {
+  display: flex;
+  margin-bottom: 8px;
 }
