@@ -84,16 +84,61 @@ function SiteCreateModal() {
     }
   };
 
-  const handleMapClick = (e) => {
+  const handleMapClick = async (e) => {
     console.log(
       e.detail.latLng,
-      "HANDLE MAP CLICK CALLED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      "HANDLE MAP CLICK CALLED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+      "DIRECTLY NEXT IS MY FETCH CALL"
     );
 
-    setLat(e.detail.latLng.lat);
-    setLon(e.detail.latLng.lng);
-  };
+    const latitude = e.detail.latLng.lat;
+    const longitude = e.detail.latLng.lng;
 
+    setLat(latitude);
+    setLon(longitude);
+
+    /*
+    so i need to hit a backend route, which will then return my elevation info
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+    const apiUrl = `https://maps.googleapis.com/maps/api/elevation/json?locations=${latitude},${longitude}&key=${apiKey}`;
+  */
+
+    // const response = await fetch(`/api/sites/elevation}`);
+    // if (response.ok) {
+    //   console.log(
+    //     "RESPONSE OK IN  HANDLE MAP CLICK ROUTE CALL !!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    //   );
+    //   const data = await response.json();
+    //   // dispatch(createSite(data));
+    //   console.log(data, "<<<<<<<<<<<<<<<<<<<<<<data");
+    // } else if (response.status < 500) {
+    //   console.log(
+    //     "RESPPONSE NOT OK LESS THAN 500 HANDLE MAP CLICK ROUTE CALL ?????????????????????????????????????"
+    //   );
+
+    //   const errorMessages = await response.json();
+    //   return errorMessages;
+    // } else {
+    //   console.log(
+    //     "RESPPONSE BAD GREAATER THAN 500  vHANDLE MAP CLICK ROUTE CALL ?????????????????????????????????????"
+    //   );
+    //   return { server: "Something went wrong. Please try again" };
+    // }
+
+    const response = await fetch("/api/sites/elevation");
+    if (response.ok) {
+      // console.log(
+      //   "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > RESPONSE OK"
+      // );
+      const data = await response.json();
+      console.log("DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!", data);
+    } else if (response.status < 500) {
+      const errorMessages = await response.json();
+      return errorMessages;
+    } else {
+      return { server: "Something went wrong. Please try again" };
+    }
+  };
   const location = { lat: lat, lng: lon };
   return (
     <div className="site-create-modal">

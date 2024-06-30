@@ -3,6 +3,7 @@ from flask_login import login_required
 from app.models import Site, db
 from ..forms.create_site import SiteCreateForm
 from ..api.aws_functions import upload_file_to_s3, get_unique_filename, remove_file_from_s3
+import os
 
 
 site_routes = Blueprint('sites', __name__)
@@ -18,6 +19,16 @@ def getSiteDetails(site_id):
     print(site_details.to_dict())
     return site_details.to_dict()
 
+@site_routes.route('/elevation')
+def getSiteElevation():
+    """
+    this route is designed to interact with the google maps elevation api, it gets pinged when we try to create a new marker on the maps
+    """
+    # api_key=os.environ.get("VITE_GOOGLE_MAPS_API_KEY")
+    # print(api_key, "#########################################################################")
+    print("TESTING@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
+    return {"message": "IM ON MY WAY"}
 
 
 
@@ -179,5 +190,5 @@ def createSite():
         db.session.add(site)
         db.session.commit()
         return site.to_dict(), 201
-
+    print(form.errors, "FORM ERRORS@@@@@@@@@@@@@@@@@@@@@@@@@@")
     return form.errors, 400

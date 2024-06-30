@@ -13,8 +13,8 @@ class Site(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete="CASCADE"), nullable=False
     )
     name = db.Column(db.String(200), nullable = False)
-    lat = db.Column(db.Integer, nullable = False)
-    lon = db.Column(db.Integer,nullable = False)
+    lat = db.Column(db.Float, nullable = False)
+    lon = db.Column(db.Float,nullable = False)
     altitude =  db.Column(db.Integer, nullable=False)
     intro = db.Column(db.String(1029), nullable = False)
     official = db.Column(db.Boolean, nullable= False)
