@@ -85,53 +85,24 @@ function SiteCreateModal() {
   };
 
   const handleMapClick = async (e) => {
-    console.log(
-      e.detail.latLng,
-      "HANDLE MAP CLICK CALLED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-      "DIRECTLY NEXT IS MY FETCH CALL"
-    );
-
     const latitude = e.detail.latLng.lat;
     const longitude = e.detail.latLng.lng;
 
     setLat(latitude);
     setLon(longitude);
 
-    /*
-    so i need to hit a backend route, which will then return my elevation info
-    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-    const apiUrl = `https://maps.googleapis.com/maps/api/elevation/json?locations=${latitude},${longitude}&key=${apiKey}`;
-  */
-
-    // const response = await fetch(`/api/sites/elevation}`);
-    // if (response.ok) {
-    //   console.log(
-    //     "RESPONSE OK IN  HANDLE MAP CLICK ROUTE CALL !!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    //   );
-    //   const data = await response.json();
-    //   // dispatch(createSite(data));
-    //   console.log(data, "<<<<<<<<<<<<<<<<<<<<<<data");
-    // } else if (response.status < 500) {
-    //   console.log(
-    //     "RESPPONSE NOT OK LESS THAN 500 HANDLE MAP CLICK ROUTE CALL ?????????????????????????????????????"
-    //   );
-
-    //   const errorMessages = await response.json();
-    //   return errorMessages;
-    // } else {
-    //   console.log(
-    //     "RESPPONSE BAD GREAATER THAN 500  vHANDLE MAP CLICK ROUTE CALL ?????????????????????????????????????"
-    //   );
-    //   return { server: "Something went wrong. Please try again" };
-    // }
-
-    const response = await fetch("/api/sites/elevation");
+    const response = await fetch(
+      `/api/sites/elevation/${latitude}/${longitude}`
+    );
     if (response.ok) {
-      // console.log(
-      //   "I THINK THIS IS GETTING CALLED< GET ALL SITES THUNK > RESPONSE OK"
-      // );
       const data = await response.json();
-      console.log("DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!", data);
+      console.log(
+        "DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!",
+        data.results[0].elevation * 3.3
+      );
+
+      setAltitude(Math.floor(data.results[0].elevation * 3.3));
+      console.log(altitude, "altitude");
     } else if (response.status < 500) {
       const errorMessages = await response.json();
       return errorMessages;
@@ -142,7 +113,7 @@ function SiteCreateModal() {
   const location = { lat: lat, lng: lon };
   return (
     <div className="site-create-modal">
-      <h1>Create Site</h1>
+      <h1>Create Launch Site</h1>
 
       {/* {errors.server && <p className="form-errors">{errors.server}</p>} */}
       <div className="form-errors">{errors.server}</div>
@@ -159,37 +130,7 @@ function SiteCreateModal() {
         <div className="form-errors">{errors.name}</div>
 
         <label>
-          Latitude
-          <input
-            type="number"
-            value={lat}
-            onChange={(e) => setLat(e.target.value)}
-          />
-        </label>
-        <div className="form-errors">{errors.lat}</div>
-
-        <label>
-          Longitude
-          <input
-            type="number"
-            value={lon}
-            onChange={(e) => setLon(e.target.value)}
-          />
-        </label>
-        <div className="form-errors">{errors.lon}</div>
-
-        {/* <label>
-          Altitude
-          <input
-          type="number"
-          value={altitude}
-          onChange={(e) => setAltitude(e.target.value)}
-          />
-          </label>
-          <div className="form-errors">{errors.altitude}</div> */}
-
-        <label>
-          Site Intro
+          Site Intro (tell us about this launch)
           <textarea
             value={intro}
             className="text-area"
@@ -217,7 +158,7 @@ function SiteCreateModal() {
                   htmlFor="post-image-input"
                   className="file-input-labels clickable"
                 >
-                  Upload a photo
+                  Choose photo
                 </h4>
                 <input
                   type="file"
@@ -230,27 +171,60 @@ function SiteCreateModal() {
             </label>
             <div className="form-errors">{errors.site_photo}</div>
           </div>
+          <div className="map-and-info-div">
+            <p className="map-label-p">
+              place a marker on the map to indicate Launch location
+            </p>
+            <div className="site-map-div-container">
+              <Map
+                defaultZoom={13}
+                defaultCenter={{ lat: 40.015, lng: -105.2705 }}
+                mapId={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+                reuseMaps="true"
+                // onCameraChanged={(ev) =>
+                //   console.log(
+                //     "camera changed:",
+                //     ev.detail.center,
+                //     "zoom:",
+                //     ev.detail.zoom
+                //   )
+                // }
+                onClick={handleMapClick}
+              >
+                <AdvancedMarker position={location}>
+                  <Pin background={"purple"} glyphColor={"red"} />
+                </AdvancedMarker>
+              </Map>
+            </div>
+            <div className="site-map-detail-fields">
+              <label>
+                Latitude
+                <input
+                  type="number"
+                  value={lat}
+                  onChange={(e) => setLat(e.target.value)}
+                />
+              </label>
 
-          <div style={{ minHeight: "300px", width: "100%" }}>
-            <Map
-              defaultZoom={13}
-              defaultCenter={{ lat: 40.015, lng: -105.2705 }}
-              mapId={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-              reuseMaps="true"
-              // onCameraChanged={(ev) =>
-              //   console.log(
-              //     "camera changed:",
-              //     ev.detail.center,
-              //     "zoom:",
-              //     ev.detail.zoom
-              //   )
-              // }
-              onClick={handleMapClick}
-            >
-              <AdvancedMarker position={location}>
-                <Pin background={"purple"} glyphColor={"red"} />
-              </AdvancedMarker>
-            </Map>
+              <label>
+                Longitude
+                <input
+                  type="number"
+                  value={lon}
+                  onChange={(e) => setLon(e.target.value)}
+                />
+              </label>
+
+              <label>
+                Altitude
+                <input
+                  type="number"
+                  value={altitude}
+                  onChange={(e) => setAltitude(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className="form-errors">{errors.intro}</div>
           </div>
         </div>
 

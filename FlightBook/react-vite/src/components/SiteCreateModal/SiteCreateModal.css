@@ -91,11 +91,12 @@
 }
 
 .file-inputs-container img.thumbnails-noname {
-  width: 100px;
-  height: 100px;
+  margin-top: 20px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   border-radius: 4px;
-  margin-bottom: 1.25px;
+  margin-bottom: 9px;
 }
 
 .file-inputs-container h4.file-input-labels {
@@ -139,4 +140,17 @@
 .photo-and-map-div {
   display: flex;
   margin-bottom: 8px;
+}
+
+.site-map-detail-fields {
+  background-color: #5fa6f1;
+  display: flex;
+  color: whitesmoke;
+}
+.site-map-div-container {
+  height: 300px;
+  width: 100%;
+}
+.map-label-p {
+  margin-bottom: 3px;
 }
