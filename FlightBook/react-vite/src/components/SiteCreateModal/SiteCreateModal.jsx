@@ -3,12 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createSiteThunk } from "../../redux/sites"; // You'll need to create this thunk
 import "./SiteCreateModal.css";
+import {
+  APIProvider,
+  Map,
+  AdvancedMarker,
+  Pin,
+  InfoWindow,
+} from "@vis.gl/react-google-maps";
 
 function SiteCreateModal() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
-  const [lat, setLat] = useState("");
-  const [lon, setLon] = useState("");
+  const [lat, setLat] = useState(40.015); // Default to Boulder's latitude
+  const [lon, setLon] = useState(-105.2705); // Default to Boulder's longitude
   const [altitude, setAltitude] = useState("");
   const [intro, setIntro] = useState("");
   const [official, setOfficial] = useState(false);
@@ -38,6 +45,10 @@ function SiteCreateModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("TOP OF THE HANDLE SUBMIT IN THE SITE CREATE COMPONENT");
+    console.log("lat", lat);
+    console.log("lon", lon);
 
     if (isSubmitting) {
       return;
@@ -73,10 +84,37 @@ function SiteCreateModal() {
     }
   };
 
+  const handleMapClick = async (e) => {
+    const latitude = e.detail.latLng.lat;
+    const longitude = e.detail.latLng.lng;
+
+    setLat(latitude);
+    setLon(longitude);
+
+    const response = await fetch(
+      `/api/sites/elevation/${latitude}/${longitude}`
+    );
+    if (response.ok) {
+      const data = await response.json();
+      console.log(
+        "DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!",
+        data.results[0].elevation * 3.3
+      );
+
+      setAltitude(Math.floor(data.results[0].elevation * 3.3));
+      console.log(altitude, "altitude");
+    } else if (response.status < 500) {
+      const errorMessages = await response.json();
+      return errorMessages;
+    } else {
+      return { server: "Something went wrong. Please try again" };
+    }
+  };
+  const location = { lat: lat, lng: lon };
   return (
     <div className="site-create-modal">
-      <h1>Create Site</h1>
-      <p>(map input in development :)</p>
+      <h1>Create Launch Site</h1>
+
       {/* {errors.server && <p className="form-errors">{errors.server}</p>} */}
       <div className="form-errors">{errors.server}</div>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -92,37 +130,7 @@ function SiteCreateModal() {
         <div className="form-errors">{errors.name}</div>
 
         <label>
-          Latitude
-          <input
-            type="number"
-            value={lat}
-            onChange={(e) => setLat(e.target.value)}
-          />
-        </label>
-        <div className="form-errors">{errors.lat}</div>
-
-        <label>
-          Longitude
-          <input
-            type="number"
-            value={lon}
-            onChange={(e) => setLon(e.target.value)}
-          />
-        </label>
-        <div className="form-errors">{errors.lon}</div>
-
-        <label>
-          Altitude
-          <input
-            type="number"
-            value={altitude}
-            onChange={(e) => setAltitude(e.target.value)}
-          />
-        </label>
-        <div className="form-errors">{errors.altitude}</div>
-
-        <label>
-          Site Intro
+          Site Intro (tell us about this launch)
           <textarea
             value={intro}
             className="text-area"
@@ -132,29 +140,93 @@ function SiteCreateModal() {
         </label>
         <div className="form-errors">{errors.intro}</div>
 
-        <label className="form-label">
-          Upload Site Photo
-          <span id="site-label-info">
-            A site photo is required & a good one shows a launch in progress!
-          </span>
-          <div className="file-inputs-container">
-            <img src={imageURL} alt="Flight" className="thumbnails-noname" />
-            <h4
-              htmlFor="post-image-input"
-              className="file-input-labels clickable"
-            >
-              Upload a photo
-            </h4>
-            <input
-              type="file"
-              accept="image/png, image/jpeg, image/jpg"
-              id="post-image-input"
-              onChange={fileWrap}
-              className="form-input"
-            />
+        <div className="photo-and-map-div">
+          <div className="photo-upload-div">
+            <label className="form-label">
+              <h3>Upload Site Photo</h3>
+              <span id="site-label-info">
+                A site photo is required & a good one shows a launch in
+                progress!
+              </span>
+              <div className="file-inputs-container">
+                <img
+                  src={imageURL}
+                  alt="Flight"
+                  className="thumbnails-noname"
+                />
+                <h4
+                  htmlFor="post-image-input"
+                  className="file-input-labels clickable"
+                >
+                  Choose photo
+                </h4>
+                <input
+                  type="file"
+                  accept="image/png, image/jpeg, image/jpg"
+                  id="post-image-input"
+                  onChange={fileWrap}
+                  className="form-input"
+                />
+              </div>
+            </label>
+            <div className="form-errors">{errors.site_photo}</div>
           </div>
-        </label>
-        <div className="form-errors">{errors.site_photo}</div>
+          <div className="map-and-info-div">
+            <p className="map-label-p">
+              place a marker on the map to indicate Launch location
+            </p>
+            <div className="site-map-div-container">
+              <Map
+                defaultZoom={13}
+                defaultCenter={{ lat: 40.015, lng: -105.2705 }}
+                mapId={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+                reuseMaps="true"
+                // onCameraChanged={(ev) =>
+                //   console.log(
+                //     "camera changed:",
+                //     ev.detail.center,
+                //     "zoom:",
+                //     ev.detail.zoom
+                //   )
+                // }
+                onClick={handleMapClick}
+              >
+                <AdvancedMarker position={location}>
+                  <Pin background={"purple"} glyphColor={"red"} />
+                </AdvancedMarker>
+              </Map>
+            </div>
+            <div className="site-map-detail-fields">
+              <label>
+                Latitude
+                <input
+                  type="number"
+                  value={lat}
+                  onChange={(e) => setLat(e.target.value)}
+                />
+              </label>
+
+              <label>
+                Longitude
+                <input
+                  type="number"
+                  value={lon}
+                  onChange={(e) => setLon(e.target.value)}
+                />
+              </label>
+
+              <label>
+                Altitude
+                <input
+                  type="number"
+                  value={altitude}
+                  onChange={(e) => setAltitude(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className="form-errors">{errors.intro}</div>
+          </div>
+        </div>
 
         <div
           className={`submit-button clickable ${

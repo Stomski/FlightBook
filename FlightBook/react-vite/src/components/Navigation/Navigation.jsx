@@ -10,15 +10,15 @@ import { setFeedComponent } from "../../redux/view";
 function Navigation() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(sessionUser, "SESSION USER IN NAVIGATION COMPONENT");
+  // console.log(sessionUser, "SESSION USER IN NAVIGATION COMPONENT");
 
   const demoUser = () => {
-    console.log("DEMO USER CALLED");
+    // console.log("DEMO USER CALLED");
     dispatch(thunkLogin({ email: "bobby@aa.io", password: "password" }));
   };
 
   const handleClick = () => {
-    console.log("HANDLE CLICK CALLED IN THE Nav COMPONENT");
+    // console.log("HANDLE CLICK CALLED IN THE Nav COMPONENT");
     dispatch(setFeedComponent("WelcomePage"));
     // dispatch(getSiteDetailsThunk(siteId));
   };
