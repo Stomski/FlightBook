@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required
-from app.models import Site, db
+from app.models import Site,Review, db
 from ..forms.create_site import SiteCreateForm
 from ..api.aws_functions import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 import os
@@ -37,10 +37,29 @@ def getSiteElevation(lat,lon):
 
     return(jsonify(response.json()))
 
+@site_routes.route('reviews/<int:site_id>')
+def getReviewsBySite(site_id):
+    """
+    this route returns dictionaries of all the reviews for a given site_id
+    """
 
+    print
+    reviews = Review.query.filter_by(site_id=site_id).all()
+    print('reviews',reviews)
+    review_dict ={}
+    for review in reviews:
+        review_to_dict = review.to_dict()
+        review_dict[review_to_dict["id"]]=review_to_dict
+    return review_dict
 
-
-
+@site_routes.route('reviews/create/<int:site_id>')
+def createReviewBySite(site_id):
+    """
+    This route creates a new REVIEW in the database from the form data in the ReviewCreateForm,
+    attached to the given site_id
+    """
+    print("CREATE Review route CALLED $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    return {"message":"making progress from the create review backend route"}
 
 
 @site_routes.route('/all')

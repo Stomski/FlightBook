@@ -22,3 +22,13 @@ class Review(db.Model):
 
     creator = db.relationship('User', back_populates = "reviews")
     site = db.relationship('Site', back_populates = "reviews")
+
+    def to_dict(self):
+        return{
+            "id":self.id,
+            "creator_id":self.creator_id,
+            "review":self.review,
+            "site_id":self.site_id,
+            "created_at":self.created_at,
+            "updated_at":self.updated_at
+        }
