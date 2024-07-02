@@ -33,8 +33,7 @@ function ReviewCreateModal(site) {
     formData.append("review", review);
 
     formData.append("creator_id", sessionUser.id);
-    formData.append("site_id", site["id"]);
-    console.log(site, "site id before the fuckin thingg");
+    formData.append("site_id", site.site["id"]);
 
     const serverResponse = await dispatch(
       createReviewThunk(formData, site.site["id"])
@@ -42,11 +41,11 @@ function ReviewCreateModal(site) {
 
     setIsSubmitting(false);
 
-    // if (serverResponse) {
-    //   setErrors(serverResponse);
-    // } else {
-    //   closeModal();
-    // }
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
+    }
   };
 
   return (

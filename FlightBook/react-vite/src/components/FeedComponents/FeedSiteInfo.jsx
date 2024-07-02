@@ -63,10 +63,7 @@ export default function FeedSiteInfo() {
                   <div key={review.id} className="review-card">
                     <p>{review.review}</p>
                     <p>
-                      <strong>Rating:</strong> {review.rating}
-                    </p>
-                    <p>
-                      <strong>Reviewer:</strong> {review.reviewer}
+                      this should be the name of the guy who made this review
                     </p>
                   </div>
                 ))

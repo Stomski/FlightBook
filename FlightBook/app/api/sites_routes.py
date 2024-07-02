@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import login_required
 from app.models import Site,Review, db
 from ..forms.create_site import SiteCreateForm
+from ..forms.create_review import ReviewCreateForm
 from ..api.aws_functions import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 import os
 import requests
@@ -52,15 +53,35 @@ def getReviewsBySite(site_id):
         review_dict[review_to_dict["id"]]=review_to_dict
     return review_dict
 
-@site_routes.route('reviews/create/<int:site_id>')
+@site_routes.route('reviews/create/<int:site_id>', methods = ["POST"])
 def createReviewBySite(site_id):
     """
     This route creates a new REVIEW in the database from the form data in the ReviewCreateForm,
     attached to the given site_id
     """
     print("CREATE Review route CALLED $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    return {"message":"making progress from the create review backend route"}
+    print(site_id,"site_id #################################")
 
+    form = ReviewCreateForm()
+
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data, "FORM DATA IN REVIEW CREATE ROUTE &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+    if form.validate_on_submit():
+        print("form.validate on submit passed in create review route")
+        review = Review(
+            creator_id = form.data["creator_id"],
+            site_id = form.data["site_id"],
+            review = form.data["review"]
+        )
+        db.session.add(review)
+        db.session.commit()
+        return review.to_dict()
+
+    print(form.errors, "form.errors")
+
+
+    return form.errors, 400
 
 @site_routes.route('/all')
 def getAllSites():
