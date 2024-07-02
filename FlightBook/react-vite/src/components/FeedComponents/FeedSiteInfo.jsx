@@ -61,10 +61,24 @@ export default function FeedSiteInfo() {
               {reviews ? (
                 Object.values(reviews).map((review) => (
                   <div key={review.id} className="review-card">
-                    <p>{review.review}</p>
-                    <p>
-                      this should be the name of the guy who made this review
-                    </p>
+                    <p className="review-content-p">{review.review}</p>
+                    <div className="review-creator-info-div">
+                      <img
+                        className="user-photo-reviews"
+                        src={review.creator["user_photo"]}
+                        alt=""
+                      />
+                      <p>{review.creator["username"]}</p>
+                      {sessionUser.id === review.creator_id ? (
+                        <div className="review-edit-delete-div">
+                          edit/delete
+                        </div>
+                      ) : (
+                        <div className="review-not-my-review-div clickable">
+                          connect with {review.creator["first_name"]}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 ))
               ) : (

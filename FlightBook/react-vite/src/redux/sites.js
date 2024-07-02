@@ -36,27 +36,21 @@ const getAllSites = (sites) => ({
 });
 
 export const getSiteDetailsThunk = (siteId) => async (dispatch) => {
-  // console.log(
-  //   "I THINK THIS IS GETTING CALLED< GET SITRE DETAILS > BEFORE FETCH"
-  // );
+  console.log(
+    "I THINK THIS IS GETTING CALLED< GET SITRE DETAILS > BEFORE FETCH"
+  );
 
   const response = await fetch(`/api/sites/details/${siteId}`);
   if (response.ok) {
-    // console.log(
-    //   "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK > RESPONSE OK"
-    // );
+    console.log("GET SITE DETAILS THUNK > RESPONSE OK");
     const data = await response.json();
     dispatch(getSiteDetails(data));
   } else if (response.status < 500) {
-    // console.log(
-    //   "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK > err less 500"
-    // );
+    console.log("GET SITE DETAILS THUNK > err less 500");
     const errorMessages = await response.json();
     return errorMessages;
   } else {
-    // console.log(
-    //   "I THINK THIS IS GETTING CALLED< GET SITE DETAILS THUNK greater 500"
-    // );
+    console.log("GET SITE DETAILS THUNK greater 500");
     return { server: "Something went wrong. Please try again" };
   }
 };

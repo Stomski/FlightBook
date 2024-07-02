@@ -49,14 +49,20 @@ export const getReviewsBySiteThunk = (siteId) => async (dispatch) => {
   console.log(
     "GET REVIEWSS BY SITE GET REVIEWSS BY SITE GET REVIEWSS BY SITE > BEFORE FETCH"
   );
-  console.log(siteId, "SiTE id   <<<<<<<<<<<<<<<<<<<");
+  // console.log(
+  //   siteId,
+  //   "SiTE id   <<<<<<<<<<<<<<<<<<< in the get review by site thunk"
+  // );
   const response = await fetch(`/api/sites/reviews/${siteId}`);
   if (response.ok) {
     console.log(
       "#####################################################GET REVIEWSS BY SITE GET REVIEWSS BY SITE GET REVIEWSS BY SITE > RESPONSE OK"
     );
     const data = await response.json();
-    console.log(data, "data<<<<<<<<<<<<<,");
+    console.log(
+      data,
+      "data<<<<<<<<<<<<< get reviews by site thunk respons to json"
+    );
     dispatch(getReviewsBySite(data));
   } else if (response.status < 500) {
     const errorMessages = await response.json();

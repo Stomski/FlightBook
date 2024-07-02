@@ -4,6 +4,7 @@ from app.models import Site,Review, db
 from ..forms.create_site import SiteCreateForm
 from ..forms.create_review import ReviewCreateForm
 from ..api.aws_functions import upload_file_to_s3, get_unique_filename, remove_file_from_s3
+from sqlalchemy.orm import joinedload
 import os
 import requests
 
@@ -42,16 +43,33 @@ def getSiteElevation(lat,lon):
 def getReviewsBySite(site_id):
     """
     this route returns dictionaries of all the reviews for a given site_id
+    it also returns the creators data, the user that made the review
     """
 
-    print
-    reviews = Review.query.filter_by(site_id=site_id).all()
+
+    reviews = Review.query.options(joinedload(Review.creator)).filter_by(site_id=site_id).all()
+
+
+
+
     print('reviews',reviews)
     review_dict ={}
     for review in reviews:
+        print("THIS IS MY ITERATION THROUGH THE REVIEWS>>>>>>>>>>>>", review)
+        print("keying into the creator", review.creator.to_dict())
+        review_creator = review.creator.to_dict()
+
         review_to_dict = review.to_dict()
+        review_to_dict["creator"]=review_creator
         review_dict[review_to_dict["id"]]=review_to_dict
     return review_dict
+
+
+
+
+
+
+
 
 @site_routes.route('reviews/create/<int:site_id>', methods = ["POST"])
 def createReviewBySite(site_id):

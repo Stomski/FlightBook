@@ -69,7 +69,23 @@
 .review-card {
   border: 1px solid navy;
   margin: 3px;
+  max-height: fit-content;
 }
 .create-review-button {
   border: 1px solid navy;
+}
+.review-creator-info-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+}
+.user-photo-reviews {
+  max-height: 50px;
+  max-width: 50px;
+}
+.review-content-p {
+  margin: 5px;
+  margin-top: 10px;
+  margin-left: 15 px;
 }
