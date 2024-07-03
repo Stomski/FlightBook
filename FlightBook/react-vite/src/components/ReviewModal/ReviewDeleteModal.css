@@ -6,7 +6,7 @@
 }
 
 /* Style the modal container */
-.delete-site-modal {
+.delete-Review-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,23 +18,23 @@
   margin: auto;
 }
 
-.delete-site-modal .top {
+.delete-Review-modal .top {
   width: 100%;
   text-align: center;
 }
 
-.delete-site-modal .top h2 {
+.delete-Review-modal .top h2 {
   margin-bottom: 20px;
   font-size: 24px;
 }
 
-.delete-site-modal .top p {
+.delete-Review-modal .top p {
   margin-bottom: 10px;
   font-size: 14px;
   color: #333;
 }
 
-.delete-site-modal .site-display {
+.delete-Review-modal .Review-display {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -42,19 +42,19 @@
   color: #333;
 }
 
-.delete-site-modal .site-display i {
+.delete-Review-modal .Review-display i {
   margin-right: 5px;
 }
 
 /* Style the button container */
-.delete-site-modal .button-container {
+.delete-Review-modal .button-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.delete-site-modal .cancel-button,
-.delete-site-modal .delete-button {
+.delete-Review-modal .cancel-button,
+.delete-Review-modal .delete-button {
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
@@ -63,20 +63,20 @@
   margin-top: 10px;
 }
 
-.delete-site-modal .cancel-button {
+.delete-Review-modal .cancel-button {
   background-color: #6c757d;
   color: white;
 }
 
-.delete-site-modal .cancel-button:hover {
+.delete-Review-modal .cancel-button:hover {
   background-color: #5a6268;
 }
 
-.delete-site-modal .delete-button {
+.delete-Review-modal .delete-button {
   background-color: #dc3545;
   color: white;
 }
 
-.delete-site-modal .delete-button:hover {
+.delete-Review-modal .delete-button:hover {
   background-color: #c82333;
 }

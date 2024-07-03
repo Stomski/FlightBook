@@ -65,17 +65,19 @@ def getReviewsBySite(site_id):
     return review_dict
 
 
-site_routes.route('reviews/delete/<int:site_id>')
-def deleteReviewBySite(site_id):
+@site_routes.route('reviews/delete/<int:review_id>')
+def deleteReviewBySite(review_id):
     """
     This route deletes the review with the given ID
     """
-    print("reviews/delete/<int:site_id> ROUTE HIT")
-    review = Review.query.get(site_id)
+
+
+    print("reviews/delete/<int:review_id> ROUTE HIT")
+    review = Review.query.get(review_id)
+    print(review, "review after query")
     db.session.delete(review)
     db.session.commit()
-    return {"message":"successfully Delete"}
-
+    return {"message":"successfully Delete"}, 201
 
 
 @site_routes.route('reviews/create/<int:site_id>', methods = ["POST"])

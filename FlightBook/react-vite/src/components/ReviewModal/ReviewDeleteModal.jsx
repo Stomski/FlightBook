@@ -12,7 +12,10 @@ function ReviewDeleteModal({ review }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(review, "review in handle submit above dispatch thunk");
+    console.log(
+      review,
+      " review in handle submit above dispatch delete reviewthunk"
+    );
     const serverResponse = await dispatch(deleteReviewThunk(review.id));
 
     if (serverResponse) {
