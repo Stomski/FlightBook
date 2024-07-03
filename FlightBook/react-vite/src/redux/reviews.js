@@ -26,7 +26,7 @@ const getReviewsBySite = (reviews) => ({
 export const updateReviewThunk = (review, reviewId) => async (dispatch) => {
   console.log("update review thunk above the fetch");
 
-  const response = await fetch(`/api/sites/review/update/${reviewId}`, {
+  const response = await fetch(`/api/sites/reviews/update/${reviewId}`, {
     method: "POST",
     body: review,
   });

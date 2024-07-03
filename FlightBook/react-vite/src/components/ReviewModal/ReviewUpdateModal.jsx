@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { updateReviewThunk } from "../../redux/reviews";
 import "./ReviewUpdateModal.css";
 
 function ReviewUpdateModal({ review }) {
@@ -13,6 +14,8 @@ function ReviewUpdateModal({ review }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
+    console.log("TOP review update modal handle submit");
+
     if (isSubmitting) return;
 
     setIsSubmitting(true);
@@ -21,14 +24,27 @@ function ReviewUpdateModal({ review }) {
 
     formData.append("review", currReview);
     formData.append("user_id", sessionUser.id);
+    console.log(
+      "form data in the review update modal handle submit>>>",
+      formData
+    );
 
-    const serverResponse = await dispatch();
+    const serverResponse = await dispatch(
+      updateReviewThunk(formData, review["id"])
+    );
 
     if (serverResponse) {
+      console.log(
+        "server response conditional triggered in the review update modal handle submit"
+      );
       setIsSubmitting(false);
       setErrors(serverResponse);
     } else {
-      closeModal();
+      // closeModal();
+      console.log(
+        "else condit triggered in the review update modal handle submit"
+      );
+
       setIsSubmitting(false);
     }
   };
