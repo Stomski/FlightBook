@@ -65,9 +65,16 @@ def getReviewsBySite(site_id):
     return review_dict
 
 
-
-
-
+site_routes.route('reviews/delete/<int:site_id>')
+def deleteReviewBySite(site_id):
+    """
+    This route deletes the review with the given ID
+    """
+    print("reviews/delete/<int:site_id> ROUTE HIT")
+    review = Review.query.get(site_id)
+    db.session.delete(review)
+    db.session.commit()
+    return {"message":"successfully Delete"}
 
 
 

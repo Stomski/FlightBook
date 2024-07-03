@@ -36,7 +36,7 @@ function ReviewCreateModal(site) {
     formData.append("site_id", site.site["id"]);
 
     const serverResponse = await dispatch(
-      createReviewThunk(formData, site.site["id"])
+      createReviewThunk(formData, site.site["id"], sessionUser)
     );
 
     setIsSubmitting(false);

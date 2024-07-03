@@ -1,22 +1,24 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-// import { deleteReviewThunk } from "../../redux/sites";
+import { deleteReviewThunk } from "../../redux/reviews";
 import { setFeedComponent } from "../../redux/view";
 import { useState } from "react";
 import "./ReviewDeleteModal.css";
 
-function ReviewDeleteModal(review) {
+function ReviewDeleteModal({ review }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const serverResponse = await dispatch(deleteSiteThunk(site.id));
+    console.log(review, "review in handle submit above dispatch thunk");
+    const serverResponse = await dispatch(deleteReviewThunk(review.id));
 
     if (serverResponse) {
-      // setErrors(serverResponse);
+      setErrors(serverResponse);
     } else {
+      console.log("no server response in the handle submit delete modal");
       closeModal();
       // dispatch(setFeedComponent("FeedMySites"));
     }
