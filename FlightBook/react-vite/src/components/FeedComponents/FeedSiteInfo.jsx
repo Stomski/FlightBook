@@ -5,8 +5,8 @@ import FlightUpdateModal from "../FlightCreateModal/FlightUpdateModal";
 import FlightDeleteModal from "../FlightCreateModal/FlightDeleteModal";
 import { getReviewsBySiteThunk } from "../../redux/reviews";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import SiteUpdateModal from "../SiteCreateModal/SiteUpdateModal";
 import ReviewCreateModal from "../ReviewModal/ReviewCreateModal";
+import ReviewDeleteModal from "../ReviewModal/ReviewDeleteModal";
 import "./FeedSiteInfo.css";
 
 export default function FeedSiteInfo() {
@@ -71,11 +71,27 @@ export default function FeedSiteInfo() {
                       <p>{review.creator["username"]}</p>
                       {sessionUser.id === review.creator_id ? (
                         <div className="review-edit-delete-div">
-                          edit/delete
+                          <div className="review-button-div clickable">
+                            <OpenModalMenuItem
+                              itemText="Edit"
+                              modalComponent={
+                                <ReviewCreateModal review={review} />
+                              }
+                            />
+                          </div>
+                          <div className="review-button-div clickable delete-review">
+                            <OpenModalMenuItem
+                              itemText="Delete"
+                              modalComponent={
+                                <ReviewDeleteModal review={review} />
+                              }
+                            />
+                          </div>
                         </div>
                       ) : (
                         <div className="review-not-my-review-div clickable">
-                          connect with {review.creator["first_name"]}
+                          connect with {review.creator["first_name"]} (feature
+                          coming soon!)
                         </div>
                       )}
                     </div>
