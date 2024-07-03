@@ -70,7 +70,7 @@ def updateReviewById(review_id):
     This route UPDATES AN EXISTING REVIEW in the database from the form data in the ReviewUpdateForm
     """
     print("UPDATE REVIEW ROUTE BACKEND IS HITTING")
-    return {"messatge":"UPDATE REVIEW"}, 301
+    return {"messatge":"UPDATE REVIEW"}, 200
 
 
 
