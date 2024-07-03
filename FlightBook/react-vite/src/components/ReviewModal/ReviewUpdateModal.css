@@ -1,0 +1,89 @@
+/* General reset and box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style the modal container */
+.review-update-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px; /* Reduced padding */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.review-update-modal h1 {
+  margin-bottom: 10px; /* Reduced margin */
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Style the form */
+.review-update-modal form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.text-area {
+  resize: none;
+  height: 40px; /* Set the height to fit two lines */
+  max-height: 40px; /* Ensure the height doesn't exceed this value */
+  overflow-y: auto; /* Allow vertical scrolling */
+}
+
+/* Style the labels and inputs */
+.review-update-modal label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3px; /* Reduced margin */
+  font-size: 14px;
+  color: #333;
+}
+
+.review-update-modal input,
+.review-update-modal textarea {
+  padding: 3px; /* Reduced padding */
+  margin-top: 2px; /* Reduced margin */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Style the error messages */
+.review-update-modal p {
+  margin-top: 3px; /* Reduced margin */
+  margin-bottom: 3px; /* Reduced margin */
+  font-size: 12px;
+  color: red;
+}
+
+/* Style the submit button */
+.review-update-modal button {
+  padding: 5px 10px; /* Reduced padding */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 5px; /* Reduced margin */
+}
+
+.review-update-modal button:hover {
+  background-color: #0056b3;
+}
+
+/* Style the error divs */
+.form-errors {
+  min-height: 18px; /* Consistent height for error messages */
+  font-size: 12px;
+  color: red;
+  margin-top: 3px; /* Reduced margin */
+  margin-bottom: 5px; /* Reduced margin */
+}

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getFlightsByUserThunk } from "../../redux/flights";
-import FlightUpdateModal from "../FlightCreateModal/FlightUpdateModal";
-import FlightDeleteModal from "../FlightCreateModal/FlightDeleteModal";
 import { getReviewsBySiteThunk } from "../../redux/reviews";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ReviewCreateModal from "../ReviewModal/ReviewCreateModal";
+import ReviewUpdateModal from "../ReviewModal/ReviewUpdateModal";
 import ReviewDeleteModal from "../ReviewModal/ReviewDeleteModal";
 import "./FeedSiteInfo.css";
 
@@ -75,7 +73,7 @@ export default function FeedSiteInfo() {
                             <OpenModalMenuItem
                               itemText="Edit"
                               modalComponent={
-                                <ReviewCreateModal review={review} />
+                                <ReviewUpdateModal review={review} />
                               }
                             />
                           </div>

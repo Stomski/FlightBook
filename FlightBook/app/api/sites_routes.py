@@ -64,6 +64,15 @@ def getReviewsBySite(site_id):
         review_dict[review_to_dict["id"]]=review_to_dict
     return review_dict
 
+@site_routes.route('reviews/update/<int:review_id>', methods = ["POST"])
+def updateReviewById(review_id):
+    """
+    This route UPDATES AN EXISTING REVIEW in the database from the form data in the ReviewUpdateForm
+    """
+    print("UPDATE REVIEW ROUTE BACKEND IS HITTING")
+    return {"messatge":"UPDATE REVIEW"}, 301
+
+
 
 @site_routes.route('reviews/delete/<int:review_id>')
 def deleteReviewBySite(review_id):
