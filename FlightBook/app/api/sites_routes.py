@@ -27,9 +27,11 @@ def getSiteElevation(lat,lon):
     this route is designed to interact with the google maps elevation api, it gets pinged when we try to create a new marker on the maps
     """
     #  const apiUrl = `https://maps.googleapis.com/maps/api/elevation/json?locations=${latitude},${longitude}&key=${apiKey}`;
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("this is the top of the get site elevation backend route")
     api_key=os.environ.get("VITE_GOOGLE_MAPS_API_KEY")
-    print(api_key, "#########################################################################")
-    print("TESTING@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", lat,lon)
+    print(api_key, "this is my api key, for a test and im dumb in the get site elevation#########################################################################")
+    print("lat lon TESTING@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", lat,lon)
 
 
     api_url = f"https://maps.googleapis.com/maps/api/elevation/json?locations={lat},{lon}&key={api_key}"
