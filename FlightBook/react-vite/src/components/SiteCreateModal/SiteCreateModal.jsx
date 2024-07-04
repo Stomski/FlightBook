@@ -107,8 +107,11 @@ function SiteCreateModal() {
         "response ok #################################################################################################################"
       );
       const data = await response.json();
+      console.log(data);
+      console.log("data in the elevation handle map click response");
       console.log(
-        "DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!",
+        data,
+        "<<<<<<<<<<<<DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!",
         data.results[0].elevation * 3.3
       );
 
