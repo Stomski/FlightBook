@@ -90,11 +90,21 @@ function SiteCreateModal() {
 
     setLat(latitude);
     setLon(longitude);
+    console.log(
+      "BEFORE route fetch @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+    );
 
     const response = await fetch(
       `/api/sites/elevation/${latitude}/${longitude}`
     );
+    console.log(
+      "after route fetch @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+    );
+
     if (response.ok) {
+      console.log(
+        "response ok #################################################################################################################"
+      );
       const data = await response.json();
       console.log(
         "DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!",
