@@ -29,12 +29,12 @@ def getSiteElevation(lat,lon):
     #  const apiUrl = `https://maps.googleapis.com/maps/api/elevation/json?locations=${latitude},${longitude}&key=${apiKey}`;
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     print("this is the top of the get site elevation backend route")
-    api_key=os.environ.get("VITE_GOOGLE_MAPS_API_KEY")
-    print(api_key, "this is my api key, for a test and im dumb in the get site elevation#########################################################################")
+    API_KEY=os.environ.get("VITE_GOOGLE_MAPS_API_KEY")
+    print(API_KEY, "this is my api key, for a test and im dumb in the get site elevation#########################################################################")
     print("lat lon TESTING@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", lat,lon)
 
 
-    api_url = f"https://maps.googleapis.com/maps/api/elevation/json?locations={lat},{lon}&key={api_key}"
+    api_url = f"https://maps.googleapis.com/maps/api/elevation/json?locations={lat},{lon}&key={API_KEY}"
 
 
     response = requests.get(api_url)
