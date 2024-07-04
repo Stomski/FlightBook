@@ -69,8 +69,16 @@ def updateReviewById(review_id):
     """
     This route UPDATES AN EXISTING REVIEW in the database from the form data in the ReviewUpdateForm
     """
-    print("UPDATE REVIEW ROUTE BACKEND IS HITTING")
-    return {"messatge":"UPDATE REVIEW"}, 200
+    form= ReviewCreateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print(form.data, "form  VALIDATED IN update review backend<<<<<<<<<<<<<<<<<<<<")
+        review_to_update = Review.query.get(review_id)
+        review_to_update.review =form.data["review"]
+        db.session.add(review_to_update)
+        db.session.commit()
+        return review_to_update.to_dict()
+    return {"error":"Something went wrong, please try again later"}, 404
 
 
 
@@ -158,7 +166,7 @@ def update_site(site_id):
     print(site_id)
     form = SiteCreateForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data, "FORM DATA IN CREATE SITE THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print(form.data, "FORM DATA IN CREATE SITE THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     if form.validate_on_submit():
         site_to_update = Site.query.get(site_id)
         print("form.validate on submit in the update site route!!!!!!!!!!!!!!!!!!")

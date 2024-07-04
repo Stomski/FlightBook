@@ -15,6 +15,7 @@ function ReviewUpdateModal({ review }) {
 
   const handleSubmit = async (e) => {
     console.log("TOP review update modal handle submit");
+    console.log(review, "review at top of handle submit review update modal");
 
     if (isSubmitting) return;
 
@@ -23,14 +24,16 @@ function ReviewUpdateModal({ review }) {
     const formData = new FormData();
 
     formData.append("review", currReview);
-    formData.append("user_id", sessionUser.id);
+    formData.append("creator_id", sessionUser.id);
+    formData.append("site_id", review["site_id"]);
+
     console.log(
       "form data in the review update modal handle submit>>>",
       formData
     );
 
     const serverResponse = await dispatch(
-      updateReviewThunk(formData, review["id"])
+      updateReviewThunk(formData, review["id"], sessionUser)
     );
 
     if (serverResponse) {
@@ -40,10 +43,7 @@ function ReviewUpdateModal({ review }) {
       setIsSubmitting(false);
       setErrors(serverResponse);
     } else {
-      // closeModal();
-      console.log(
-        "else condit triggered in the review update modal handle submit"
-      );
+      closeModal();
 
       setIsSubmitting(false);
     }
@@ -58,7 +58,7 @@ function ReviewUpdateModal({ review }) {
           <textarea
             id="review"
             value={currReview}
-            onChange={(e) => setLog(e.target.value)}
+            onChange={(e) => setCurrReview(e.target.value)}
             required
             className="text-area"
           />
