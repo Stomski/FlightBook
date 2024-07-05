@@ -63,37 +63,56 @@
   color: #999;
 }
 .site-details-reviews-div {
-  border: 2px solid black;
+  border: 2px solid rgb(0, 122, 235);
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 3px;
+  margin-top: 40px;
 }
 .review-card {
-  border: 1px solid navy;
+  border: 2px solid rgb(72, 155, 232);
+  border-radius: 4px;
+
   margin: 3px;
   max-height: fit-content;
+  background-color: aliceblue;
+  margin-top: 6px;
 }
 .create-review-button {
-  border: 1px solid navy;
+  border: 2px solid rgb(72, 155, 232);
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .review-creator-info-div {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 10px;
+  margin-left: 35px;
 }
 .user-photo-reviews {
   max-height: 50px;
   max-width: 50px;
+  margin-right: 15px;
 }
 .review-content-p {
   margin: 5px;
-  margin-top: 10px;
-  margin-left: 15 px;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border: 2px solid rgb(72, 155, 232);
+  border-radius: 4px;
+
+  padding: 10px;
+  background-color: rgba(72, 155, 232, 0.1);
 }
+
 .review-not-my-review-div {
   margin-left: 10px;
   padding: 3px;
-
-  border: 1px solid black;
+  border: 2px solid rgb(146, 173, 198);
+  background-color: rgb(146, 173, 198);
+  border-radius: 4px;
 }
 .review-edit-delete-div {
   margin-left: 10px;
@@ -108,4 +127,16 @@
 .review-button-div {
   border: 1px solid black;
   padding: 3px;
+}
+.modal-button {
+  background-color: #007bff;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.review-title-div,
+h2 {
+  padding-bottom: 9px;
 }
