@@ -25,6 +25,7 @@ function SiteCreateModal() {
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAltitudeLoading, setIsAltitudeLoading] = useState(false);
 
   const fileWrap = (e) => {
     e.stopPropagation();
@@ -90,32 +91,47 @@ function SiteCreateModal() {
 
     setLat(latitude);
     setLon(longitude);
+    setIsAltitudeLoading(true);
+    console.log("BEFORE route fetch @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
     const response = await fetch(
       `/api/sites/elevation/${latitude}/${longitude}`
     );
+    console.log(
+      "after route fetch @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+      response.ok
+    );
+
     if (response.ok) {
+      console.log("response ok ###################################");
       const data = await response.json();
+      console.log(data);
+      console.log("data in the elevation handle map click response");
       console.log(
-        "DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!",
+        data,
+        "<<<<<<<<<<<<DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!",
         data.results[0].elevation * 3.3
       );
 
       setAltitude(Math.floor(data.results[0].elevation * 3.3));
+      setIsAltitudeLoading(false);
       console.log(altitude, "altitude");
     } else if (response.status < 500) {
       const errorMessages = await response.json();
+      setIsAltitudeLoading(false);
       return errorMessages;
     } else {
+      setIsAltitudeLoading(false);
       return { server: "Something went wrong. Please try again" };
     }
   };
+
   const location = { lat: lat, lng: lon };
+
   return (
     <div className="site-create-modal">
       <h1>Create Launch Site</h1>
 
-      {/* {errors.server && <p className="form-errors">{errors.server}</p>} */}
       <div className="form-errors">{errors.server}</div>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
@@ -181,14 +197,6 @@ function SiteCreateModal() {
                 defaultCenter={{ lat: 40.015, lng: -105.2705 }}
                 mapId={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
                 reuseMaps="true"
-                // onCameraChanged={(ev) =>
-                //   console.log(
-                //     "camera changed:",
-                //     ev.detail.center,
-                //     "zoom:",
-                //     ev.detail.zoom
-                //   )
-                // }
                 onClick={handleMapClick}
               >
                 <AdvancedMarker position={location}>
@@ -199,28 +207,20 @@ function SiteCreateModal() {
             <div className="site-map-detail-fields">
               <label>
                 Latitude
-                <input
-                  type="number"
-                  value={lat}
-                  onChange={(e) => setLat(e.target.value)}
-                />
+                <input type="number" value={lat} readOnly />
               </label>
 
               <label>
                 Longitude
-                <input
-                  type="number"
-                  value={lon}
-                  onChange={(e) => setLon(e.target.value)}
-                />
+                <input type="number" value={lon} readOnly />
               </label>
 
               <label>
                 Altitude
                 <input
-                  type="number"
-                  value={altitude}
-                  onChange={(e) => setAltitude(e.target.value)}
+                  type="text"
+                  value={isAltitudeLoading ? "Loading..." : altitude}
+                  readOnly
                 />
               </label>
             </div>

@@ -9,9 +9,11 @@ import sessionReducer from "./session";
 import flightsReducer from "./flights";
 import sitesReducer from "./sites";
 import viewReducer from "./view";
+import reviewReducer from "./reviews";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  reviews: reviewReducer,
   flights: flightsReducer,
   sites: sitesReducer,
   view: viewReducer,

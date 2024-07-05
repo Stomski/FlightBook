@@ -1,8 +1,11 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required
-from app.models import Site, db
+from app.models import Site,Review, db
 from ..forms.create_site import SiteCreateForm
+from ..forms.create_review import ReviewCreateForm
 from ..api.aws_functions import upload_file_to_s3, get_unique_filename, remove_file_from_s3
+from sqlalchemy.orm import joinedload
+
 import os
 import requests
 
@@ -25,23 +28,107 @@ def getSiteElevation(lat,lon):
     this route is designed to interact with the google maps elevation api, it gets pinged when we try to create a new marker on the maps
     """
     #  const apiUrl = `https://maps.googleapis.com/maps/api/elevation/json?locations=${latitude},${longitude}&key=${apiKey}`;
-    api_key=os.environ.get("VITE_GOOGLE_MAPS_API_KEY")
-    print(api_key, "#########################################################################")
-    print("TESTING@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", lat,lon)
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("this is the top of the get site elevation backend route")
+    API_KEY=os.environ.get("VITE_GOOGLE_MAPS_API_KEY")
+    print(API_KEY, "this is my api key, for a test and im dumb in the get site elevation#########################################################################")
+    print("lat lon TESTING@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", lat,lon)
 
 
-    api_url = f"https://maps.googleapis.com/maps/api/elevation/json?locations={lat},{lon}&key={api_key}"
+    api_url = f"https://maps.googleapis.com/maps/api/elevation/json?locations={lat},{lon}&key={API_KEY}"
 
 
     response = requests.get(api_url)
 
     return(jsonify(response.json()))
 
+@site_routes.route('reviews/<int:site_id>')
+def getReviewsBySite(site_id):
+    """
+    this route returns dictionaries of all the reviews for a given site_id
+    it also returns the creators data, the user that made the review
+    """
+
+
+    reviews = Review.query.options(joinedload(Review.creator)).filter_by(site_id=site_id).all()
 
 
 
 
+    print('reviews',reviews)
+    review_dict ={}
+    for review in reviews:
+        print("THIS IS MY ITERATION THROUGH THE REVIEWS>>>>>>>>>>>>", review)
+        print("keying into the creator", review.creator.to_dict())
+        review_creator = review.creator.to_dict()
 
+        review_to_dict = review.to_dict()
+        review_to_dict["creator"]=review_creator
+        review_dict[review_to_dict["id"]]=review_to_dict
+    return review_dict
+
+@site_routes.route('reviews/update/<int:review_id>', methods = ["POST"])
+def updateReviewById(review_id):
+    """
+    This route UPDATES AN EXISTING REVIEW in the database from the form data in the ReviewUpdateForm
+    """
+    form= ReviewCreateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print(form.data, "form  VALIDATED IN update review backend<<<<<<<<<<<<<<<<<<<<")
+        review_to_update = Review.query.get(review_id)
+        review_to_update.review =form.data["review"]
+        db.session.add(review_to_update)
+        db.session.commit()
+        return review_to_update.to_dict()
+    return {"error":"Something went wrong, please try again later"}, 404
+
+
+
+@site_routes.route('reviews/delete/<int:review_id>')
+def deleteReviewBySite(review_id):
+    """
+    This route deletes the review with the given ID
+    """
+
+
+    print("reviews/delete/<int:review_id> ROUTE HIT")
+    review = Review.query.get(review_id)
+    print(review, "review after query")
+    db.session.delete(review)
+    db.session.commit()
+    return {"message":"successfully Delete"}, 201
+
+
+@site_routes.route('reviews/create/<int:site_id>', methods = ["POST"])
+def createReviewBySite(site_id):
+    """
+    This route creates a new REVIEW in the database from the form data in the ReviewCreateForm,
+    attached to the given site_id
+    """
+    print("CREATE Review route CALLED $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print(site_id,"site_id #################################")
+
+    form = ReviewCreateForm()
+
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data, "FORM DATA IN REVIEW CREATE ROUTE &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+    if form.validate_on_submit():
+        print("form.validate on submit passed in create review route")
+        review = Review(
+            creator_id = form.data["creator_id"],
+            site_id = form.data["site_id"],
+            review = form.data["review"]
+        )
+        db.session.add(review)
+        db.session.commit()
+        return review.to_dict()
+
+    print(form.errors, "form.errors")
+
+
+    return form.errors, 400
 
 @site_routes.route('/all')
 def getAllSites():
@@ -82,7 +169,7 @@ def update_site(site_id):
     print(site_id)
     form = SiteCreateForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data, "FORM DATA IN CREATE SITE THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print(form.data, "FORM DATA IN CREATE SITE THUNK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     if form.validate_on_submit():
         site_to_update = Site.query.get(site_id)
         print("form.validate on submit in the update site route!!!!!!!!!!!!!!!!!!")
