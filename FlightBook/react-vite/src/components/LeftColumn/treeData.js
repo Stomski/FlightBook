@@ -19,23 +19,23 @@ export const treeData = [
         viewOption: "FeedMySites",
         requireLogin: true,
       },
-      {
-        key: "0-2",
-        label: "view favorites",
-        requireLogin: true,
-        children: [
-          {
-            key: "0-2-0",
-            label: "my favorites",
-            viewOption: "featureComingSoon",
-          },
-          {
-            key: "0-2-1",
-            label: "Top Rated",
-            viewOption: "featureComingSoon",
-          },
-        ],
-      },
+      // {
+      //   key: "0-2",
+      //   label: "view favorites",
+      //   requireLogin: true,
+      //   children: [
+      //     {
+      //       key: "0-2-0",
+      //       label: "my favorites",
+      //       viewOption: "featureComingSoon",
+      //     },
+      //     {
+      //       key: "0-2-1",
+      //       label: "Top Rated",
+      //       viewOption: "featureComingSoon",
+      //     },
+      //   ],
+      // },
       {
         key: "0-3",
         label: "create an unofficial site!",

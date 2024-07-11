@@ -14,8 +14,8 @@ function ReviewUpdateModal({ review }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
-    console.log("TOP review update modal handle submit");
-    console.log(review, "review at top of handle submit review update modal");
+    // console.log("TOP review update modal handle submit");
+    // console.log(review, "review at top of handle submit review update modal");
 
     if (isSubmitting) return;
 
@@ -27,19 +27,19 @@ function ReviewUpdateModal({ review }) {
     formData.append("creator_id", sessionUser.id);
     formData.append("site_id", review["site_id"]);
 
-    console.log(
-      "form data in the review update modal handle submit>>>",
-      formData
-    );
+    // console.log(
+    //   "form data in the review update modal handle submit>>>",
+    //   formData
+    // );
 
     const serverResponse = await dispatch(
       updateReviewThunk(formData, review["id"], sessionUser)
     );
 
     if (serverResponse) {
-      console.log(
-        "server response conditional triggered in the review update modal handle submit"
-      );
+      // console.log(
+      //   "server response conditional triggered in the review update modal handle submit"
+      // );
       setIsSubmitting(false);
       setErrors(serverResponse);
     } else {

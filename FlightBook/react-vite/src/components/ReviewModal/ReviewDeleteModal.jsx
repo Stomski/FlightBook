@@ -12,16 +12,16 @@ function ReviewDeleteModal({ review }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(
-      review,
-      " review in handle submit above dispatch delete reviewthunk"
-    );
+    // console.log(
+    //   review,
+    //   " review in handle submit above dispatch delete reviewthunk"
+    // );
     const serverResponse = await dispatch(deleteReviewThunk(review.id));
 
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-      console.log("no server response in the handle submit delete modal");
+      // console.log("no server response in the handle submit delete modal");
       closeModal();
       // dispatch(setFeedComponent("FeedMySites"));
     }

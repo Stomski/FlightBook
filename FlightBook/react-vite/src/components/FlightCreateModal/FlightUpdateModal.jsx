@@ -25,8 +25,8 @@ function FlightUpdateModal({ flight }) {
   const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  console.log(imageURL);
-  console.log("%c imageURL log>", "color:red; font-size: 26px", imageURL);
+  // console.log(imageURL);
+  // console.log("%c imageURL log>", "color:red; font-size: 26px", imageURL);
   const fileWrap = (e) => {
     e.stopPropagation();
 

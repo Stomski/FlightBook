@@ -18,10 +18,10 @@ function ReviewCreateModal(site) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("TOP OF THE HANDLE SUBMIT IN THE REVIEW CREATE COMPONENT");
+    // console.log("TOP OF THE HANDLE SUBMIT IN THE REVIEW CREATE COMPONENT");
 
     if (isSubmitting) {
-      console.log("isSubmitting conditional triggered");
+      // console.log("isSubmitting conditional triggered");
       return;
     }
 

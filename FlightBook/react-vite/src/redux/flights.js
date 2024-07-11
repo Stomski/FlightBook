@@ -202,7 +202,7 @@ function flightsReducer(state = {}, action) {
       newState["detailView"] = state["detailView"];
       return newState;
     case CREATE_FLIGHT:
-      console.log("CREATE FLIGHT CALLED, asdfasdfasdf", action);
+      // console.log("CREATE FLIGHT CALLED, asdfasdfasdf", action);
       newState = { ...state };
       newState[action.payload["id"]] = action.payload;
       if (newState["selectedUsersFlights"]) {

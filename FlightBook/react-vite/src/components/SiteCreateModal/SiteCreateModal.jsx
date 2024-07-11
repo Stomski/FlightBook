@@ -47,9 +47,9 @@ function SiteCreateModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("TOP OF THE HANDLE SUBMIT IN THE SITE CREATE COMPONENT");
-    console.log("lat", lat);
-    console.log("lon", lon);
+    // console.log("TOP OF THE HANDLE SUBMIT IN THE SITE CREATE COMPONENT");
+    // console.log("lat", lat);
+    // console.log("lon", lon);
 
     if (isSubmitting) {
       return;
@@ -92,30 +92,30 @@ function SiteCreateModal() {
     setLat(latitude);
     setLon(longitude);
     setIsAltitudeLoading(true);
-    console.log("BEFORE route fetch @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    // console.log("BEFORE route fetch @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
     const response = await fetch(
       `/api/sites/elevation/${latitude}/${longitude}`
     );
-    console.log(
-      "after route fetch @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
-      response.ok
-    );
+    // console.log(
+    //   "after route fetch @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    //   response.ok
+    // );
 
     if (response.ok) {
-      console.log("response ok ###################################");
+      // console.log("response ok ###################################");
       const data = await response.json();
-      console.log(data);
-      console.log("data in the elevation handle map click response");
-      console.log(
-        data,
-        "<<<<<<<<<<<<DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!",
-        data.results[0].elevation * 3.3
-      );
+      // console.log(data);
+      // console.log("data in the elevation handle map click response");
+      // console.log(
+      //   data,
+      //   "<<<<<<<<<<<<DATA IN THE MAP CLICK !!!!!!!!!!!!!!!!!!!!!!!!!!",
+      //   data.results[0].elevation * 3.3
+      // );
 
       setAltitude(Math.floor(data.results[0].elevation * 3.3));
       setIsAltitudeLoading(false);
-      console.log(altitude, "altitude");
+      // console.log(altitude, "altitude");
     } else if (response.status < 500) {
       const errorMessages = await response.json();
       setIsAltitudeLoading(false);

@@ -24,7 +24,7 @@ function TreeNode({ node }) {
   };
 
   const handleViewChange = () => {
-    console.log("%c handleViewChange log>", "color:red; font-size: 26px");
+    // console.log("%c handleViewChange log>", "color:red; font-size: 26px");
     dispatch(setFeedComponent(viewOption));
   };
   return (
@@ -104,7 +104,7 @@ function TreeNode({ node }) {
   );
 }
 function LeftNavTree({ treeData }) {
-  console.log(treeData);
+  // console.log(treeData);
   return (
     <section className="left-nav-tree">
       <ul>

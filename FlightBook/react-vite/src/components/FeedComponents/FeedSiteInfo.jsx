@@ -87,10 +87,11 @@ export default function FeedSiteInfo() {
                           </div>
                         </div>
                       ) : (
-                        <div className="review-not-my-review-div clickable">
-                          connect with {review.creator["first_name"]} (feature
-                          coming soon!)
-                        </div>
+                        <></>
+                        // <div className="review-not-my-review-div clickable">
+                        //   {/* connect with {review.creator["first_name"]} (feature
+                        //   coming soon!) */}
+                        // </div>
                       )}
                     </div>
                   </div>

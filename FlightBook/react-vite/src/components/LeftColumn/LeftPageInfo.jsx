@@ -18,7 +18,7 @@ function LeftInfoAllSites() {
   return (
     <>
       <h2>All the Launch Sites in our DB:</h2>
-      <p>search feature coming soon :)</p>
+      {/* <p>search feature coming soon :)</p> */}
     </>
   );
 }
