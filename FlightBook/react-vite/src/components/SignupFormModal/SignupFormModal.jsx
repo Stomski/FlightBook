@@ -32,6 +32,14 @@ function SignupFormModal() {
     formData.append("first_name", firstName);
     formData.append("last_name", lastName);
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/;
+    if (!emailRegex.test(email)) {
+      setIsSubmitting(false);
+      return setErrors({
+        email: "Invalid email format",
+      });
+    }
+
     if (password !== confirmPassword) {
       setIsSubmitting(false);
 
