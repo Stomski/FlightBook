@@ -10,12 +10,14 @@
 ![PostgreSQL](https://img.shields.io/badge/postgresql-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-The Free Flight Site is a full stack web application designed to showcase and facilitate my evolution as a developer.
+The Free Flight Site is a full stack web application designed to showcase and facilitate my evolution as a developer. It is a flight logging social networking application aimed at connecting local paraglider pilots, providing them with a platform to share their experiences, track their flights, review launch areas, and connect with other enthusiasts around the world.
 
-It utilizes a PostrgreSQL database, accessed using SQLAlchemy in a Python Flask Environment, all displayed to the client in a sleek, intuitive react/redux powered UI 
+The application utilizes a PostgreSQL database, accessed using SQLAlchemy in a Python Flask environment, all displayed to the client in a sleek, intuitive React/Redux powered UI. This robust setup ensures a smooth and responsive user experience, allowing pilots to log their flights and share their journeys effortlessly.
 
-The applications Images are hosted via AWS, and I am excited to expand on the GoogleMapsAPI integration, as of now the ElevationAPI was the trickiest to integrate but increases the functionality of the site such that it was worth it.
+The application's images are hosted via AWS, ensuring reliable and fast access to visual content. One of the standout features is the integration of the Google Maps API, which offers dynamic and interactive flight maps. The Elevation API integration, although challenging, significantly enhances the functionality by providing detailed elevation data, making it an invaluable tool for pilots planning their flights.
 
 ![flightmap](https://github.com/user-attachments/assets/67c8f71c-eff8-48b9-99a9-3e31e63b3b3c)
 
+The Free Flight Site is not just a static application; it was designed with scalability in mind, leaving ample room for feature expansion. Future updates may include enhanced social features, real-time weather updates, advanced analytics for flight data, and more. The goal is to continuously evolve and provide an indispensable resource for the paragliding community.
 
+Whether you're an experienced pilot or a beginner looking to connect with others, The Free Flight Site offers a comprehensive platform to enhance your flying experience and better enable your connection to a vibrant community of like-minded individuals.
