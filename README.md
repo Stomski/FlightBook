@@ -18,6 +18,6 @@ The application's images are hosted via AWS, ensuring reliable and fast access t
 
 ![flightmap](https://github.com/user-attachments/assets/67c8f71c-eff8-48b9-99a9-3e31e63b3b3c)
 
-The Free Flight Site is not just a static application; it was designed with scalability in mind, leaving ample room for feature expansion. Future updates may include enhanced social features, real-time weather updates, advanced analytics for flight data, and more. The goal is to continuously evolve and provide an indispensable resource for the paragliding community.
+The Free Flight Site is not just a static application; it was designed with scalability in mind, leaving ample room for feature expansion. Future updates may include enhanced social features, real-time weather updates, advanced analytics for flight data, and more. The goal is to continuously evolve and provide utility for the paragliding community.
 
 Whether you're an experienced pilot or a beginner looking to connect with others, The Free Flight Site offers a comprehensive platform to enhance your flying experience and better enable your connection to a vibrant community of like-minded individuals.
